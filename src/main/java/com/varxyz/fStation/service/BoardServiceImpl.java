@@ -18,7 +18,7 @@ public class BoardServiceImpl implements BoardService{
 	
 	@Override
 	public int writePost(Post post) {
-		return 0;
+		return boardDao.writePost(post);
 	}
 
 	@Override

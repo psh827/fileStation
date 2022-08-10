@@ -24,7 +24,13 @@ public class BoardDao {
 		//sql insert 순서 지켜서 넣기
 		String sql = "INSERT INTO Board (title, nickName, passwd, content)"
 				+ " VALUES (?, ?, ?, ?)";
-		return 0;
+		try {
+			jdbcTemplate.update(sql,post.getTitle(), post.getNickname(), post.getPasswd(), post.getContent());
+			return 1;
+			
+		} catch (Exception e) {
+			return 0;
+		}
 	}
 	
 	/**
