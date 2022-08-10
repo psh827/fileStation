@@ -1,9 +1,13 @@
 package com.varxyz.fStation.dao;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
 
 import org.apache.tomcat.jdbc.pool.DataSource;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 
 import com.varxyz.fStation.domain.Post;
 
@@ -38,9 +42,24 @@ public class BoardDao {
 	 * @return
 	 */
 	public List<Post> getAllPost() {
-		String sql = "SELECT * FORM Board";
-		return null;
+		String sql = "SELECT * FROM Board";
+
+		return jdbcTemplate.query(sql, new RowMapper<Post>() {
+			
+			@Override
+			public Post mapRow(ResultSet rs, int rowNum) throws SQLException {
+				Post post = new Post();
+				post.setBId(rs.getLong("bId"));
+				post.setTitle(rs.getString("title"));
+				post.setNickname(rs.getString("nickName"));
+				post.setPasswd(rs.getString("passwd"));
+				post.setContent(rs.getString("content"));
+				post.setRegDate(rs.getDate("regDate"));
+				return post;	
+			}
+		});
 	}
+	
 	
 	/**
 	 * 자기글 보기

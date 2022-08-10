@@ -1,0 +1,77 @@
+@charset "UTF-8";
+@import "./seven.css";
+:root {
+  --content-width: 1530px;
+  --main-color: #4425a7;
+}
+
+*:focus{
+  outline: none;
+}
+
+body {
+  background-color: #f1eef9;
+  height: calc(100vh);
+  display: flex;
+  align-items: center;
+}
+
+.main_container {
+  position: relative;
+  width: var(--content-width);
+  height: 800px;
+  background-color: var(--main-color);
+  margin: 0 auto;
+  border-radius: 50px;
+}
+
+nav {
+  width: 90px;
+  height: 100%;
+  position: relative;
+}
+
+nav > ul {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 55%;
+  margin-top: 40px;
+}
+
+nav a.logo {
+  display: inline-block;
+  font-weight: 900;
+  text-align: center;
+}
+
+nav > ul > li {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+nav > ul > li.active {
+  background-color: #37179c;
+  border-radius: 8px;
+}
+
+nav > ul > li > a {
+  color: #09c0d0;
+}
+
+.main-inner__container {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: calc(100% - 90px);
+  background-color: #ffffff;
+  margin-right: -2px;
+  height: 100%;
+  border-radius: 50px;
+  padding: 60px 25px 25px 72px;
+}

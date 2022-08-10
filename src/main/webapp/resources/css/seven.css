@@ -1,0 +1,57 @@
+@charset "UTF-8";
+#container section#seventh .up-section {
+  height: 485px;
+  background-image: url("../img/subway/seven_bg.jpg");
+  padding-top: 80px;
+  box-sizing: border-box;
+}
+#container section#seventh {
+  background-color: #f6f6f6;
+  min-height: 900px;
+}
+#container section#seventh .up-section .inner {
+  width: 1320px;
+  text-align: left;
+}
+
+#container section#seventh .up-section .inner .diet {
+  /* margin-top: 80px; */
+  width: 225px;
+  height: 50px;
+  background-color: #ff8201;
+  border-radius: 20px;
+  text-align: center;
+  line-height: 50px;
+  color: white;
+  font-size: 22px;
+}
+
+#container section#seventh .up-section .inner .up-section__text {
+  display: inline-block;
+}
+
+#container section#seventh .up-section .inner .up-section__text h2 {
+  font-size: 54px;
+  font-weight: bold;
+  margin-top: 50px;
+  margin-bottom: 35px;
+  color: white;
+}
+
+#container section#seventh .up-section .inner .up-section__text span {
+  color: white;
+  line-height: 26px;
+  float: left;
+  text-align: left;
+}
+
+#container section#seventh .box.img {
+  width: var(--content-width);
+  height: 475px;
+  background-color: white;
+  margin: -60px auto 0;
+  padding: 0 90px;
+  box-sizing: border-box;
+  /* position: absolute; */
+  /* top: 420px; */
+}
