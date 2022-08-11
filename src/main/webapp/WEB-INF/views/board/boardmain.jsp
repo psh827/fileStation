@@ -14,12 +14,16 @@
     <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/initial.css'/>" />
     <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/default.css'/>" />
     <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/style.css'/>" />
-     <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/board.css'/>" />
-     
+    <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/board.css'/>" />
+    <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/modal.css'/>" />
     <script
       src="https://kit.fontawesome.com/62a067f302.js"
       crossorigin="anonymous"
     ></script>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
+<script src="<c:url value='/resources/js/subpage.js'/>"></script>
   </head>
   <body>
     <div class="main_container">
@@ -70,7 +74,7 @@
         <div class="Questions_container">
           <div class="subheading">건의사항</div>
           <div class="Questions_banner">
-            <button class="Questions_btn" type="button" name="writing"><a href="/fileStation/board/write_board">글작성</a></button>
+            <button class="Questions_btn" type="button" name="writing" onclick='location.href="<c:url value='/board/write_board'/>"'>글작성</button>
             <button class="Questions_btn right" type="button" name="mywriting">내가 작성한 글</button>
           </div>
           <div class="posting_list">
@@ -78,7 +82,7 @@
             <c:forEach var="postlist" items="${posttList}">
                 <tr>
                   <td class="Q_no">${postlist.getBId()}</td>
-                  <td><a href="/fileStation/board/post?">${postlist.getTitle()}  </a></td>
+                  <td><a data-value="${postlist.getBId()}" class="modal_btn"  rel="modal:open" href="#modal1">${postlist.getTitle()}</a></td>
                   <td class="Q_date">${postlist.getRegDate()}</td>
                 </tr>
             </c:forEach>
@@ -87,5 +91,17 @@
         </div>
       </div>
     </div>
+    
+<!-- modal body -->
+<div id="modal1" class="modal" >
+	<form action="post" method="post" class="modal_body">
+		<input class="modal_hidden_input" hidden name="bId" value="" />
+		비밀번호 : <input type="password" name="passwd" maxlength="4" />
+		<input class="submit_btn" type="submit" value="확인" />
+	</form>
+</div>
+
+
+
   </body>
 </html>

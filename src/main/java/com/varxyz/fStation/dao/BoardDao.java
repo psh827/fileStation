@@ -66,8 +66,30 @@ public class BoardDao {
 	 * @param passwd
 	 * @return
 	 */
-	public Post viewPostByPasswd(String passwd) {
-		String sql = "SELECT * FROM Board WHERE passwd = ?";
+	public Post viewPostByPasswd(long bId, String passwd) {
+		String sql = "SELECT * FROM Board WHERE bId = ? AND passwd = ?";
+		try {
+			return jdbcTemplate.queryForObject(sql, new RowMapper<Post>() {
+				
+				@Override
+				public Post mapRow(ResultSet rs, int rowNum) throws SQLException {
+					Post post = new Post();
+					post.setBId(rs.getLong("bId"));
+					post.setTitle(rs.getString("title"));
+					post.setNickname(rs.getString("nickName"));
+					post.setPasswd(rs.getString("passwd"));
+					post.setContent(rs.getString("content"));
+					post.setRegDate(rs.getDate("regDate"));
+					return post;	
+				}
+			}, bId, passwd);
+		} catch (EmptyResultDataAccessException e) {
+			return null;
+		}
+	}
+	
+	public Post viewPostByBid(long bId) {
+		String sql = "SELECT * FROM Board WHERE bId = ?";
 		
 		return jdbcTemplate.queryForObject(sql, new RowMapper<Post>() {
 			
@@ -82,8 +104,11 @@ public class BoardDao {
 				post.setRegDate(rs.getDate("regDate"));
 				return post;	
 			}
-		}, passwd);
+		}, bId);
 	}
+	
+//	public boolean is
+	
 	
 	/**
 	 * 자기 글 수정

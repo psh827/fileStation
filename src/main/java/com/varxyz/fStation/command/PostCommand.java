@@ -10,6 +10,8 @@ import lombok.ToString;
 @AllArgsConstructor
 @ToString
 public class PostCommand {
+	
+//	private long bId;
 	private String title;
 	private String nickName;
 	private String passwd;

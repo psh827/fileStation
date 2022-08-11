@@ -72,17 +72,15 @@
         <div class="Questions_container">
           <div class="subheading">글 내용</div>
           <div class="post_box">
-            <div class="title_box">
-            <label></label>
-            </div>
-            <label>제목</label><br>
+           	<p class="writer">작성자 : ${post.nickname}</p>
             <div class="Questions_title">
-            ${post.nickname}
-            </div><br>
-            <label>내용</label><br>
-            <div class="Questions_inner"></div><br>
+            ${post.title }
+            </div>
+            <div class="Questions_inner">${post.content}</div>
             <div class="write_btn_box">
-              <button class="Questions_btn" type="button" name="list">목록으로</button><button class="Questions_btn right" type="button" name="revoke">취소하기</button>
+              <button class="Questions_btn" type="button" name="list" onclick='location.href="<c:url value='/board/boardmain'/>"'>목록으로</button>
+              <button class="Questions_btn middle" type="button" name="revoke" onclick='location.href="<c:url value='/board/update_board'/>"'>수정하기</button>
+              <button class="Questions_btn right" type="button" name="revoke">삭제하기</button>
             </div>
           </div>
           </div>

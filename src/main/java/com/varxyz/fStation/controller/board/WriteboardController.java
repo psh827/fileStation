@@ -61,7 +61,7 @@ public class WriteboardController {
 		
 		model.addAttribute("postCommand", postCommand);
 		
-		return "board/success_board";
+		return "redirect:/board/boardmain";
 	}
 	
 	

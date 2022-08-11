@@ -1,0 +1,17 @@
+@charset "UTF-8";
+#modal1 {
+	height : 200px;
+}
+.modal_body {
+	text-align: center;
+    margin-top: 70px;
+}
+.submit_btn {
+	margin-left: 12px;
+    background-color: #4425a7;
+    border-style: none;
+    border-radius: 5px;
+    width: 50px;
+    height: 30px;
+    color: white;
+}

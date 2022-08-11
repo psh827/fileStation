@@ -27,8 +27,8 @@ public class BoardServiceImpl implements BoardService{
 	}
 
 	@Override
-	public Post viewPostByPasswd(String passwd) {
-		return boardDao.viewPostByPasswd(passwd);
+	public Post viewPostByPasswd(long bId, String passwd) {
+		return boardDao.viewPostByPasswd(bId, passwd);
 	}
 
 	@Override
@@ -39,6 +39,11 @@ public class BoardServiceImpl implements BoardService{
 	@Override
 	public int deletePost(String passwd) {
 		return 0;
+	}
+
+	@Override
+	public Post viewPostByBid(long bId) {
+		return boardDao.viewPostByBid(bId);
 	}
 
 }
