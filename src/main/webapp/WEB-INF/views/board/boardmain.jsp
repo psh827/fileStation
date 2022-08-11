@@ -85,41 +85,7 @@
                   <td><a href="#">다른 제목도 일단 적어봄  </a></td>
                   <td class="Q_date">2022-08-09</td>
               </tr>
-              <tr>
-                <td class="Q_no">no</td>
-                <td><a href="#">건의 사항 제목임  </a></td>
-                <td class="Q_date">2022-08-09</td>
-              </tr>
-              <tr>
-                <td class="Q_no">no</td>
-                <td><a href="#">건의 사항 제목임  </a></td>
-                <td class="Q_date">2022-08-09</td>
-              </tr>
-              <tr>
-                <td class="Q_no">no</td>
-                <td><a href="#">건의 사항 제목임  </a></td>
-                <td class="Q_date">2022-08-09</td>
-              </tr>
-              <tr>
-                <td class="Q_no">no</td>
-                <td><a href="#">건의 사항 제목임  </a></td>
-                <td class="Q_date">2022-08-09</td>
-              </tr>
-              <tr>
-                <td class="Q_no">no</td>
-                <td><a href="#">건의 사항 제목임  </a></td>
-                <td class="Q_date">2022-08-09</td>
-              </tr>
-              <tr>
-                <td class="Q_no">no</td>
-                <td><a href="#">건의 사항 제목임  </a></td>
-                <td class="Q_date">2022-08-09</td>
-              </tr>
-              <tr>
-                <td class="Q_no">no</td>
-                <td><a href="#">조금 제목이 길어지면 이상하려나?  </a></td>
-                <td class="Q_date">2022-08-09</td>
-              </tr>
+
             </table>
           </div>
         </div>

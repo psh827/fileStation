@@ -82,7 +82,7 @@ public class FileController {
 	        File file = new File(filePath + storedFileName);
 	        //파일 저장
 	        mt.transferTo(file);
-	        
+	        v
 	        System.out.println(ourFile + "가 업로드한 파일은");
 	        System.out.println(originalFile + "은 업로드한 파일이다.");
 	        System.out.println(storedFileName + "라는 이름으로 업로드 됐다.");
