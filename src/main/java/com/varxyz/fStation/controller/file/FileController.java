@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
@@ -37,6 +38,11 @@ public class FileController {
 	
 	@Autowired
 	FileServiceImpl fileService;
+	
+	@GetMapping("/file/file_main")
+	public String main() {
+		return "file/file_main";
+	}
 	
 	@PostMapping("/file/file_main")
 	public String addMenuItem(Model model, HttpServletRequest request, @RequestParam("report") MultipartFile[] report) throws IOException {

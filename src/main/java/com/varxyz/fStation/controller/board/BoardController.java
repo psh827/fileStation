@@ -27,11 +27,10 @@ public class BoardController {
 	@Autowired
 	BoardServiceImpl boardService;
 	
-<<<<<<< Updated upstream
-=======
+
 	@GetMapping("/board/main")
 	public String boardForm() {
 		return "board/boardmain";
 	}
->>>>>>> Stashed changes
+
 }
