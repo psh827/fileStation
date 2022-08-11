@@ -1,9 +1,15 @@
 package com.varxyz.fStation.controller.board;
 
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import com.varxyz.fStation.domain.Post;
 import com.varxyz.fStation.service.BoardServiceImpl;
 
 /**
@@ -29,7 +35,9 @@ public class BoardController {
 	
 
 	@GetMapping("/board/main")
-	public String boardForm() {
+	public String boardForm(HttpServletRequest request, Model model) {
+		List<Post> posttList = boardService.getAllPost();
+		request.setAttribute("posttList", posttList);
 		return "board/boardmain";
 	}
 
