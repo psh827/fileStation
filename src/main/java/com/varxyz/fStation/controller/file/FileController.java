@@ -10,8 +10,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.varxyz.fStation.domain.OurFile;
@@ -44,19 +46,25 @@ public class FileController {
 		return "file/file_main";
 	}
 	
-	@PostMapping("/file/file_main")
-	public String addMenuItem(Model model, HttpServletRequest request, @RequestParam("report") MultipartFile[] report) throws IOException {
+//	@PostMapping("/file/file_main")
+	@RequestMapping(value = "/file/addFile", method = { RequestMethod.POST })
+	@ResponseBody
+	public String addMenuItem(Model model, HttpServletRequest request, @RequestParam("files") MultipartFile[] files) throws IOException {
 		OurFile ourFile = new OurFile();		
 		
-		String filePath = "C:\\ncs\\eclipse\\workspace\\fileStation\\src\\main\\webapp\\resources\\files\\";
+		//희정 주소
+//		String filePath = "C:\\ncs\\eclipse\\workspace\\fileStation\\src\\main\\webapp\\resources\\files\\";
 //		String filePath = "C:\\workspace\\java-cafe\\src\\main\\webapp\\resources\\menuImg\\";
+		//상훈 주소
+		String filePath = "C:\\Park\\work\\fileStation\\src\\main\\webapp\\resources\\files\\";
 		
-		for(MultipartFile mt : report) {	
+		for(MultipartFile mt : files) {	
 	        //파일명
 	        String originalFile = mt.getOriginalFilename();
 	        System.out.println(originalFile);
 	        //파일명 중 확장자만 추출                                                //lastIndexOf(".") - 뒤에 있는 . 의 index번호
 	        String originalFileExtension = originalFile.substring(originalFile.lastIndexOf("."));
+	        System.out.println(originalFileExtension);
 	        //fileuploadtest.doc
 	        //lastIndexOf(".") = 14(index는 0번부터)
 	        //substring(14) = .doc
@@ -91,11 +99,12 @@ public class FileController {
 	        
 	        System.out.println(ourFile + "가 업로드한 파일은");
 	        System.out.println(originalFile + "은 업로드한 파일이다.");
-	        System.out.println(storedFileName + "라는 이름으로 업로드 됐다.");
+	        System.out.println(originalFileExtension + "라는 확장자를 가지고 있다.");
 	        System.out.println("파일사이즈는 " + mt.getSize());
 		}
 		return "file/file_main";
 	}
+	
 	
 	
 }
