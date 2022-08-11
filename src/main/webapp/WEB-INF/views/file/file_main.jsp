@@ -10,7 +10,7 @@
     />
     <title>file Station</title>
     <!-- <link rel="stylesheet" href="./css/initial.css"> -->
-    <link rel="stylesheet" href="<c:url value='/resources/css/initial.min.css'/>">
+    <link rel="stylesheet" href="<c:url value='/resources/css/initial.css'/>">
     <link rel="stylesheet" href="<c:url value='/resources/css/default.css'/>">
     <link rel="stylesheet" href="<c:url value='/resources/css/style.css'/>">
     <link rel="stylesheet" href="<c:url value='/resources/css/upload.css'/>">
@@ -108,6 +108,6 @@
       </div>
     </div>
     <script src="http://code.jquery.com/jquery-latest.js"></script>
-    <script src="../js/home.js"></script>
+    <script src="<c:url value='/resources/js/home.js'/>"></script>
   </body>
 </html>

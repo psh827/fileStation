@@ -279,7 +279,7 @@ function uploadFile() {
         }
 
         $.ajax({
-            url : "업로드 경로",
+            url : "addFile",
             data : formData,
             type : 'POST',
             enctype : 'multipart/form-data',
@@ -288,15 +288,17 @@ function uploadFile() {
             dataType : 'json',
             cache : false,
             success : function(result) {
+				console.log(result)
                 if (result.data.length > 0) {
                     alert("성공");
-                    location.reload();
                 } else {
                     alert("실패");
                     location.reload();
                 }
             }
         });
+		console.log("hello")
+		location.reload();
     }
 }
 
