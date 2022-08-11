@@ -33,11 +33,11 @@ public class BoardController {
 	@Autowired
 	BoardServiceImpl boardService;
 	
-
 	@GetMapping("/board/main")
 	public String boardForm(HttpServletRequest request, Model model) {
 		List<Post> posttList = boardService.getAllPost();
 		request.setAttribute("posttList", posttList);
+		System.out.println(posttList);
 		return "board/boardmain";
 	}
 

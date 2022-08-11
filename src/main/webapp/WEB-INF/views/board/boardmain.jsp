@@ -75,17 +75,18 @@
           </div>
           <div class="posting_list">
             <table class="Questions_table">
+            <c:forEach var="postlist" items="${posttList}">
                 <tr>
-                  <td class="Q_no">no</td>
-                  <td><a href="#">건의 사항 제목임  </a></td>
-                  <td class="Q_date">2022-08-09</td>
+                  <td class="Q_no">${postlist.getBId()}</td>
+                  <td><a href="/fileStation/board/post?">${postlist.getTitle()}  </a></td>
+                  <td class="Q_date">${postlist.getRegDate()}</td>
                 </tr>
               <tr>
+            </c:forEach>
                   <td class="Q_no">no</td>
-                  <td><a href="#">다른 제목도 일단 적어봄  </a></td>
+                  <td><a href="/fileStation/board/post?">다른 제목도 일단 적어봄  </a></td>
                   <td class="Q_date">2022-08-09</td>
               </tr>
-
             </table>
           </div>
         </div>

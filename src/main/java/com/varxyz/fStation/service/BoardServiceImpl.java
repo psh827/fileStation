@@ -23,7 +23,7 @@ public class BoardServiceImpl implements BoardService{
 
 	@Override
 	public List<Post> getAllPost() {
-		return null;
+		return boardDao.getAllPost();
 	}
 
 	@Override
