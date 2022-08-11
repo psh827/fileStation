@@ -21,6 +21,17 @@ body {
   font-family: 'OTWelcomeRA';
   color: #666666;
 }
+
+input[type=password]{
+	font-family: '맑은 고딕', 'malgun gothic', '돋움', Dotum, sans-serif;
+}
+
+input[type=password]::placeholder {
+	font-size: 14px;
+	line-height: 20px;
+	font-family: 'OTWelcomeRA';
+}
+
 ul,
 ol {
   list-style: none;

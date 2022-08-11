@@ -18,8 +18,7 @@ public class FileServiceImpl implements FileService{
 	
 	@Override
 	public int addFile(List<OurFile> ourFile) {
-		// TODO Auto-generated method stub
-		return 0;
+		return fileDao.addFile(ourFile);
 	}
 
 	@Override

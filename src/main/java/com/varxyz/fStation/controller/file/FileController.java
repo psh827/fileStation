@@ -2,6 +2,8 @@ package com.varxyz.fStation.controller.file;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
@@ -49,8 +51,9 @@ public class FileController {
 //	@PostMapping("/file/file_main")
 	@RequestMapping(value = "/file/addFile", method = { RequestMethod.POST })
 	@ResponseBody
-	public String addMenuItem(Model model, HttpServletRequest request, @RequestParam("files") MultipartFile[] files) throws IOException {
-		OurFile ourFile = new OurFile();		
+	public String addMenuItem(Model model, @RequestParam("files") MultipartFile[] files, @RequestParam("passwd") String passwd) throws IOException {
+		
+		List<OurFile> ourFileList = new ArrayList<OurFile>();
 		
 		//희정 주소
 //		String filePath = "C:\\ncs\\eclipse\\workspace\\fileStation\\src\\main\\webapp\\resources\\files\\";
@@ -59,12 +62,12 @@ public class FileController {
 		String filePath = "C:\\Park\\work\\fileStation\\src\\main\\webapp\\resources\\files\\";
 		
 		for(MultipartFile mt : files) {	
+			System.out.println(mt);
+			OurFile ourFile = new OurFile();		
 	        //파일명
 	        String originalFile = mt.getOriginalFilename();
-	        System.out.println(originalFile);
 	        //파일명 중 확장자만 추출                                                //lastIndexOf(".") - 뒤에 있는 . 의 index번호
 	        String originalFileExtension = originalFile.substring(originalFile.lastIndexOf("."));
-	        System.out.println(originalFileExtension);
 	        //fileuploadtest.doc
 	        //lastIndexOf(".") = 14(index는 0번부터)
 	        //substring(14) = .doc
@@ -86,22 +89,44 @@ public class FileController {
 	        TGA - 트루비전사에 개발한 타가보드에서 사용하기 위해 만들어진 포맷
 	        AI - 어도비사에서 개발한 일러스트레이터 파일 포맷
 	        SVG - xml기반으로 한 벡터 파일형식 */ 	
+	        ourFile.setPasswd(passwd);
 	        ourFile.setFileName(originalFile);
 	        ourFile.setFileSize(mt.getSize());
-	        ourFile.setFileType(originalFileExtension);
-	//        request.setAttribute("menuitem", menuItem);
-	//        request.setAttribute("imgName", storedFileName);
+	        String fileT = "";
+	        if(originalFileExtension == ".jpg" || originalFileExtension == ".jpeg" ||
+	        		originalFileExtension == ".gif" || originalFileExtension == ".svg" ||
+	        		originalFileExtension == ".tiff" || originalFileExtension == ".ai" ||
+	        		 originalFileExtension == ".bmp" || originalFileExtension == ".png") {
+	        	fileT = "IMG";
+	        } else if (originalFileExtension == ".mp3" || originalFileExtension == ".mp4") {
+	        	fileT = "VIDEO";
+	        } else {
+	        	fileT = "DOCUMENT";
+	        }
+	        ourFile.setFileType(fileT);
+	        
+	        ourFileList.add(ourFile);
 	        
 	        //파일을 저장하기 위한 파일 객체 생성
 	        File file = new File(filePath + storedFileName);
-	        //파일 저장
+	        
+	        //파일 저장	        
 	        mt.transferTo(file);
 	        
-	        System.out.println(ourFile + "가 업로드한 파일은");
-	        System.out.println(originalFile + "은 업로드한 파일이다.");
-	        System.out.println(originalFileExtension + "라는 확장자를 가지고 있다.");
-	        System.out.println("파일사이즈는 " + mt.getSize());
+	        
+//	        System.out.println(ourFile + "가 업로드한 파일은");
+//	        System.out.println(originalFile + "은 업로드한 파일이다.");
+//	        System.out.println(originalFileExtension + "라는 확장자를 가지고 있다.");
+//	        System.out.println("파일사이즈는 " + mt.getSize());
 		}
+		
+		int result = fileService.addFile(ourFileList);
+        if(result == 0) {
+        	model.addAttribute("msg", "업로드 오류");
+        	model.addAttribute("url", "file_main");
+        	return "alert";
+        }
+        
 		return "file/file_main";
 	}
 	

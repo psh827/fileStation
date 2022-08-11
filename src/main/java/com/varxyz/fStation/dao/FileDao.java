@@ -21,7 +21,17 @@ public class FileDao {
 	public int addFile(List<OurFile> ourFile) {
 		String sql = "INSERT INTO File (passwd, fileName, fileSize, fileType)"
 				+ " VALUES (?, ?, ?, ?)";
-		return 0;
+		
+		try {
+			for(OurFile of : ourFile) {
+				System.out.println("in dao = " + of);
+				jdbcTemplate.update(sql, of.getPasswd(), of.getFileName(), of.getFileSize(), of.getFileType());
+			}
+			System.out.println("입력성공");
+			return 1;
+		} catch (Exception e) {
+			return 0;
+		}
 	}
 	
 	/**

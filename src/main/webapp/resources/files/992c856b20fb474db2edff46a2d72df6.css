@@ -1,0 +1,112 @@
+*{
+    /*모든 요소 마진, 패딩 제거*/
+    margin:0;
+    padding:0;
+}
+ul{
+    /*list스타일제거*/
+    list-style: none;
+}
+a{
+    /*앵커 데코레이션 제거(밑줄제거)*/
+    text-decoration: none;
+}
+
+#wrap{
+    width:1200px;
+    height:700px;
+    background-color: aqua;
+    margin: 0 auto; /*wrap을 가운데로 */
+    /* 위아래 마진 : 0
+    왼쪽, 오른쪽 마진 : auto(왼쪽, 오른쪽 마진을 균등하게 맞춤)
+    */
+}
+
+/* 헤더*/
+#header{
+    width:1200px;
+    height:100px;
+    background-color: beige;
+}
+
+#header>#logo{
+    width:200px;
+    height:100px;
+    background-color: blue;
+    float: left;
+}
+
+#header>#nav{
+    width:1000px;
+    height:100px;
+    background-color: cadetblue;
+    float: left;
+}
+
+/* 슬라이드 */
+#slide{
+    width:1200px;
+    height:300px;
+    background-color: green;
+}
+
+/* 컨텐츠 */
+#contents{
+    width:1200px;
+    height:200px;
+    background-color: fuchsia;
+}
+
+#contents>#cont1{
+    width:480px;
+    height:200px;
+    background-color: chocolate;
+    float: left;
+}
+
+#contents>#cont2{
+    width:360px;
+    height:200px;
+    background-color: brown;
+    float: left;
+}
+
+#contents>#cont3{
+    width:360px;
+    height:200px;
+    background-color: chartreuse;
+    float: left;
+}
+
+/* 푸터 */
+#footer{
+    width:1200px;
+    height:100px;
+    background-color: gray;
+}
+
+#footer>#logo{
+    width:200px;
+    height:100px;
+    background-color: goldenrod;
+    float: left;
+}
+
+#footer>#foot2{
+    width:1000px;
+    height:100px;
+    background-color: cornflowerblue;
+    float: left;
+}
+
+#foot2>#bottom-menu{
+    width:1000px;
+    height:50px;
+    background-color: coral;
+}
+
+#foot2>#copyright{
+    width:1000px;
+    height:50px;
+    background-color: darkorchid;
+}

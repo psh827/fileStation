@@ -138,7 +138,7 @@ function selectFile(fileObject) {
                 // 확장자 체크
                 alert("등록 불가 확장자");
                 break; */
-            if ($.inArray(ext, [ 'hwp', 'doc', 'docx', 'xls', 'xlsx', 'ppt', 'pptx', 'txt', 'png', 'pdf', 'jpg', 'jpeg', 'gif', 'zip' ]) <= 0) {
+            if ($.inArray(ext, [ 'hwp', 'doc', 'docx', 'xls', 'xlsx', 'ppt', 'pptx', 'txt', 'png', 'pdf', 'jpg', 'jpeg', 'gif', 'zip', 'css', 'js', 'jsp', 'py', 'svg', 'tiff', 'ai', 'bmp', 'mp3', 'mp4' ]) <= 0) {
                 // 확장자 체크
                 /* alert("등록이 불가능한 파일 입니다.");
                 break; */
@@ -238,7 +238,7 @@ function uploadFile() {
     var uploadFileList = Object.keys(fileList);
     
     //비밀번호 체크
-    var password = $('.input_passwd');
+    var password = $('.input_passwd').val();
 
     console.log(password)
     
@@ -250,12 +250,12 @@ function uploadFile() {
     }
 
     // 비밀번호가 있는지 체크 
-    if(password.val() == ""){
+    if(password == ""){
         alert("비밀번호를 입력하세요");
         return;
     }
 
-    if(password.val().length <= 7){
+    if(password.length <= 7){
         alert("비밀번호는 8자리 이상입니다.");
         return;
     }
@@ -273,10 +273,9 @@ function uploadFile() {
         console.log(form)
         var formData = new FormData(form[0]);
         for (var i = 0; i < uploadFileList.length; i++) {
-            console.log(fileList[uploadFileList[i]])
             formData.append('files', fileList[uploadFileList[i]]);
-            console.log(formData.get('files'))
         }
+        formData.append('passwd', password);
 
         $.ajax({
             url : "addFile",
