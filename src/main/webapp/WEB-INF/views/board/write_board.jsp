@@ -24,7 +24,7 @@
             <label>첨부파일</label><input type="file"><br>
             <button class="write_btn" type="submit" onclick="location.href='<c:url value="/board/success_board"/>'" >작성하기</button>
             <div class="write_btn_box">
-              <button class="Questions_btn" type="button">목록으로</button><button class="Questions_btn right" type="button" >취소하기</button>
+              <button class="Questions_btn" type="button"><a href="/fileStation/board/main">목록으로</a></button>
             </div>
           </div>
 		</form:form>
