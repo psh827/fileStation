@@ -66,7 +66,7 @@
       <!-- 하얀색 영역 -->
       <div class="main-inner__container">
         <div class="input-container">
-          <form name="uploadForm" id="uploadForm" enctype="multipart/form-data" method="post">
+          <form name="uploadForm" id="uploadForm" enctype="multipart/form-data" method="post" onsubmit="return false;">
             <div class="filearea">
               <p class="filearea-p textarea-p">
                 <span>파일</span>

@@ -19,15 +19,35 @@ public class FileDao {
 	 * 파일 업로드
 	 */
 	public int addFile(List<OurFile> ourFile) {
-		String sql = "INSERT INTO File (passwd, fileName, fileSize, fileType)"
-				+ " VALUES (?, ?, ?, ?)";
-		
 		try {
+			String sql = "INSERT INTO File (passwd, fileName, fileSize, fileType)"
+					+ " VALUES (?, ?, ?, ?)";
+			
 			for(OurFile of : ourFile) {
-				System.out.println("in dao = " + of);
 				jdbcTemplate.update(sql, of.getPasswd(), of.getFileName(), of.getFileSize(), of.getFileType());
 			}
+			
 			System.out.println("입력성공");
+			
+			return 1;
+		} catch (Exception e) {
+			return 0;
+		}
+	}
+	
+	/**
+	 * 텍스트 업로드
+	 * @param textarea
+	 * @return
+	 */
+	public int addText(String textarea) {
+		try {
+			String sql = "INSERT INTO Text (content) VALUE(?)";
+			
+			jdbcTemplate.update(sql, textarea);
+			
+			System.out.println("입력성공");
+			
 			return 1;
 		} catch (Exception e) {
 			return 0;
@@ -53,4 +73,6 @@ public class FileDao {
 		String sql = "DELETE FROM File WHERE passwd = ?";
 		return 0;
 	}
+
+	
 }

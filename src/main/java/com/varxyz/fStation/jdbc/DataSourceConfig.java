@@ -4,6 +4,8 @@ import org.apache.tomcat.jdbc.pool.DataSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.datasource.DataSourceTransactionManager;
+import org.springframework.transaction.PlatformTransactionManager;
 
 import com.varxyz.fStation.dao.BoardDao;
 import com.varxyz.fStation.dao.FileDao;
@@ -37,6 +39,13 @@ public class DataSourceConfig {
 	}
 	
 	@Bean
+	public PlatformTransactionManager transactionmanager() {
+		DataSourceTransactionManager txManager = new DataSourceTransactionManager();
+		txManager.setDataSource(dataSource());
+		return txManager;
+	}
+	
+	@Bean
 	public FileServiceImpl fileService() {
 		return new FileServiceImpl();
 	}
@@ -55,5 +64,7 @@ public class DataSourceConfig {
 	public BoardDao boardDao() {
 		return new BoardDao(dataSource());
 	}
+	
+	
 	
 }

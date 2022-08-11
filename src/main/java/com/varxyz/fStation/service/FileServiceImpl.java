@@ -20,6 +20,11 @@ public class FileServiceImpl implements FileService{
 	public int addFile(List<OurFile> ourFile) {
 		return fileDao.addFile(ourFile);
 	}
+	
+	@Override
+	public int addText(String textarea) {
+		return fileDao.addText(textarea);
+	}
 
 	@Override
 	public List<OurFile> getFile(String passwd) {

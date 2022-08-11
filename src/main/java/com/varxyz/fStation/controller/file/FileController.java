@@ -51,8 +51,13 @@ public class FileController {
 //	@PostMapping("/file/file_main")
 	@RequestMapping(value = "/file/addFile", method = { RequestMethod.POST })
 	@ResponseBody
-	public String addMenuItem(Model model, @RequestParam("files") MultipartFile[] files, @RequestParam("passwd") String passwd) throws IOException {
+	public String addMenuItem(Model model, @RequestParam(value="files", required = false) 
+				MultipartFile[] files, @RequestParam("passwd") String passwd,
+				@RequestParam(value="textarea", required = false) String textarea) throws IOException {
 		
+		System.out.println(textarea);
+		
+		passwd = passwd.split(",")[0];
 		List<OurFile> ourFileList = new ArrayList<OurFile>();
 		
 		//희정 주소
@@ -61,71 +66,68 @@ public class FileController {
 		//상훈 주소
 		String filePath = "C:\\Park\\work\\fileStation\\src\\main\\webapp\\resources\\files\\";
 		
-		for(MultipartFile mt : files) {	
-			System.out.println(mt);
-			OurFile ourFile = new OurFile();		
-	        //파일명
-	        String originalFile = mt.getOriginalFilename();
-	        //파일명 중 확장자만 추출                                                //lastIndexOf(".") - 뒤에 있는 . 의 index번호
-	        String originalFileExtension = originalFile.substring(originalFile.lastIndexOf("."));
-	        //fileuploadtest.doc
-	        //lastIndexOf(".") = 14(index는 0번부터)
-	        //substring(14) = .doc
-	        
-	        //업무에서 사용하는 리눅스, UNIX는 한글지원이 안 되는 운영체제 
-	        //파일업로드시 파일명은 ASCII코드로 저장되므로, 한글명으로 저장 필요
-	        //UUID클래스 - (특수문자를 포함한)문자를 랜덤으로 생성                    "-"라면 생략으로 대체
-	        String storedFileName = UUID.randomUUID().toString().replaceAll("-", "") + originalFileExtension;
-	        
-	        
-	       /*
-	        * 이미지 형식
-	        BMP - 마이크로소프트에서 윈도우 환경의 비트맵 데이터를 표현하기 위한 포맷
-	        JPEG
-	        GIF
-	        PNG
-	        TIFF -포토샵에서 이미지를 저장할 때 압축방식
-	        PSD - 어도비사의 포토샵에서 전용으로 사용하는 파일포맷
-	        TGA - 트루비전사에 개발한 타가보드에서 사용하기 위해 만들어진 포맷
-	        AI - 어도비사에서 개발한 일러스트레이터 파일 포맷
-	        SVG - xml기반으로 한 벡터 파일형식 */ 	
-	        ourFile.setPasswd(passwd);
-	        ourFile.setFileName(originalFile);
-	        ourFile.setFileSize(mt.getSize());
-	        String fileT = "";
-	        if(originalFileExtension == ".jpg" || originalFileExtension == ".jpeg" ||
-	        		originalFileExtension == ".gif" || originalFileExtension == ".svg" ||
-	        		originalFileExtension == ".tiff" || originalFileExtension == ".ai" ||
-	        		 originalFileExtension == ".bmp" || originalFileExtension == ".png") {
-	        	fileT = "IMG";
-	        } else if (originalFileExtension == ".mp3" || originalFileExtension == ".mp4") {
-	        	fileT = "VIDEO";
-	        } else {
-	        	fileT = "DOCUMENT";
-	        }
-	        ourFile.setFileType(fileT);
-	        
-	        ourFileList.add(ourFile);
-	        
-	        //파일을 저장하기 위한 파일 객체 생성
-	        File file = new File(filePath + storedFileName);
-	        
-	        //파일 저장	        
-	        mt.transferTo(file);
-	        
-	        
-//	        System.out.println(ourFile + "가 업로드한 파일은");
-//	        System.out.println(originalFile + "은 업로드한 파일이다.");
-//	        System.out.println(originalFileExtension + "라는 확장자를 가지고 있다.");
-//	        System.out.println("파일사이즈는 " + mt.getSize());
+		//text처리
+		if(!textarea.equals("")) {
+			int textResult = fileService.addText(textarea);
+			if(textResult == 0) {
+				model.addAttribute("msg", "업로드오류");
+				model.addAttribute("url", "file_main");
+				return "alert";
+			}		
 		}
 		
-		int result = fileService.addFile(ourFileList);
-        if(result == 0) {
-        	model.addAttribute("msg", "업로드 오류");
-        	model.addAttribute("url", "file_main");
-        	return "alert";
-        }
+		//file처리
+		if(files != null) {
+			for(MultipartFile mt : files) {	
+				System.out.println(mt);
+				OurFile ourFile = new OurFile();		
+				//파일명
+				String originalFile = mt.getOriginalFilename();
+				//파일명 중 확장자만 추출                                                //lastIndexOf(".") - 뒤에 있는 . 의 index번호
+				String originalFileExtension = originalFile.substring(originalFile.lastIndexOf("."));
+				//fileuploadtest.doc
+				//lastIndexOf(".") = 14(index는 0번부터)
+				//substring(14) = .doc
+				
+				//업무에서 사용하는 리눅스, UNIX는 한글지원이 안 되는 운영체제 
+				//파일업로드시 파일명은 ASCII코드로 저장되므로, 한글명으로 저장 필요
+				//UUID클래스 - (특수문자를 포함한)문자를 랜덤으로 생성                    "-"라면 생략으로 대체
+//	        String storedFileName = UUID.randomUUID().toString().replaceAll("-", "") + originalFileExtension;
+
+				ourFile.setPasswd(passwd);
+				ourFile.setFileName(originalFile);
+				ourFile.setFileSize(mt.getSize());
+				String fileT = "";
+				if(originalFileExtension.equals(".jpg") || originalFileExtension.equals(".jpeg") ||
+						originalFileExtension.equals(".gif") || originalFileExtension.equals(".svg") ||
+						originalFileExtension.equals(".tiff") || originalFileExtension.equals(".ai") ||
+						originalFileExtension.equals(".bmp") || originalFileExtension.equals(".png")) {
+					fileT = "IMG";
+				} else if (originalFileExtension.equals(".mp3") || originalFileExtension.equals(".mp4")) {
+					fileT = "VIDEO";
+				} else {
+					fileT = "DOCUMENT";
+				}
+				ourFile.setFileType(fileT);
+				
+				ourFileList.add(ourFile);
+				
+				//파일을 저장하기 위한 파일 객체 생성
+				File file = new File(filePath + originalFile);
+				
+				//파일 저장	        
+				mt.transferTo(file);
+
+			}
+			int result = fileService.addFile(ourFileList);
+	        if(result == 0) {
+	        	model.addAttribute("msg", "업로드 오류");
+	        	model.addAttribute("url", "file_main");
+	        	return "alert";
+	        }
+		}
+		
+		
         
 		return "file/file_main";
 	}

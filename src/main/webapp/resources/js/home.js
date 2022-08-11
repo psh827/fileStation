@@ -240,10 +240,11 @@ function uploadFile() {
     //비밀번호 체크
     var password = $('.input_passwd').val();
 
-    console.log(password)
-    
+	//텍스트 체크
+	var textarea = $('.textInput').val();
+
     // 파일이 있는지 체크
-    if (uploadFileList.length == 0) {
+    if (uploadFileList.length == 0 && textarea == "") {
         // 파일등록 경고창
         alert("파일이 없습니다.");
         return;
@@ -259,6 +260,7 @@ function uploadFile() {
         alert("비밀번호는 8자리 이상입니다.");
         return;
     }
+    
 
     // 용량을 500MB를 넘을 경우 업로드 불가
     if (totalFileSize > maxUploadSize) {
@@ -275,7 +277,8 @@ function uploadFile() {
         for (var i = 0; i < uploadFileList.length; i++) {
             formData.append('files', fileList[uploadFileList[i]]);
         }
-        formData.append('passwd', password);
+        formData.append("passwd", password);
+        formData.append("textarea", textarea);
 
         $.ajax({
             url : "addFile",
@@ -296,7 +299,7 @@ function uploadFile() {
                 }
             }
         });
-		console.log("hello")
+		alert("업로드 성공되었습니다!")
 		location.reload();
     }
 }
