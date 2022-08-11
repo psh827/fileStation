@@ -68,7 +68,21 @@ public class BoardDao {
 	 */
 	public Post viewPostByPasswd(String passwd) {
 		String sql = "SELECT * FROM Board WHERE passwd = ?";
-		return null;
+		
+		return jdbcTemplate.queryForObject(sql, new RowMapper<Post>() {
+			
+			@Override
+			public Post mapRow(ResultSet rs, int rowNum) throws SQLException {
+				Post post = new Post();
+				post.setBId(rs.getLong("bId"));
+				post.setTitle(rs.getString("title"));
+				post.setNickname(rs.getString("nickName"));
+				post.setPasswd(rs.getString("passwd"));
+				post.setContent(rs.getString("content"));
+				post.setRegDate(rs.getDate("regDate"));
+				return post;	
+			}
+		}, passwd);
 	}
 	
 	/**

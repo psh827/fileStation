@@ -28,7 +28,7 @@ public class BoardServiceImpl implements BoardService{
 
 	@Override
 	public Post viewPostByPasswd(String passwd) {
-		return null;
+		return boardDao.viewPostByPasswd(passwd);
 	}
 
 	@Override

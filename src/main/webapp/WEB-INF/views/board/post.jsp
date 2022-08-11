@@ -67,16 +67,18 @@
         </ul>
       </nav>
       <!-- 하얀색 영역 -->
-      <form:form>
+      <form>
       <div class="main-inner__container">
         <div class="Questions_container">
           <div class="subheading">글 내용</div>
           <div class="post_box">
             <div class="title_box">
-            <form:label path="nickName"/>
+            <label></label>
             </div>
             <label>제목</label><br>
-            <div class="Questions_title"></div><br>
+            <div class="Questions_title">
+            ${post.nickname}
+            </div><br>
             <label>내용</label><br>
             <div class="Questions_inner"></div><br>
             <div class="write_btn_box">
@@ -85,7 +87,7 @@
           </div>
           </div>
         </div>
-      </form:form>
+      </form>
       </div>
     </div>
   </body>
