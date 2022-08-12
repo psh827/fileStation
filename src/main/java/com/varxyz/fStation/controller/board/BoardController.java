@@ -39,7 +39,6 @@ public class BoardController {
 		session.invalidate();
 		List<Post> posttList = boardService.getAllPost();
 		request.setAttribute("posttList", posttList);
-		System.out.println(posttList);
 		return "board/boardmain";
 	}
 

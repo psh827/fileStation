@@ -37,8 +37,8 @@ public class BoardServiceImpl implements BoardService{
 	}
 
 	@Override
-	public int deletePost(String passwd) {
-		return 0;
+	public int deletePost(Post post) {
+		return boardDao.deletePost(post);
 	}
 
 	@Override

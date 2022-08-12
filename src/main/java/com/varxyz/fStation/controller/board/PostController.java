@@ -26,13 +26,8 @@ public class PostController {
 	public String postForm(Model model, HttpServletRequest request, HttpSession session) {
 
 		long bId = Long.parseLong(request.getParameter("bId"));
-		session.setAttribute("bId", bId);
 		String passwd = request.getParameter("passwd");
 		
-		System.out.println(bId);
-		System.out.println(passwd);
-		
-		System.out.println("dao test = " + boardService.viewPostByPasswd(bId, passwd));
 		Post post = boardService.viewPostByPasswd(bId, passwd);
 		
 		if (post == null) {
@@ -40,7 +35,8 @@ public class PostController {
 			model.addAttribute("url", "boardmain");
 			return "alert";
 		}
-
+		
+		session.setAttribute("bId", bId);
 		
 		model.addAttribute("post", post);
 		return "board/post";

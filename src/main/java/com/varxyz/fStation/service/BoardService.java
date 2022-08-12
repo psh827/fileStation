@@ -9,7 +9,7 @@ public interface BoardService {
 	List<Post> getAllPost();
 	Post viewPostByPasswd(long bId, String passwd);
 	int	modifyPost(Post post);
-	int deletePost(String passwd);
+	int deletePost(Post post);
 	public Post viewPostByBid(long bId);
 	
 }

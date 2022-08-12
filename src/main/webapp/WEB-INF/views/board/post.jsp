@@ -15,12 +15,17 @@
     <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/initial.css'/>" />
     <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/default.css'/>" />
     <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/style.css'/>" />
-     <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/board.css'/>" />
-     
+    <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/board.css'/>" />
+    <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/modal.css'/>" />
+         
     <script
       src="https://kit.fontawesome.com/62a067f302.js"
       crossorigin="anonymous"
     ></script>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
+<script src="<c:url value='/resources/js/subpage.js'/>"></script>
   </head>
   <body>
     <div class="main_container">
@@ -80,13 +85,32 @@
             <div class="write_btn_box">
               <button class="Questions_btn" type="button" name="list" onclick='location.href="<c:url value='/board/boardmain'/>"'>목록으로</button>
               <button class="Questions_btn middle" type="button" name="revoke" onclick='location.href="<c:url value='/board/modify_board'/>"'>수정하기</button>
-              <button class="Questions_btn right" type="button" name="revoke">삭제하기</button>
+              <a class="modal_btn" rel="modal:open" href="#modal1" type="button">삭제하기</a>
             </div>
           </div>
           </div>
         </div>
       </form>
       </div>
-    </div>
+    
+    <!-- modal body -->
+<div id="modal1" class="modal" >
+	<form action="delete" method="post" class="modal_body">
+		<fieldset>삭제 여부</fieldset>
+		삭제 하시겠습니까?<br>
+		<div>
+		<input type="radio" name="delete" value="1"/>
+		<label>확인</label>
+		<input type="radio" name="delete" value="0"/>
+		<label>취소</label>
+		</div>
+		<input class="submit_btn" type="submit" value="확인"/>
+
+	</form>
+</div>
+ <script type="text/javascript">
+ var tmp_value = $('input:radio[name=radio_name]:checked').val();
+ </script>
+  
   </body>
 </html>

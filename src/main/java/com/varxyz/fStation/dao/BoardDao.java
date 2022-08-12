@@ -127,8 +127,13 @@ public class BoardDao {
 	 * @param passwd
 	 * @return
 	 */
-	public int deletePost(String passwd) {
-		String sql = "DELETE FROM Board WHERE passwd = ?";
-		return 0;
+	public int deletePost(Post post) {
+		String sql = "DELETE FROM Board WHERE BId = ?";
+		try {
+			jdbcTemplate.update(sql, post.getBId());
+			return 1;
+		} catch (Exception e) {
+			return 0;
+		}
 	}
 }
