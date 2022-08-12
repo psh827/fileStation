@@ -66,18 +66,19 @@
       <!-- 하얀색 영역 -->
       <div class="main-inner__container">
         <div class="input-container">
+          <input class="file" id="input_file" type="file" multiple>
           <form name="uploadForm" id="uploadForm" enctype="multipart/form-data" method="post" onsubmit="return false;">
-            <div class="filearea">
-              <p class="filearea-p textarea-p">
-                <span>파일</span>
-              </p>
-                <div id="dropZone">
-                  <div id="fileListTable" style="width: 100%;">
-                    <div id="fileDragDesc">파일을 끌어다 놓거나 버튼을 눌러 추가하세요</div>
-                      <ul id="fileTableTbody">
-
-                      </ul>
+            <div id="root">
+                <div class="contents">
+                  <div class="upload-box">
+                    <div id="drop-file" class="drag-file">
+                      <img src="https://img.icons8.com/pastel-glyph/2x/image-file.png" alt="파일 아이콘" class="image">
+                      <p class="message">Drag files to upload</p>
                     </div>
+                  </div>
+                  <div id="files" class="files">
+                    
+                  </div>
                 </div>
             </div>
             <div class="textarea">
@@ -97,14 +98,7 @@
                 <input type="button" class="submit_file" onclick="uploadFile(); return false;" class="btn bg_01" value="파일 업로드">
             </div>
           </form>
-          <!-- <div class="banner_container">
-            <div class="banner_inner">
-              <div class="banner first_banner"></div>
-              <div class="banner second_banner"></div>
-            </div>
-          </div> -->
         </div>
-        <div class="ad_box"></div>
       </div>
     </div>
     <script src="http://code.jquery.com/jquery-latest.js"></script>

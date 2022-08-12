@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<h3>File Upload Exmaple</h3>
+<form action="file_upload.do">
+	첨부파일 : <input type="file" name="attachedFile">
+	<input type="submit" value="전송"/>
+</form>
+</body>
+</html>
+
+file은 get을 못받는다 용량.
+무조건 post해야된다 
+그다음에 이거를 html시간에 배웠을거라고 확신하는데 파일을 올릴때는 form쪽에다가 뭔가 하나를 더 해야되요
+서버쪽에 form이가는데 야 서버야 조심해 우리지금 파일 보내고있어 알려줘야되요. 
+인코딩타입을 해줘야된다. 안써주면 복잡해진다. 
+파일을 올릴때는 파일을 올리는 형태의 인코딩타입을 잡아줘야된다.
+
+<form action="file_upload.do" method="post" enctype="multipart/form-data">
+
+프로젝트할때 필요하다면 파일처리도있을 수 있다. 
+
+친구가 메일주소고, 이친구가 메일 본문이고, 이친구가 메일 첨부파일이야 submit누르자마자 스트림을통해서 날아간다고
+날아갈때 어느것이 주소고 어느것이 본문이고 어느것이 첨부파일인지 알아야겟죠 이때 멀티파트라는게 여러개라는뜻이잖아 파트가 구분한다는거잖아
+이사이에 구분을 줍니다. 구분이 ......한다음에 이상한 문자랑 숫자의 조합 그 정보를알내야되요
+요청 헤드값을 가지고 알아낸다고 개발자가 그걸 다잘라서 파일이면 다 짤라서 저장하는 작업을 해야되요 2.대
+3.대는 힘들어서 뭘했냐면 외부 라이브러리를썻어요 썬이ㅏㄴ 자바진영이아니라 누군가가 그걸보고 만들었겠지 
+3.0으로 가면서 썬이 스펙에서 servlet스펙에서 우리 이렇게 처리하자 하면서 표준화 해버렸어요 지금
+소갷나ㅡㄴ건 그이야기를 할거에요.
+
+
+@MultipartConfig(
+		fileSizeThreshold = 1024 * 1024 * 2, 		// 2MB
+		maxFileSize = 1024 * 1024 * 10,				// 10MB
+		maxRequestSize = 1024 * 1024 * 50)			// 50MB
+		
+maxFileSize 나 maxRequestSize -1로줘버리면 무제한
+
+fileSizeThreshold는 파일을 바로보관하느 ㄴ경우가 있고 메모리에 낫둿다가 하는 경우가있는데
+2mb보다 커지면 바로 정해진 저장소에다가 바로쓰겟다. 이렇게 되어있다 그렇게 신경쓸필요는없다. 
+
+10:08 2교시
+윈도우에서의 파일구분자는 \이다. 유닉스는 /
+자바에서 \ 는 escape문자이기때문에 한개 더쳐야된다.
+저렇게 치면 윈도우면 상관없는데 만약에 유닉스나 리눅스에서 돌리게되면 \는 이해할 수 없는 문자가되어버린다.
+이거를 위해서 File.seperate를 적는다 윈도우면 \ 리눅스는 / 로 하게해준다.
+
+	host = localhost:8080
+	connection = keep-alive
+	content-length = 196
+	cache-control = max-age=0
+	sec-ch-ua = ".Not/A)Brand";v="99", "Google Chrome";v="103", "Chromium";v="103"
+	sec-ch-ua-mobile = ?0
+	sec-ch-ua-platform = "Windows"
+	upgrade-insecure-requests = 1
+	origin = http://localhost:8080
+	content-type = multipart/form-data; boundary=----WebKitFormBoundaryvVmHMnlAExepzUwv
+	user-agent = Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36
+	accept = text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+	sec-fetch-site = same-origin
+	sec-fetch-mode = navigate
+	sec-fetch-user = ?1
+	sec-fetch-dest = document
+	referer = http://localhost:8080/jv300/mode004/File_upload.html
+	accept-encoding = gzip, deflate, br
+	accept-language = ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7
+	
+	
+11:18 3교시
+JSP (Java Server Page)
+	-. 사용자를 위한 동적 뷰를 제공한다.
+	-. 프리젠테이션 코드를 서블릿이 아닌 JSP를 통해 작성함으로써 코드 작성을 간소화.
+	

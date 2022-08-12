@@ -1,0 +1,226 @@
+09:13 1교시
+요구사항은 인터뷰를 통해서 요구사항을 뽑아내고 정리하는거에요
+이렇게 보면 간단하죠 인터뷰잘하고 필요하구나 정리하면되요 이런이야기들을 기업에서 이야기할때
+굉장히 많이 햇었는데 이렇게 질문해요 어떤 누군가를 인터뷰를 해서 뭔가를 기록을해서 저으이를 한다면
+왜우리는 기자를 가리켜 분석가라고 하지않을까 그들도 인터뷰하고 하는데 마찬가지이유로 우리를 기자라고 말하지않아요
+결과론적으로 결과서라는게 도큐먼트형태로되는거지만 차이는뭐냐면 기자는 주안점을두고있는부분들이있잖아요 진실은 뭔지, 여론은 어떻게될것인지 부조리가있는것인지
+이런것들이 그사람들의 주요 임무이고 언론의 목적이라고한다면 분석가의경우는 실제 시스템에서 만들어낼 요구사항들이 그 뒤에 있는 설계자나 개발자에게 어떤형태로 전달되어서
+도움을줄것인가가 목저이에요. 기술적기반이없이 작성되면 소설인거죠. 적어도 설계자 이후의 사람들이 공감ㅇ을못하면 쓰래기인거죠. 그 설계자가 다시 만나서 또 물어야 되요.
+설계자도 자기의 설계가 구현에 영향에 미치는 형태로 가지않으면 개발자는 또다시 물어야되요. 모든분야에있는 기술을 이해하고 그영역위에서 수행해야되요
+우리가 앞으로 요구사항들은 자바로짜는게아니고 프레임웤을통해서 웹방식을통해서 프로그램을짜야되요 그사항에서 웹이라는 이해라던지 데이터베이스모델에대한 이해라던지 프레임윀에대한 이해라던지
+없이 작성하면 기반위에서 작성한사람들입장에서보면 뭐하냐이거지. 
+프로젝트상에서 키플레이어가누군지 빨리찾아내는게 중요하죠
+학교와 현실에대한이야기 프로젝트를 해봣더니 못받아도 이거는 해야 수지가 맞다고 가정해봅시다(1억)
+회사가 공개입찰을해서 프로젝트를  때익겟다
+한 업체가 8000으로 수주를 햇어요 그러면 누가봐도 제대로했다면 1억이 최저가에요 8000만원이 최저가에요
+그 팀장을 이거를 딴거로 해서 마이너스를 한거죠 그런데도 불구하고 땁니다. 왜?
+그렇게따서 해당프로젝트회사로 가야되요 자꾸 남아있어서 상부얼굴보고하면 일이없는사람처럼 보이니깐 나가야된다.?
+손해가되더라도 현재 일하고있어라고 보여줘야된다. 어디든 나가서 해당업체에가서 일을 해야된다.
+나중에 손해난 부분을 유지보수를 통해서 어떻게든 보수한다고 치더라도 당장에 낙야된다.
+애플리케이션을 분석하고하는건 훈련하면 할수있는데 지금같은 상황에서 수ㅁ낳은 변수들을 컨트롤하는것은 경험이 필요한다는 거죠
+머ㅜ가 선이고 정의인건 도덕교과서로 잘 알고있는데 현실에서는 때론 타협도해야되고 모른척도 해야되죠
+
+앞에서 어카운트디에이오 현재 필요한 로직을 가지고있어요 실제로직들은 어카운트에 들어가있어요 withdraw라던지 deposite라던지
+일바넞ㄱ이 서비스로직은 크게 두가지 첫번재는 비즈니스로직 그자체 비스니스는 현재 뱅킹과 같은 부분에서는 출입금 그자체. 없으면 온라인 뱅킹은 읨기ㅏ 없다.
+출입금이 필요해서 하는거지 순수한 비즈니스로직 이 순수한 로직일부가 데이터베이스에 저장 비즈니스로직에서 따로빼서 너는 저장만 처리해! 이거 dao로직 이거또한 싱글톤처럼 중요한 패턴.!
+나주엥 스프링으로 가게되면 스프링까지는 dao쓰는데 spring으로 가면 repository로 바뀐다. 
+현재 우리 로직은 account에 있다 withdraw랑 deposite, 실제에서 저 두개가 현실에서는 이게 체킹에 있을까 세이빙에 존재할까 실제는 수많은 은행들이 저렇게할까 한군대도 없다.
+다시말해서 저 두개의 로직은 존재는 하는데 어디로 가느냐하면 service로 옴ㄹ겨버려요 왜? 두가지의 문제가 있따. 첫번재는 우리가 생각한거 이상으로 저 두개의 로직이 간닪나게 그때그때마다 일어나느게 아니라
+필요하다면 한번에 처리해야된다는것 아침마다 지하철 교통카드찍죠 그때 돈이 빠져나갈까요? 아니에요 어떻게 빠져나갈까요 이거를 매치로 처리하는거죠 매번 comision을 할숭벗다 메세지 큐에다가 담아두고 일괄적으로 처리하는거죠
+그래서 하나에 처리하기에 안맞고 두번째는 이거를 쨔ㅏㄹ때 oop를 잘알고 짜는게 아니에요 통상적으로 프로그램에서 은행에서 java시스템이 차세대로 등장 그전에는 코글? 그러다가 java가 들어섬.
+java로가야되는건 알앗지만 개별개별이 oop에전문화된 사람들이 없엇따 껍대기만 갈아탓다. 어떤식으로 서비스로 연결하는가 서비스를 만들어볼텐데
+만들때 인터페이스를 뽑아서 만들면 더 좋아요. 여기서는 그냥
+
+private CustomerDao customerDao;
+어떤일이있다면 customerDao를 통해서 처리하겟다.
+
+public Customer createCustomer(String name, String ssn, String phone, String userId, String passwd) {
+		return new Customer(name, ssn, phone, userId, passwd);
+}
+
+생성자 생성 하기.
+
+
+	public void addCustomer(Customer customer) {
+		customerDao.addCustomer(customer);
+	}
+	
+	public Customer getCustomerBySsn(String ssn) {
+		return customerDao.findCustomerBySsn(ssn);
+	}
+	
+	public List<Customer> getAllcustomers(){
+		return customerDao.findAllCustomers();
+	}
+	
+구현해 놓은 것들 적기 client가 직접 호출하는게 아니라 service를 받죠.
+지나번에 java만해서느 ㄴ안된다 길을 알아야한다. 
+
+
+10:03 2교시
+과제를 한개 내주겠습니다.
+수요일까지 각 조별로 어떤 프로젝트를 할 것인지를 생각해옵니다. 이 프로젝트는  마지막 프로젝트아니고 그앞에 단계에서 간단하게 우리 하고있는 뱅킹수준도 괜찮고
+이것보다 조금더 복잡해도 괜찮아요. 만들고 싶은 것 을 각 조별로 상상력을 동원해서 이런거 만들어볼까 정도 가지고 뭔지 정도만 조별로 생각해서 그 내용 가지고 요구사항 분석정의때 도큐먼트를 작성하는것으로 평가
+이게 일안이고 이안은 제가하나 건내주고 난뒤에 그내용을 여러분들이 작성하는겁니다. 이 프로젝트에 맞는 요구사항명세를 분석해보는것. 아니면 첨부터 스스로가 각 조마다 우리 이거 해볼래? 하는거 기반으로 만드는 방법.
+어떤 내용이 포함되어야하나. 
+첫번째 우리가 만들고자하는 어플리케이션(시스템) 목적. 비즈니스 목적이 뭔지.
+두번째는 그 시스템의 요구사항은 뭐냐 크게 두가지가있다.
+	만약에 은행에서 지금같이 뱅킹시스템 만든다고 치면 '고객이 입금도하고 출금도할수있도록 합니다' 이런식의 목적을 functional 기능적인형태의 요구사항들은
+	두번째는 non-functional 비기능적. 출금하는과정이 한시간이걸리면 이용안하겟죠. non-functional은 아키텍쳐수준. 우리 수준이 아님. 이게 2등급수준 여러분들은 4~5등급.
+	기능적 요구사항 정도만 가져오기
+세번째는 소프트웨어적 요구사항이에요. 소프트웨어적 요구사항들을 기능적요구사항들을 만족시키기위해서 소프트웨어적으로 뭐가 필요하나. 
+여러분드링 배운것만으로만 하면 JDBC밖에없어요 또하나는 데이터베이스. 나올게 없는데 그래서 지금하면안된다 소프트웨어적으로 필요한것들 생각해보고 이것을 웹베이스적으로 가야하니
+스크립트 html자체가 웹기술이니 웹기반으로하는것을 보고 포커스를 줄여서 기반에서 필요한 소프트웨어들을 생각해보면 될거같다. 이런것들이 반드시필요하다고 해서 넣을 필요는없고
+이런것들이 필요하다 해서 넣으면된다
+네번째는 유스케이스 목록이 있어야된다.
+그리고 클래스 모델이 등장해야되요 클래스모델은 뭐냐면 상속관계입니다 하면서 박스그리고 그런거있었죠 그게 클래스 다이어그램명세. 그게 클래스 모델.
+그러니깐 이 클래스 모델이 나오려면 명세를 작성할때 기본적으로 oop개념을 알아야되죠. 여러분들이 만들고자하는 객체, 클래스들이 뭔지 도출 할 수 있어야 되요.
+지금까지 우리가 배운거는 account안에 이런 소스가 있어 엎르리케이션이 있어 이게 체킹하고 상속관계야 이게 자바로 어ㄸ허게 표현하는지 배웠음
+여기서는 account라는것이 객체가 될거냐 말거냐
+customer가 객체가 될거냐 말거냐 이거말고 객체가 뭐가있을거냐 이거를 자바로 어떻게 만들거냐고 중요한게 아니고.
+앞에서는 이게 이미 클래스라고 하고 구현했다면
+지금은 그 앞에 것을 뽑는것. 
+교보문고에서 온라인 도서시스템 만들려고해요 온라인 북스토어.
+여기서 필요한 객체가 무엇이있을까요. 책, 유저, 
+최소한 그것에 대해서 이용은해봤잖아요 경험은 해봤지만 뽀ㅓㅂ기가 힘들다
+항공관제가 관리를하죠 객체 뭐있을까요 
+우리가 흔히알고있는거 이야기해도 5개가 안나와. ㅠ
+여러분들이 상상하라고했잖아 각 조별로 상상하겠지 거기에 필요한 클래스들ㅇ르 뽑으세요.......ㅠ
+그다음에 마지막에 관련 이슈.
+정리를 해서 제출 하는걸로.
+
+
+자 이어서 customerservice를 만들고 추가는 정리하시고
+또하나는 account이겟죠
+
+예전에 service같은경우에 어떤 커스토머에 관계없이 동일한 서비스를 하고있따 매번 생성하지말고 하자
+싱글톤으로하자. 근데 싱글톤으로 안만들었죠 두개를 싱글톤으로 만들어야겠죠그렇게 할수 있지만
+이렇게도 할 수 있죠 bankservice에다가 싱글톤으로 돌리고.
+
+public class BankService {
+	public static final BankService service = new BankService();
+	public static final char SA = 'S';
+	public static final char CA = 'C';
+	
+	public static final double DEFAULT_INTEREST_RATE = 0.03;
+	public static final double DEFAULT_OVERDRAFT_AMOUNT = 1000.0;
+	
+	private CustomerService customerService;
+	private AccountService accountService;
+	
+	private BankService() {
+		init();
+	}
+	
+	public void init() {
+		customerService = new CustomerService(new CustomerDao());
+		accountService = new AccountService(new AccountDao());
+	}
+	
+	public static BankService getInstance() {
+		return service;
+	}
+	
+	public void addCustomer(String name, String ssn, String phone, 
+			String userId, String passwd) {
+		if(!isCustomer(ssn)) {
+			customerService.addCustomer(customerService
+					.createCustomer(name, ssn, phone, userId, passwd));
+		}
+		throw new DuplicatedEntityException(ssn + " is duplicated.");
+	}
+	
+	public Customer getCustomerBySsn(String ssn) {
+		return customerService.getCustomerBySsn(ssn);
+	}
+	
+	public List<Customer> getAllcustomers(){
+		return customerService.getAllcustomers();
+	}
+	
+	public void addSavingAccount(long balance, double interestRate, String ssn)
+												throws CustomerNotFoundException{
+		SavingAccount account = new SavingAccount();
+		account.setAccountNum(accountService.generateAccount());
+		account.setAccountType(BankService.SA);
+		account.setInterestRate(interestRate);
+		Customer customer = customerService.getCustomerBySsn(ssn);
+		if(customer != null) {
+			account.setCustomer(customer);			
+		}else {
+			throw new CustomerNotFoundException(ssn + " not found");
+		}
+	}
+	
+	public void addCheckingAccount(long balance, double overdraftAmount, String ssn) 
+										throws CustomerNotFoundException{
+		CheckingAccount account = new CheckingAccount();
+		account.setAccountNum(accountService.generateAccount());
+		account.setAccountType(BankService.CA);
+		account.setOverdraftAmount(overdraftAmount);
+		
+		Customer customer = customerService.getCustomerBySsn(ssn);
+		if(customer != null) {
+			account.setCustomer(customer);			
+		}else {
+			throw new CustomerNotFoundException(ssn + " not found");
+		}
+	}
+	
+	public boolean isCustomer(String ssn) {
+		return customerService.getCustomerBySsn(ssn) == null ? false : true;
+	}
+}
+
+
+동시에 처리해도 사오간은 없는데 계좌를 하나만 만들거 같으면 가입과동시에 계좌를 하면되죠.
+그런데 이사람이 하나 만들어지고 난뒤에 또다른 계좌를 만들려고하는거죠그러면 고객정보를 또 인서트할피룡는 없잖아요
+그래서 찾아보고 인서트하는 방향으로 하면될거같은데 그러면은 테스트할때 어떻게 해야되요 고객부터 먼저 집어넣고
+그다음에 어카운트 생성하면되죠 지금 같은 경우는 서비스에서 Bank에서 checking을 생성하겟다 saving을 생성하겠다 따ㅣ로따로 메소드를 줬죠
+이렇게 하지않고 addAccount해도되죠 이렇게 하게되면 안에서 saving인지 checking인지 구분해야겟죠 
+이거는 각각 장단점이 있어요 애초부터 각각 다르게 매소드를 하는 방법이있고
+두번재는 일봔화해서 account안에서 구분하는 방법이있겟죠
+만약에 두개지만 계좌가 점점 ㅁ낳아지면 if else가 점점 ㅁ낳아지겟죠 
+그럴거같으면 미리 뽑아 내는게 좋을지도 모르죠 지금은 관계가 없다고 생각되어짐. 이거는 설계자의 몫.
+크라잉어트가 테스트하기위해서 잇을텐데 생성해야될 객체가 뭐가있겠어요
+생성해야될 객체가 없다.? 
+테스트할때 customer도 만들고 account도 만들고 할테지만
+실제 이코드에서는 client가 생성할 유일한게 banksevice거든요 bankservice이 뒤에서 customer 도부르고 account도 부르고
+하는데 그 유일한 bankservice라서 싱글톤이라 자기가 안만들어.
+customer도 create해서 그안에다 인자를 넣어주면 customer안에서 만들지.
+
+addCustomer를 할때 name이나 ssn같은 정보지 customer정보가 아니지.
+우리는 new customer를 할거아니에요 저기는 new가없죠 new는 이안쪽에 들어와서 하는거죠.
+이거는 기능적차원에서의 문제를 언급하는게아니고 보다 차원높은형태의 oop에대해서 말하는거에요ㅣ.
+여기가 클라이언트고 여기가 서버프로그램이에요 이거를 테스트하라고 하면되죠 내가 최종적으로 dao에 콜을해서 insert해야되잖아요
+여기서 customer, acocunt, dao객체만들자
+만든거를 넘겨주면 이런식으로 테스트할거에요
+근데 저는 필요한정보 customer에대한 정보면 저기다가 넘겨주라는거에요 그러면 알아서 만들어주겟다는거에요 customer도부르고 dao도 불러서 저장까지해주겟다는거에요
+내가 계좌하나 만드는데 여기저기 가는게 아니고 여기다가 맡기면 뒤에서 알아서 해주겠다는 그거를 지금 흉내내본거에요.
+bankService가 은행의 텔러역활하는거에요 말로한거를 코드로한번 만들어본거에요
+은행가면 종이있잖아요 계좌체크하고 주민번호 그거 내는게 다지 그안에서 어떠한 서류를 따로 만들지 않는다는거에요.
+여기서 그렇게 하고 있는거에요.
+대다수는 이렇게 만들지 못해요. 왜 이렇게 어렵게 하냐하면 저는 그렇게 생각해요 어렵든말든간에 따라해라. 
+그리고 자기거로 해버려라. 언제가서는 알게된다.
+운동배우ㅕㅁㄴ 야구를 하든 골프를 하든 하면 코치가 자세를 알려주죠 폼을 알려주죠 근데 들어보면 어떤 사람들도 그렇게 훈련받았는데 세상에서 야구로 예를 들면 야구에서 가장 잘하는 사람들만 모아논게 메쟈
+거기서도 홈런타자들을 들여다보면 폼이 다 달라. 똑같ㅇ폼을 가진사람이 없ㄷ고 .어떤 폼이 가장 좋은폼인가요. 몰라 그러면 기본이없나? 기본이 있어요. 가장 좋은 폼이 있어.
+근데 그 폼이 왜 모든 사람에게 동일한 모습으로 등장하지않냐하면 아무리 기본적인 폼이 좋아도 신체는 다 달라요. 누구는 갑바가 좋고 누구는 심장이 좋고 거기에 맞춰서 변화하는거죠 그래서 폼이 다른거지
+기본이 없는게 아니다. 기본을 다배우고 변형하는거지. 근데 아이들은 예를들어 양준혁을들면 다 그렇게 든다. 다 흉내내는거지. 근데 그거는 흉내인것이지 그렇게 흉내를 내다가 실제 야구선수가 되기위해서
+레슨을 받으면 그 폼은 다뜯어고치게 되어지죠 다뜯어고치고 정확하게 폼을익히고 자리잡으면 신체에맞게끔 바꾸는거다. 그거모르고 젤 마지막만보고 따라할려고하는거지.
+
+우리가 애플리케이션을 잡을때 어떤형태로 갈것인가는 만든 시간 확장성, 변견가능성에따라서 다달라지지만 기본은 존재한다. 이런정도의 코드는 여러분단계에서 볼 수 있는 코드는 아니지만 알려주는거야 흉내내도 된다니깐.
+짜다보며 ㄴ이해하게 되는거지.
+
+customer가져올때 account가져오겠다 하는거 이거로딩? 즉시가져오겠다 라는 뜻
+가져오지않고 필요할때 쿼리날려서 가져오지뭐 이거는 lazyloading 지연시켜서 가져오겠다.
+여러분드링 어플리케이션짤때 이거로딩할거냐 레이지로딩할거냐하는거를 언젠가는 결정을 하셔야되요 이런경우가 굉장히 많이 발생하는데 게시판에 게시글이 존재를 하죠
+어떤 경우에는 첨부파일이 존재하죠 이럴때는 게시판하면서 첨부파일 같이 로딩할래
+아니면 첨부파일은 껍데기만 게시할래 이거는 성능에관한 문제 무조건 이거로딩이 좋지않다 왜냐면 필요없을수도있다.
+어던사람이 고객정보를 가져오는데 있어서 어카운트 필요없어 하면 굳이 안불러와도된다 그러면 레이지로딩
+아 해보니깐 매번필요하던데? 이러면 이거로딩 그때그때마다 다르다.
+
+
+02:04 5교시
+실제입금과 출금이 남아있어요 이미 자바때도 햇어요.
+이거를 어떤식으로 불러야지 실제 현재 우리가 만들고있는 전체적이 포멧에서 벗어나지않고 불러낼수있을까
+실제 입금과 출금을 한번 해보고 되었으면 그것이 DB에 반영이되도록 만들어보세요.

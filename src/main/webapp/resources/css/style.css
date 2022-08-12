@@ -14,6 +14,7 @@ body {
   height: calc(100vh);
   display: flex;
   align-items: center;
+  background: linear-gradient(90deg, rgba(241,238,248,1) 0%, rgba(224,212,244,1) 46%, rgba(195,206,235,1) 100% );
 }
 
 .main_container {
@@ -23,6 +24,7 @@ body {
   background-color: var(--main-color);
   margin: 0 auto;
   border-radius: 50px;
+  box-shadow: 20px 35px 59px 0px rgba(149,145,199,1);
 }
 
 nav {

@@ -67,7 +67,7 @@ public class FileController {
 		String filePath = "C:\\Park\\work\\fileStation\\src\\main\\webapp\\resources\\files\\";
 		
 		//text처리
-		if(!textarea.equals("")) {
+		if(textarea != null) {
 			int textResult = fileService.addText(textarea);
 			if(textResult == 0) {
 				model.addAttribute("msg", "업로드오류");

@@ -4,21 +4,38 @@ $(document).ready(function() {
         //this.files[0].size gets the size of your file.
         //alert(this.files[0].size);
     });
+    
+   
     $(".textInput").on("change keyup paste", function(){
         $(this).css("line-height", "1")
         if($(".textInput").val() == ""){
             $(this).attr("placeholder", "TEXT")
-            $(this).css("font-size", "30px").css("font-weight", "bold").css("line-height", "365px")
-        }
+            $(this).css("font-size", "30px").css("font-weight", "bold").css("line-height", "365px").css("overflow-y", "hidden")
+        }else {
+			$(this).attr("placeholder", "")
+   			$(this).css("font-size", "16px").css("font-weight", "normal").css("overflow-y", "auto")
+		}
     })
 });
+
+/*$(".textInput").on("click", function(){
+   	$(this).attr("placeholder", "")
+   	$(this).css("font-size", "16px").css("font-weight", "normal").css("overflow-y", "auto")
+})*/
+    
 
 $(".delete_all").on("click", function(){
     let textarea = $(".textInput")
     textarea.val("")
     textarea.attr("placeholder", "TEXT")
-    textarea.css("font-size", "30px").css("font-weight", "bold").css("line-height", "365px")
+    textarea.css("font-size", "30px").css("font-weight", "bold").css("line-height", "365px").css("overflow-y", "hidden")
 })
+
+$(".upload-box").click(function(e){
+    e.preventDefault();
+    $("#input_file").click()
+})
+
 // 파일 리스트 번호
 var fileIndex = 0;
 // 등록할 전체 파일 사이즈
@@ -40,7 +57,7 @@ $(function() {
 
 // 파일 드롭 다운
 function fileDropDown() {
-    var dropZone = $("#dropZone");
+    var dropZone = $("#drop-file");
     //Drag기능 
     dropZone.on('dragenter', function(e) {
         e.stopPropagation();
@@ -138,7 +155,7 @@ function selectFile(fileObject) {
                 // 확장자 체크
                 alert("등록 불가 확장자");
                 break; */
-            if ($.inArray(ext, [ 'hwp', 'doc', 'docx', 'xls', 'xlsx', 'ppt', 'pptx', 'txt', 'png', 'pdf', 'jpg', 'jpeg', 'gif', 'zip', 'css', 'js', 'jsp', 'py', 'svg', 'tiff', 'ai', 'bmp', 'mp3', 'mp4' ]) <= 0) {
+            if ($.inArray(ext, [ 'hwp', 'doc', 'docx', 'xls', 'xlsx', 'ppt', 'pptx', 'txt', 'png', 'pdf', 'jpg', 'jpeg', 'gif', 'zip', 'css' ]) <= 0) {
                 // 확장자 체크
                 /* alert("등록이 불가능한 파일 입니다.");
                 break; */
@@ -160,9 +177,10 @@ function selectFile(fileObject) {
                 // 업로드 파일 목록 생성
                 if(file.type.split("/")[0] == "image"){
                     var size = uploadFiles.push(file); //업로드 목록에 추가
+                    addFileList(fileIndex, fileName, fileSizeStr);
                     preview(file, fileIndex); //미리보기 만들기
                 } else {
-                    addFileList(fileIndex, fileName, fileSizeStr);
+                    fileaddFileList(fileIndex, fileName, fileSizeStr);
                 }
 
                 // 파일 번호 증가
@@ -178,10 +196,8 @@ function preview(file, fileIndex) {
     var reader = new FileReader();
     reader.onload = (function(f, idx) {
         return function(e) {
-        var div = '<li id="fileTr_' + fileIndex + '" class="thumb fileLi fileImg"> \
-        <a class="file-item"><img style="width: 100%; height:100%;" src="' + e.target.result + '" title="' + escape(f.name) + '"/></a> \
-        <input value="삭제" class="file_input" type="button" href="#" onclick="deleteFile(' + fileIndex + '); return false;"></li>';
-        $("#fileTableTbody").append(div);
+        var div = `<img src="${e.target.result}" title="${escape(f.name)}" alt="파일타입 이미지" class="image">`;
+        $(`.thumbnail.${fileIndex}`).append(div);
     };
 })(file, fileIndex);
 
@@ -189,24 +205,70 @@ reader.readAsDataURL(file);
 
 }
 
-// 업로드 파일 목록 생성
+//업로드 파일 목록 생성
 function addFileList(fIndex, fileName, fileSizeStr) {
     /* if (fileSize.match("^0")) {
         alert("start 0");
     } */
 
     var html = "";
-    html += "<li id='fileTr_" + fIndex + "' class='fileLi'>";
-    html += "    <a class='file-item left' >";
-    html +=  "<span class='file_name'>" + fileName + "</span><span class='file_size'>(" + fileSizeStr +")</span>" 
-            + "<input value='삭제' class='file_input' type='button' href='#' onclick='deleteFile(" + fIndex + "); return false;'>"
-    html += "    </a>"
-    html += "</li>"
+    html +=  `
+    <div class="file" id="fileTr_${fIndex}">
+        <div class="thumbnail ${fIndex}">
+        
+        </div>
+        <div class="details">
+        <header class="header">
+            <span class="name">${fileName}</span>
+            <span class="size">${fileSizeStr}</span>
+        </header>
+        <div class="progress">
+            <div class="bar"></div>
+        </div>
+        <div class="status">
+            <span class="percent">100% done</span>
+            <span class="speed">90KB/sec</span>
+        </div>
+        <input value="삭제" class="file_input" type="button" href="#" onclick="deleteFile(${fIndex}); return false;">
+        </div>
+    </div>
+  `
 
-    $('#fileTableTbody').append(html);
+    $('#files').append(html);
 }
 
-// 업로드 파일 삭제
+function fileaddFileList(fIndex, fileName, fileSizeStr) {
+    /* if (fileSize.match("^0")) {
+        alert("start 0");
+    } */
+
+    var html = "";
+    html +=  `
+    <div class="file" id="fileTr_${fIndex}">
+        <div class="thumbnail">
+        <img src="https://img.icons8.com/pastel-glyph/2x/image-file.png" alt="파일타입 이미지" class="image">
+        </div>
+        <div class="details">
+        <header class="header">
+            <span class="name">${fileName}</span>
+            <span class="size">${fileSizeStr}</span>
+        </header>
+        <div class="progress">
+            <div class="bar"></div>
+        </div>
+        <div class="status">
+            <span class="percent">100% done</span>
+            <span class="speed">90KB/sec</span>
+        </div>
+        <input value="삭제" class="file_input" type="button" href="#" onclick="deleteFile(${fIndex}); return false;">
+        </div>
+    </div>
+  `
+
+    $('#files').append(html);
+}
+
+//업로드 파일 삭제
 function deleteFile(fIndex) {
     console.log("deleteFile.fIndex=" + fIndex);
     // 전체 파일 사이즈 수정
@@ -240,11 +302,10 @@ function uploadFile() {
     //비밀번호 체크
     var password = $('.input_passwd').val();
 
-	//텍스트 체크
-	var textarea = $('.textInput').val();
-
+    console.log(password)
+    
     // 파일이 있는지 체크
-    if (uploadFileList.length == 0 && textarea == "") {
+    if (uploadFileList.length == 0) {
         // 파일등록 경고창
         alert("파일이 없습니다.");
         return;
@@ -260,7 +321,6 @@ function uploadFile() {
         alert("비밀번호는 8자리 이상입니다.");
         return;
     }
-    
 
     // 용량을 500MB를 넘을 경우 업로드 불가
     if (totalFileSize > maxUploadSize) {
@@ -275,10 +335,11 @@ function uploadFile() {
         console.log(form)
         var formData = new FormData(form[0]);
         for (var i = 0; i < uploadFileList.length; i++) {
+            console.log(fileList[uploadFileList[i]])
             formData.append('files', fileList[uploadFileList[i]]);
+            console.log(formData.get('files'))
         }
-        formData.append("passwd", password);
-        formData.append("textarea", textarea);
+        formData.append('passwd', password);
 
         $.ajax({
             url : "addFile",
@@ -304,7 +365,3 @@ function uploadFile() {
     }
 }
 
-$(".textInput").on("click", function(){
-    $(this).attr("placeholder", "")
-    $(this).css("font-size", "16px").css("font-weight", "normal")
-})
