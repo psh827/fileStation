@@ -107,17 +107,19 @@ public class BoardDao {
 		}, bId);
 	}
 	
-//	public boolean is
-	
-	
 	/**
 	 * 자기 글 수정
 	 * @param passwd
 	 * @return
 	 */
 	public int modifyPost(Post post) {
-		String sql = "UPDATE Board SET content = ? WHERE passwd = ?";
-		return 0;
+		String sql = "UPDATE Board SET content = ? WHERE bId = ?";
+		try {
+			jdbcTemplate.update(sql, post.getContent());
+			return 1;
+		} catch (Exception e) {
+			return 0;
+		}
 	}
 	
 	/**

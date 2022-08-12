@@ -33,7 +33,7 @@ public class BoardServiceImpl implements BoardService{
 
 	@Override
 	public int modifyPost(Post post) {
-		return 0;
+		return boardDao.modifyPost(post);
 	}
 
 	@Override

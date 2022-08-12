@@ -38,5 +38,7 @@ SELECT * FROM Text;
 SELECT * FROM Board;
 SELECT * FROM BoardImage;
 
+UPDATE Board SET content = 'test test test' WHERE bId = '1';
+
 DROP TABLE BoardImage;
 DROP TABLE Board;

@@ -79,7 +79,7 @@
             <div class="Questions_inner">${post.content}</div>
             <div class="write_btn_box">
               <button class="Questions_btn" type="button" name="list" onclick='location.href="<c:url value='/board/boardmain'/>"'>목록으로</button>
-              <button class="Questions_btn middle" type="button" name="revoke" onclick='location.href="<c:url value='/board/update_board'/>"'>수정하기</button>
+              <button class="Questions_btn middle" type="button" name="revoke" onclick='location.href="<c:url value='/board/modify_board'/>"'>수정하기</button>
               <button class="Questions_btn right" type="button" name="revoke">삭제하기</button>
             </div>
           </div>

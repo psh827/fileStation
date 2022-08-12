@@ -26,6 +26,7 @@ public class PostController {
 	public String postForm(Model model, HttpServletRequest request, HttpSession session) {
 
 		long bId = Long.parseLong(request.getParameter("bId"));
+		session.setAttribute("bId", bId);
 		String passwd = request.getParameter("passwd");
 		
 		System.out.println(bId);

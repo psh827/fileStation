@@ -3,6 +3,7 @@ package com.varxyz.fStation.controller.board;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -34,7 +35,8 @@ public class BoardController {
 	BoardServiceImpl boardService;
 	
 	@GetMapping("/board/boardmain")
-	public String boardForm(HttpServletRequest request, Model model) {
+	public String boardForm(HttpServletRequest request, Model model, HttpSession session) {
+		session.invalidate();
 		List<Post> posttList = boardService.getAllPost();
 		request.setAttribute("posttList", posttList);
 		System.out.println(posttList);
