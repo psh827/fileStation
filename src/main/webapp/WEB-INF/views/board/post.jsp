@@ -15,17 +15,16 @@
     <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/initial.css'/>" />
     <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/default.css'/>" />
     <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/style.css'/>" />
-    <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/board.css'/>" />
-    <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/modal.css'/>" />
-         
+     <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/board.css'/>" />
+     
     <script
       src="https://kit.fontawesome.com/62a067f302.js"
       crossorigin="anonymous"
     ></script>
- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
-<script src="<c:url value='/resources/js/subpage.js'/>"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
+	<script src="<c:url value='/resources/js/modify.js'/>"></script>
   </head>
   <body>
     <div class="main_container">
@@ -81,10 +80,11 @@
             <div class="Questions_title">
             ${post.title }
             </div>
+            <span hidden class="bId_hidden">${bId}</span>
             <div class="Questions_inner">${post.content}</div>
             <div class="write_btn_box">
               <button class="Questions_btn" type="button" name="list" onclick='location.href="<c:url value='/board/boardmain'/>"'>목록으로</button>
-              <button class="Questions_btn middle" type="button" name="revoke" onclick='location.href="<c:url value='/board/modify_board'/>"'>수정하기</button>
+              <button class="Questions_btn modify middle" type="button" name="revoke">수정하기</button>
               <a class="modal_btn" rel="modal:open" href="#modal1" type="button">삭제하기</a>
             </div>
           </div>
@@ -92,8 +92,8 @@
         </div>
       </form>
       </div>
-    
-    <!-- modal body -->
+    </div>
+        <!-- modal body -->
 <div id="modal1" class="modal" >
 	<form action="delete" method="post" class="modal_body">
 		<fieldset>삭제 여부</fieldset>
@@ -108,9 +108,12 @@
 
 	</form>
 </div>
- <script type="text/javascript">
- var tmp_value = $('input:radio[name=radio_name]:checked').val();
- </script>
-  
+    <script>
+	    $(document).on('click', '.modify', function(){
+	    	var toTextarea = $(".Questions_inner")
+	    	$(toTextarea).replaceWith('<textarea class="Questions_inner textarea">${post.content}</textarea>')
+	    	$('.modify').replaceWith('<button class="Questions_btn comfirm middle" type="button" name="revoke">등록하기</button>')
+	    })
+	</script>
   </body>
 </html>

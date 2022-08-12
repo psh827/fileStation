@@ -43,28 +43,6 @@ public class PostDeleteController {
 
 	    return "redirect:boardmain";
 	}
-	
-//	@PostMapping("/Confirmation/delete01")
-//	public String deleteForm(@RequestParam(value = "delete") String delete, HttpServletRequest request, Model model) throws Exception {
-////		boardService.deletePost(passwd);
-////		return "redirect:post";
-//		
-//		long bId = Long.parseLong(request.getParameter("bId"));
-//		
-//		int post = boardService.deletePost(bId);
-//		
-//		if (post == 0) {
-//			model.addAttribute("msg", "비밀번호가 틀렸습니다.");
-//			model.addAttribute("url", "post");
-//			return "alert";
-//		}
-//		if (delete == 1) {
-//			model.addAttribute("msg", "비밀번호가 틀렸습니다.");
-//			model.addAttribute("url", "post");
-//			return "alert";
-//		}
-//		return "redirect:post";
-//	}
 
 }
 		 

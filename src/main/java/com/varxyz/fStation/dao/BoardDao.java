@@ -115,7 +115,7 @@ public class BoardDao {
 	public int modifyPost(Post post) {
 		String sql = "UPDATE Board SET content = ? WHERE bId = ?";
 		try {
-			jdbcTemplate.update(sql, post.getContent());
+			jdbcTemplate.update(sql, post.getContent(), post.getBId());
 			return 1;
 		} catch (Exception e) {
 			return 0;

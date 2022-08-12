@@ -1,16 +1,15 @@
 package com.varxyz.fStation.controller.board;
 
-import java.util.List;
+import java.io.UnsupportedEncodingException;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.varxyz.fStation.domain.Post;
 import com.varxyz.fStation.service.BoardServiceImpl;
@@ -21,15 +20,19 @@ public class ModifyBoardController {
 	@Autowired
 	BoardServiceImpl boardService;
 	
-	@GetMapping("/board/modify_board")
-	public String modifyBoardForm(Model model, HttpSession session, HttpServletRequest request) {
-		long bId = (long) session.getAttribute("bId");
-
-		Post post = boardService.viewPostByBid(bId);
-		model.addAttribute("post", post);
+	@RequestMapping(value = "/board/modify_board", method = { RequestMethod.POST })
+	@ResponseBody
+	public int getMenuItemForModal(HttpServletRequest request) throws UnsupportedEncodingException{
+		long bId = Long.parseLong(request.getParameter("bId"));
+		String content = request.getParameter("content");
+		System.out.println(bId);
+		System.out.println(content);
 		
-		boardService.modifyPost(post);
-		return "board/modify_board";
+		Post post = new Post();
+		post.setBId(bId);
+		post.setContent(content);
+		int result = boardService.modifyPost(post);
+		
+	   return result;
 	}
-	
 }
