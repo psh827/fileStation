@@ -12,4 +12,6 @@ public interface BoardService {
 	int deletePost(Post post);
 	public Post viewPostByBid(long bId);
 	
+	int getPagingCount();
+	
 }

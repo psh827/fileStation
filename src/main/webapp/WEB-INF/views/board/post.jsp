@@ -16,6 +16,7 @@
     <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/default.css'/>" />
     <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/style.css'/>" />
      <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/board.css'/>" />
+     <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/modal.css'/>" />
      
     <script
       src="https://kit.fontawesome.com/62a067f302.js"
@@ -93,7 +94,7 @@
       </form>
       </div>
     </div>
-        <!-- modal body -->
+<!-- modal body -->
 <div id="modal1" class="modal" >
 	<form action="delete" method="post" class="modal_body">
 		<fieldset>삭제 여부</fieldset>

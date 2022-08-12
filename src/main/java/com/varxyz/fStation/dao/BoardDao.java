@@ -2,6 +2,7 @@ package com.varxyz.fStation.dao;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.tomcat.jdbc.pool.DataSource;
@@ -10,6 +11,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 
 import com.varxyz.fStation.domain.Post;
+
 
 public class BoardDao {
 	
@@ -136,4 +138,17 @@ public class BoardDao {
 			return 0;
 		}
 	}
+	
+	/**
+	 * 게시글 수 가져오기
+	 * @param 
+	 * @return
+	 */
+	public int getPagingCount() {
+		String sql = "SELECT COUNT(*) FROM Board";
+		return jdbcTemplate.update(sql);
+	}
+	
+	
+
 }

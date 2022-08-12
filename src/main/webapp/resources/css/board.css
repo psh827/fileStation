@@ -38,6 +38,17 @@ button { cursor: pointer;}
   display: inline-block;
   color: white;
 }
+a.modal_btn {
+width: 130px;
+  height: 40px;
+  left:30px;
+  background: var(--main-color);
+  border: none;
+  border-radius: 5px;
+  bottom: 30px;
+  display: inline-block;
+  color: white;
+}
 .Questions_btn.middle {
   left: 20%;
 }

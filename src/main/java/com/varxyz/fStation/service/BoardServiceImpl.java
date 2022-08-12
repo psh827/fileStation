@@ -46,4 +46,11 @@ public class BoardServiceImpl implements BoardService{
 		return boardDao.viewPostByBid(bId);
 	}
 
+	@Override
+	public int getPagingCount() {
+		return boardDao.getPagingCount();
+	}
+
+	
+	
 }
