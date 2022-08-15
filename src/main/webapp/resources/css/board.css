@@ -14,11 +14,19 @@ button { cursor: pointer;}
 }
 
 .Questions_banner {
+  display: flex;
+  align-items: center;
   position: relative;
   border: 1px solid black;
   border-radius: 15px;
   height: 150px;
   margin: 40px 0;
+}
+.Questions_banner button:nth-of-type(1) {
+   margin-left: 60px;
+}
+.Questions_banner button:nth-of-type(2) {
+   margin-left: 20px;
 }
 .posting_list {
   position: relative;
@@ -37,18 +45,11 @@ button { cursor: pointer;}
   bottom: 30px;
   display: inline-block;
   color: white;
+  font-family: 'OTWelcomeRa';
+  font-size: 16px;
+  padding-top: 10px;
 }
-a.modal_btn {
-width: 130px;
-  height: 40px;
-  left:30px;
-  background: var(--main-color);
-  border: none;
-  border-radius: 5px;
-  bottom: 30px;
-  display: inline-block;
-  color: white;
-}
+
 .Questions_btn.middle {
   left: 20%;
 }
@@ -63,8 +64,32 @@ width: 130px;
   height: 50px;
   border-bottom: 1px solid #d8dee8;
 }
+.Questions_table tr:nth-of-type(9n) {
+  border-bottom: none;
+}
 .Questions_table tr:last-child {
   border-bottom: none;
+}
+.Questions_table tr th:nth-of-type(1) {
+  padding: 0 0 0 20px;
+}
+.Questions_table tr th {
+  background: #e0e0e0;
+}
+.Questions_table tr th:nth-of-type(1) {
+  border-radius: 14px 0 0 0;
+}
+.Questions_table tr th:nth-of-type(3) {
+  border-radius: 0 14px 0 0;
+}
+.Questions_table tr td a {
+  display: flex;
+  align-items: center;
+}
+.Questions_table span.textLine {
+  display: block;
+  padding-top: 7px;
+  line-height: 16px;
 }
 .Questions_table tr td {
   text-align: left;
@@ -105,14 +130,15 @@ label {
 }
 
 .writer {
-	margin-bottom: 20px;
+   margin-bottom: 20px;
 }
 
 .modal_btn{
-	display: inline-block;
-	width: 100%;
-	height: 35px;
-	line-height: 35px;
+   display: inline-block;
+   width: 100%;
+   height: 35px;
+   line-height: 35px;
+   padding-top: 7px;
 }
 
 .write_btn {
@@ -146,3 +172,42 @@ label {
   margin-bottom: 65px;
   padding: 20px;
 }
+a.delete {
+ width: 130px;
+ height: 40px;
+ left: 30px;
+ background: var(--main-color);
+ border: none;
+ border-radius: 5px;
+ bottom: 30px;
+ display: inline-block;
+ color: white;
+}
+
+#paging {
+   z-index: 100;
+}
+
+#paging > ul {
+    list-style-type:none;
+}
+    
+#paging > ul li {
+    font-size: 1.1em;
+    display:inline-block;
+    cursor:pointer;
+    padding: 0 3px;
+}
+#paging > ul > li:hover {
+    /*background: #fbfbfb;*/
+    /*font-weight:bold;*/
+    color: #0080ff;
+}
+    
+#paging > ul > li.selected {
+    color: #0080ff;
+    font-size:1.2em;
+    font-weight:bold;
+    cursor:default;
+}
+

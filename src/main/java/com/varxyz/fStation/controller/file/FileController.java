@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.varxyz.fStation.domain.OurFile;
+import com.varxyz.fStation.domain.Text;
 import com.varxyz.fStation.service.FileServiceImpl;
 
 
@@ -59,22 +60,21 @@ public class FileController {
 		
 		passwd = passwd.split(",")[0];
 		List<OurFile> ourFileList = new ArrayList<OurFile>();
-		
-		//희정 주소
-//		String filePath = "C:\\ncs\\eclipse\\workspace\\fileStation\\src\\main\\webapp\\resources\\files\\";
-//		String filePath = "C:\\workspace\\java-cafe\\src\\main\\webapp\\resources\\menuImg\\";
-		//상훈 주소
-		String filePath = "C:\\Park\\work\\fileStation\\src\\main\\webapp\\resources\\files\\";
-		
+		Text text = new Text();
+		text.setPasswd(passwd);
 		//text처리
 		if(textarea != null) {
-			int textResult = fileService.addText(textarea);
+			text.setContent(textarea);
+			int textResult = fileService.addText(text);
 			if(textResult == 0) {
 				model.addAttribute("msg", "업로드오류");
 				model.addAttribute("url", "file_main");
 				return "alert";
 			}		
 		}
+		
+		String filePath = "C:\\fileStation\\";
+		
 		
 		//file처리
 		if(files != null) {
@@ -85,15 +85,7 @@ public class FileController {
 				String originalFile = mt.getOriginalFilename();
 				//파일명 중 확장자만 추출                                                //lastIndexOf(".") - 뒤에 있는 . 의 index번호
 				String originalFileExtension = originalFile.substring(originalFile.lastIndexOf("."));
-				//fileuploadtest.doc
-				//lastIndexOf(".") = 14(index는 0번부터)
-				//substring(14) = .doc
 				
-				//업무에서 사용하는 리눅스, UNIX는 한글지원이 안 되는 운영체제 
-				//파일업로드시 파일명은 ASCII코드로 저장되므로, 한글명으로 저장 필요
-				//UUID클래스 - (특수문자를 포함한)문자를 랜덤으로 생성                    "-"라면 생략으로 대체
-//	        String storedFileName = UUID.randomUUID().toString().replaceAll("-", "") + originalFileExtension;
-
 				ourFile.setPasswd(passwd);
 				ourFile.setFileName(originalFile);
 				ourFile.setFileSize(mt.getSize());
@@ -109,6 +101,7 @@ public class FileController {
 					fileT = "DOCUMENT";
 				}
 				ourFile.setFileType(fileT);
+				ourFile.setUrl(filePath);
 				
 				ourFileList.add(ourFile);
 				
@@ -120,6 +113,7 @@ public class FileController {
 
 			}
 			int result = fileService.addFile(ourFileList);
+			System.out.println("result = " + result);
 	        if(result == 0) {
 	        	model.addAttribute("msg", "업로드 오류");
 	        	model.addAttribute("url", "file_main");

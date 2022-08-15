@@ -14,6 +14,7 @@ public class OurFile {
 	private String fileName;
 	private long fileSize;
 	private String fileType;
+	private String url;
 	private Date regDate;
 	
 }

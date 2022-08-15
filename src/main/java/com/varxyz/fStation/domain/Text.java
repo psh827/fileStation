@@ -8,8 +8,8 @@ import lombok.Setter;
 @Getter
 @Setter
 public class Text {
-	
 	private long tId;
+	private String passwd;
 	private String content;
 	private Date regDate;
 }

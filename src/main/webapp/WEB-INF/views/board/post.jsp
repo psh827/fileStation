@@ -23,9 +23,9 @@
       crossorigin="anonymous"
     ></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
-	<script src="<c:url value='/resources/js/modify.js'/>"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
+   <script src="<c:url value='/resources/js/modify.js'/>"></script>
   </head>
   <body>
     <div class="main_container">
@@ -77,7 +77,7 @@
         <div class="Questions_container">
           <div class="subheading">글 내용</div>
           <div class="post_box">
-           	<p class="writer">작성자 : ${post.nickname}</p>
+              <p class="writer">작성자 : ${post.nickname}</p>
             <div class="Questions_title">
             ${post.title }
             </div>
@@ -86,7 +86,7 @@
             <div class="write_btn_box">
               <button class="Questions_btn" type="button" name="list" onclick='location.href="<c:url value='/board/boardmain'/>"'>목록으로</button>
               <button class="Questions_btn modify middle" type="button" name="revoke">수정하기</button>
-              <a class="modal_btn" rel="modal:open" href="#modal1" type="button">삭제하기</a>
+              <a class="modal_btn delete" rel="modal:open" href="#modal1" type="button">삭제하기</a>
             </div>
           </div>
           </div>
@@ -96,25 +96,25 @@
     </div>
 <!-- modal body -->
 <div id="modal1" class="modal" >
-	<form action="delete" method="post" class="modal_body">
-		<fieldset>삭제 여부</fieldset>
-		삭제 하시겠습니까?<br>
-		<div>
-		<input type="radio" name="delete" value="1"/>
-		<label>확인</label>
-		<input type="radio" name="delete" value="0"/>
-		<label>취소</label>
-		</div>
-		<input class="submit_btn" type="submit" value="확인"/>
+   <form action="delete" method="post" class="modal_body">
+      <fieldset>삭제 여부</fieldset>
+      삭제 하시겠습니까?<br>
+      <div>
+      <input type="radio" name="delete" value="1"/>
+      <label>확인</label>
+      <input type="radio" name="delete" value="0"/>
+      <label>취소</label>
+      </div>
+      <input class="submit_btn" type="submit" value="확인"/>
 
-	</form>
+   </form>
 </div>
     <script>
-	    $(document).on('click', '.modify', function(){
-	    	var toTextarea = $(".Questions_inner")
-	    	$(toTextarea).replaceWith('<textarea class="Questions_inner textarea">${post.content}</textarea>')
-	    	$('.modify').replaceWith('<button class="Questions_btn comfirm middle" type="button" name="revoke">등록하기</button>')
-	    })
-	</script>
+       $(document).on('click', '.modify', function(){
+          var toTextarea = $(".Questions_inner")
+          $(toTextarea).replaceWith('<textarea class="Questions_inner textarea">${post.content}</textarea>')
+          $('.modify').replaceWith('<button class="Questions_btn comfirm middle" type="button" name="revoke">등록하기</button>')
+       })
+   </script>
   </body>
 </html>

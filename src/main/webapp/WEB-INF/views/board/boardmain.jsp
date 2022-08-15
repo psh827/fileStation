@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html lang="ko">
   <head>
@@ -79,28 +80,69 @@
           </div>
           <div class="posting_list">
             <table class="Questions_table">
-            <c:forEach var="postlist" items="${posttList}">
+            <tr>
+               <th><span class="textLine">No</span></th>
+               <th><span class="textLine">Title</span></th>
+               <th><span class="textLine">Date</span></th>
+            </tr>
+            <%-- <c:forEach var="postlist" items="${posttList}"> --%>
+            <%-- <c:forEach var="item" items="${posttList}" begin="1" end="${fn:length(posttList) + 1}" step="1" varStatus="i"> --%>
+            <c:forEach var="i" begin="1" end="${fn:length(posttList) + 1}">
                 <tr>
-                  <td class="Q_no">${postlist.getBId()}</td>
-                  <td><a data-value="${postlist.getBId()}" class="modal_btn"  rel="modal:open" href="#modal1">${postlist.getTitle()}</a></td>
-                  <td class="Q_date">${postlist.getRegDate()}</td>
+                  <td class="Q_no"><span class="textLine">${i}</span></td>
+                  <td><a data-value="${posttList[i].getBId()}" class="modal_btn"  rel="modal:open" href="#modal1"><span class="textLine">${posttList[i].getTitle()}</span></a></td>
+                  <td class="Q_date"><span class="textLine">${posttList[i].getRegDate()}</span></td>
                 </tr>
             </c:forEach>
             </table>
           </div>
+        <div id="paging"><ul></ul></div>
         </div>
       </div>
     </div>
     
 <!-- modal body -->
 <div id="modal1" class="modal" >
-	<form action="post" method="post" class="modal_body">
-		<input class="modal_hidden_input" hidden name="bId" value="" />
-		비밀번호 : <input type="password" name="passwd" maxlength="4" />
-		<input class="submit_btn" type="submit" value="확인" />
-	</form>
+   <form action="post" method="post" class="modal_body">
+      <input class="modal_hidden_input" hidden name="bId" value="" />
+      비밀번호 : <input type="password" name="passwd" maxlength="4" />
+      <input class="submit_btn" type="submit" value="확인" />
+   </form>
 </div>
 
+<script>
+   let pageNum = 8;
+    let pageCount = Math.ceil(($('tr').length - 1) / 8);
+    
+    for (let i = pageNum + 2; i <= $('tr').length; i++){
+       $('tr:nth-child('+ i +')').css('display', 'none');
+      };
+    
+      for (let i = 1; i <= pageCount; i++){
+         let str = '<li>' + i + '</li>';
+         $('#paging ul').append(str);
+      };
+      
+      $('#paging ul li').click(function(){
+         let number = $(this).text();
+         console.log(number)
+         $('tr:not(tr:nth-child(1))').css('display', 'none');
+         for (let i = pageNum * (number - 1) + 2; i <= number * pageNum + 1; i ++) {
+            $('tr:nth-child(' + i + ')').css('display', 'table-row');
+         }
+      });
+</script>
+<!-- 
+<script>
+
+    for
+    if($('tr').length == 9){
+       
+    }
+    
+       
+</script>
+-->
 
 
   </body>

@@ -6,6 +6,7 @@ import org.apache.tomcat.jdbc.pool.DataSource;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import com.varxyz.fStation.domain.OurFile;
+import com.varxyz.fStation.domain.Text;
 
 public class FileDao {
 
@@ -20,17 +21,18 @@ public class FileDao {
 	 */
 	public int addFile(List<OurFile> ourFile) {
 		try {
-			String sql = "INSERT INTO File (passwd, fileName, fileSize, fileType)"
-					+ " VALUES (?, ?, ?, ?)";
+			String sql = "INSERT INTO File (passwd, fileName, fileSize, fileType, url)"
+					+ " VALUES (?, ?, ?, ?, ?)";
 			
 			for(OurFile of : ourFile) {
-				jdbcTemplate.update(sql, of.getPasswd(), of.getFileName(), of.getFileSize(), of.getFileType());
+				jdbcTemplate.update(sql, of.getPasswd(), of.getFileName(), of.getFileSize(), of.getFileType(), of.getUrl());
 			}
 			
 			System.out.println("입력성공");
 			
 			return 1;
 		} catch (Exception e) {
+			e.printStackTrace();
 			return 0;
 		}
 	}
@@ -40,11 +42,11 @@ public class FileDao {
 	 * @param textarea
 	 * @return
 	 */
-	public int addText(String textarea) {
+	public int addText(Text text) {
 		try {
-			String sql = "INSERT INTO Text (content) VALUE(?)";
+			String sql = "INSERT INTO Text (passwd, content) VALUES(?, ?)";
 			
-			jdbcTemplate.update(sql, textarea);
+			jdbcTemplate.update(sql, text.getPasswd(), text.getContent());
 			
 			System.out.println("입력성공");
 			

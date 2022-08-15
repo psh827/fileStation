@@ -120,6 +120,19 @@
     margin: 55px auto 20px;
 }
 
+.passwd_input{
+	position: relative;
+}
+
+.notice {
+	position: absolute;
+    width: 100%;
+    left: 35px;
+    bottom: -30px;
+    font-size: 13px;
+    color: red;
+}
+
 .banner_container{
     position: absolute;
     height: calc(100% - 110px);

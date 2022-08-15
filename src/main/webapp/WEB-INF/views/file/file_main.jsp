@@ -93,7 +93,8 @@
             <div class="file_input_grp">
                 <div class="passwd_input">
                   <label class="input_label">비밀번호 입력</label>
-                  <input class="input_passwd" name="passwd" placeholder="8글자이상 특수기호를 포함!" type="password" minlength="8" required>
+                  <input class="input_passwd" name="passwd" type="password" minlength="8" required>
+                  <label class="notice">8글자 이상 !, @, #, ~ 특수기호를 넣어서 작성해주세요.</label>
                 </div>
                 <input type="button" class="submit_file" onclick="uploadFile(); return false;" class="btn bg_01" value="파일 업로드">
             </div>

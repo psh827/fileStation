@@ -77,9 +77,7 @@
             <form:textarea name="textarea" rows="20" cols="170" placeholder="글 내용을 입력하세요." path="content"></form:textarea><br>
             <label>첨부파일</label><input type="file"><br>
             <button class="write_btn" type="submit">작성하기</button>
-            <div class="write_btn_box">
-              <button class="Questions_btn" type="button"><a href="/fileStation/board/boardmain">목록으로</a></button>
-            </div>
+            <button class="write_btn" type="button"><a id="write_a" href="/fileStation/board/boardmain" style="color:white;">목록으로</a></button>
           </div>
           </form:form>
           

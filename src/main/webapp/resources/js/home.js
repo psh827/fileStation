@@ -302,10 +302,13 @@ function uploadFile() {
     //비밀번호 체크
     var password = $('.input_passwd').val();
 
+	//텍스트 체크
+	var textarea = $('.textInput').val();
+
     console.log(password)
     
     // 파일이 있는지 체크
-    if (uploadFileList.length == 0) {
+    if (uploadFileList.length == 0 && textarea == "") {
         // 파일등록 경고창
         alert("파일이 없습니다.");
         return;
@@ -340,6 +343,7 @@ function uploadFile() {
             console.log(formData.get('files'))
         }
         formData.append('passwd', password);
+        formData.append("textarea", textarea);
 
         $.ajax({
             url : "addFile",

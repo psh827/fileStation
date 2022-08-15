@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.varxyz.fStation.dao.FileDao;
 import com.varxyz.fStation.domain.OurFile;
+import com.varxyz.fStation.domain.Text;
 
 public class FileServiceImpl implements FileService{
 	
@@ -22,8 +23,8 @@ public class FileServiceImpl implements FileService{
 	}
 	
 	@Override
-	public int addText(String textarea) {
-		return fileDao.addText(textarea);
+	public int addText(Text text) {
+		return fileDao.addText(text);
 	}
 
 	@Override
