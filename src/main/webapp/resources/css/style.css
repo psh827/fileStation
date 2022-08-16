@@ -24,7 +24,7 @@ body {
   background-color: var(--main-color);
   margin: 0 auto;
   border-radius: 50px;
-  box-shadow: 20px 35px 59px 0px rgba(149,145,199,1);
+  box-shadow: 20px 35px 59px 20px rgba(149,145,199,1);
 }
 
 nav {

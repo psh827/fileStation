@@ -14,4 +14,17 @@
     width: 50px;
     height: 30px;
     color: white;
+    padding-top: 9px;
+}
+.modal_delete {
+	text-align: center;
+	margin-top: 30px;
+}
+
+.yes_or_no {
+	margin : 10px 0;
+}
+
+.delete_title {
+	font-size : 16px;
 }

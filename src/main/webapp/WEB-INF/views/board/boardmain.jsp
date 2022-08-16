@@ -17,6 +17,7 @@
     <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/style.css'/>" />
     <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/board.css'/>" />
     <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/modal.css'/>" />
+    <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/pagination.css'/>" />
     <script
       src="https://kit.fontawesome.com/62a067f302.js"
       crossorigin="anonymous"
@@ -30,45 +31,7 @@
     <div class="main_container">
       <!--왼쪽 navigation-->
       <nav>
-        <!-- <a class="logo" href="#">File Station</a> -->
-        <ul class="nav_ul">
-          <li class="nav_item">
-            <a href="#" class="nav_link logo">
-              <span class="logo_span">File Station</spanc>
-              <span class="hidden" hidden>로고</span>
-            </a>
-          </li>
-          <li class="nav_item">
-            <a href="#" class="nav_link">
-              <i class="fa-solid fa-house fa-lg"></i>
-              <span class="hidden" hidden>홈(업로드)</span>
-            </a>
-          </li>
-          <li class="nav_item">
-            <a href="" class="nav_link">
-              <i class="fa-solid fa-download fa-lg"></i>
-              <span class="hidden" hidden>다운로드</span>
-            </a>
-          </li>
-          <li class="nav_item">
-            <a href="" class="nav_link">
-              <i class="fa-solid fa-person-chalkboard fa-lg"></i>
-              <span class="hidden" hidden>서비스 소개</span>
-            </a>
-          </li>
-          <li class="nav_item">
-            <a href="" class="nav_link">
-              <i class="fa-solid fa-question fa-lg"></i>
-              <span class="hidden" hidden>자주 하는 질문</span>
-            </a>
-          </li>
-          <li class="nav_item">
-            <a href="" class="nav_link">
-              <i class="fa-solid fa-chalkboard-user fa-lg"></i>
-              <span class="hidden" hidden>건의사항</span>
-            </a>
-          </li>
-        </ul>
+        <jsp:include page="../incl/nav.jsp"/>
       </nav>
       <!-- 하얀색 영역 -->
       <div class="main-inner__container">
@@ -76,7 +39,7 @@
           <div class="subheading">건의사항</div>
           <div class="Questions_banner">
             <button class="Questions_btn" type="button" name="writing" onclick='location.href="<c:url value='/board/write_board'/>"'>글작성</button>
-            <button class="Questions_btn right" type="button" name="mywriting">내가 작성한 글</button>
+            <button class="Questions_btn right" type="button" name="mywriting"><a class="modal_btn search_btn"  rel="modal:open" href="#modal2">검색하기</a></button>
           </div>
           <div class="posting_list">
             <table class="Questions_table">
@@ -87,16 +50,63 @@
             </tr>
             <%-- <c:forEach var="postlist" items="${posttList}"> --%>
             <%-- <c:forEach var="item" items="${posttList}" begin="1" end="${fn:length(posttList) + 1}" step="1" varStatus="i"> --%>
-            <c:forEach var="i" begin="1" end="${fn:length(posttList) + 1}">
+            <%-- <c:forEach var="i" items="${pagePost}">
                 <tr>
                   <td class="Q_no"><span class="textLine">${i}</span></td>
-                  <td><a data-value="${posttList[i].getBId()}" class="modal_btn"  rel="modal:open" href="#modal1"><span class="textLine">${posttList[i].getTitle()}</span></a></td>
-                  <td class="Q_date"><span class="textLine">${posttList[i].getRegDate()}</span></td>
+                  <td><a data-value="${i.getBId()}" class="modal_btn"  rel="modal:open" href="#modal1"><span class="textLine">${i.getTitle()}</span></a></td>
+                  <td class="Q_date"><span class="textLine">${i.getRegDate()}</span></td>
                 </tr>
-            </c:forEach>
+            </c:forEach> --%>
+				<%-- <c:forEach var="item" items="${ulist.content}" begin="1" end="${fn:length(posttList) + 1}" step="1" varStatus="i"> --%>
+				<c:forEach items="${ulist.content}" var="user">
+				<tr>
+					<td>${user.boardId}</td>
+					<td><a data-value="${user.boardId}" class="modal_btn"  rel="modal:open" href="#modal1"><span class="textLine">${user.getTitle()}</span></a></td>
+					<td>${user.regDate}</td>
+				</tr>
+			</c:forEach>
             </table>
           </div>
-        <div id="paging"><ul></ul></div>
+
+<!-- 페이징 영역 시작 -->
+	<div class="text-xs-center">
+		<ul class="pagination">
+		
+			<!-- 이전 -->
+			<c:choose>
+				<c:when test="${ulist.first}"></c:when>
+				<c:otherwise>
+					<li class="page-item"><a class="page-link" href="<c:url value='/board/boardmain?page=0'/>">처음</a></li>
+					<li class="page-item"><a class="page-link" href="<c:url value='/board/boardmain?page=${ulist.number-1}'/>">&larr;</a></li>
+				</c:otherwise>
+			</c:choose>
+
+			<!-- 페이지 그룹 -->
+			<c:forEach begin="${startBlockPage}" end="${endBlockPage}" var="i">
+				<c:choose>
+					<c:when test="${ulist.pageable.pageNumber+1 == i}">
+						<li class="page-item disabled"><a class="page-link" href="<c:url value='/board/boardmain?page=${i-1}'/>">${i}</a></li>
+					</c:when>
+					<c:otherwise>
+						<li class="page-item"><a class="page-link" href="<c:url value='/board/boardmain?page=${i-1}'/>">${i}</a></li>
+					</c:otherwise>
+				</c:choose>
+			</c:forEach>
+			
+			<!-- 다음 -->
+			<c:choose>
+				<c:when test="${ulist.last}"></c:when>
+				<c:otherwise>
+					<li class="page-item "><a class="page-link" href="<c:url value='/board/boardmain?page=${ulist.number+1}'/>">&rarr;</a></li>
+					<li class="page-item "><a class="page-link" href="<c:url value='/board/boardmain?page=${ulist.totalPages-1}'/>">마지막</a></li>
+				</c:otherwise>
+			</c:choose>
+			
+		</ul>
+	</div>
+	<!-- 페이징 영역 끝 -->
+
+
         </div>
       </div>
     </div>
@@ -110,40 +120,14 @@
    </form>
 </div>
 
-<script>
-   let pageNum = 8;
-    let pageCount = Math.ceil(($('tr').length - 1) / 8);
-    
-    for (let i = pageNum + 2; i <= $('tr').length; i++){
-       $('tr:nth-child('+ i +')').css('display', 'none');
-      };
-    
-      for (let i = 1; i <= pageCount; i++){
-         let str = '<li>' + i + '</li>';
-         $('#paging ul').append(str);
-      };
-      
-      $('#paging ul li').click(function(){
-         let number = $(this).text();
-         console.log(number)
-         $('tr:not(tr:nth-child(1))').css('display', 'none');
-         for (let i = pageNum * (number - 1) + 2; i <= number * pageNum + 1; i ++) {
-            $('tr:nth-child(' + i + ')').css('display', 'table-row');
-         }
-      });
-</script>
-<!-- 
-<script>
-
-    for
-    if($('tr').length == 9){
-       
-    }
-    
-       
-</script>
--->
-
+<!-- modal body2 -->
+<div id="modal2" class="modal" >
+   <form action="post" method="post" class="modal_body">
+      <input class="modal_hidden_input" hidden name="bId" value="" />
+      닉네임 : <input type="text" name="title"/>
+      <input class="submit_btn" type="submit" value="확인" />
+   </form>
+</div>
 
   </body>
 </html>

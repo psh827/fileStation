@@ -22,14 +22,13 @@ public class PostDeleteController {
 
 	@PostMapping("/board/delete")
 	public String deleteForm(Model model,HttpServletRequest request, HttpSession session) throws Exception {
-		
 		long bId = (long) session.getAttribute("bId");
 		System.out.println(bId);
 		String radio = request.getParameter("delete");
 		System.out.println(radio);
 		Post post = new Post();
 		int result = 0;
-		post.setBId(bId);
+		post.setBoardId(bId);
 		if(radio.equals("1")) {
 			result = boardService.deletePost(post);			
 		}

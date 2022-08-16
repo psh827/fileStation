@@ -4,6 +4,8 @@ import java.awt.print.Pageable;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import com.varxyz.fStation.dao.BoardDao;
 import com.varxyz.fStation.domain.Post;
@@ -47,10 +49,16 @@ public class BoardServiceImpl implements BoardService{
 	}
 
 	@Override
-	public int getPagingCount() {
-		return boardDao.getPagingCount();
+	public Page<Post> findAll(Pageable pageable) {
+		return boardDao.findAll(pageable);
 	}
 
+	@Override
+	public long countPost() {
+		return boardDao.countPost();
+	}
+
+	
 	
 	
 }

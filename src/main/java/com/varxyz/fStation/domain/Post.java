@@ -8,7 +8,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class Post {
-	private long bId;
+	private long boardId;
 	private String title;
 	private String nickname;
 	private String passwd;

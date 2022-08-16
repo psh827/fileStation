@@ -29,7 +29,7 @@ public class ModifyBoardController {
 		System.out.println(content);
 		
 		Post post = new Post();
-		post.setBId(bId);
+		post.setBoardId(bId);
 		post.setContent(content);
 		int result = boardService.modifyPost(post);
 		

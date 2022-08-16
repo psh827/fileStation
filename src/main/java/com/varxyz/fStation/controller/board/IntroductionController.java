@@ -10,7 +10,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -35,33 +34,16 @@ import com.varxyz.fStation.service.BoardServiceImpl;
  *
  */
 @Controller
-public class BoardController {
+public class IntroductionController {
 	
-	@Autowired
-	BoardServiceImpl boardService;
-	
-	@GetMapping("/board/boardmain")
+	@GetMapping("/service/service_introduction")
 	public String boardForm(HttpServletRequest request, Model model, HttpSession session) {
-		session.invalidate();
-
-		int page = 0;
-		if(request.getParameter("page") != null) {
-			page = Integer.parseInt(request.getParameter("page"));			
-		}
-		Pageable pageable = PageRequest.of(page, 8, Sort.Direction.ASC, "regDate");
-		Page<Post> ulist = boardService.findAll(pageable);
 		
-		int pageNumber = ulist.getPageable().getPageNumber(); //현재페이지
-		int totalPages = ulist.getTotalPages(); //총 페이지 수. 검색에따라 10개면 10개..
-		int pageBlock = 5; //블럭의 수 1, 2, 3, 4, 5	
-		int startBlockPage = ((pageNumber)/pageBlock)*pageBlock+1; //현재 페이지가 7이라면 1*5+1=6
-		int endBlockPage = startBlockPage+pageBlock-1; //6+5-1=10. 6,7,8,9,10해서 10.
-		endBlockPage= totalPages<endBlockPage? totalPages:endBlockPage;
-		
-		model.addAttribute("startBlockPage", startBlockPage);
-		model.addAttribute("endBlockPage", endBlockPage);
-		model.addAttribute("ulist", ulist);
-		
-		return "board/boardmain";
+		return "service/service_introduction";
+	}
+	
+	@GetMapping("/service/qna")
+	public String qnaForm() {
+		return "service/qna";
 	}
 }

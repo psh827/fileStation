@@ -2,11 +2,14 @@ package com.varxyz.fStation.dao;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.tomcat.jdbc.pool.DataSource;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort.Order;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 
@@ -51,7 +54,7 @@ public class BoardDao {
 			@Override
 			public Post mapRow(ResultSet rs, int rowNum) throws SQLException {
 				Post post = new Post();
-				post.setBId(rs.getLong("bId"));
+				post.setBoardId(rs.getLong("bId"));
 				post.setTitle(rs.getString("title"));
 				post.setNickname(rs.getString("nickName"));
 				post.setPasswd(rs.getString("passwd"));
@@ -76,7 +79,7 @@ public class BoardDao {
 				@Override
 				public Post mapRow(ResultSet rs, int rowNum) throws SQLException {
 					Post post = new Post();
-					post.setBId(rs.getLong("bId"));
+					post.setBoardId(rs.getLong("bId"));
 					post.setTitle(rs.getString("title"));
 					post.setNickname(rs.getString("nickName"));
 					post.setPasswd(rs.getString("passwd"));
@@ -98,7 +101,7 @@ public class BoardDao {
 			@Override
 			public Post mapRow(ResultSet rs, int rowNum) throws SQLException {
 				Post post = new Post();
-				post.setBId(rs.getLong("bId"));
+				post.setBoardId(rs.getLong("bId"));
 				post.setTitle(rs.getString("title"));
 				post.setNickname(rs.getString("nickName"));
 				post.setPasswd(rs.getString("passwd"));
@@ -117,7 +120,7 @@ public class BoardDao {
 	public int modifyPost(Post post) {
 		String sql = "UPDATE Board SET content = ? WHERE bId = ?";
 		try {
-			jdbcTemplate.update(sql, post.getContent(), post.getBId());
+			jdbcTemplate.update(sql, post.getContent(), post.getBoardId());
 			return 1;
 		} catch (Exception e) {
 			return 0;
@@ -132,7 +135,7 @@ public class BoardDao {
 	public int deletePost(Post post) {
 		String sql = "DELETE FROM Board WHERE BId = ?";
 		try {
-			jdbcTemplate.update(sql, post.getBId());
+			jdbcTemplate.update(sql, post.getBoardId());
 			return 1;
 		} catch (Exception e) {
 			return 0;
@@ -149,6 +152,71 @@ public class BoardDao {
 		return jdbcTemplate.update(sql);
 	}
 	
+	/**
+	 * 페이징하기
+	 * @param pageable
+	 * @return
+	 */
+	public Page<Post> findAll(Pageable pageable) {
+		Order order = pageable.getSort().isEmpty()
+				? Order.by("bId")
+				: pageable.getSort().toList().get(0);
+		String sql = "SELECT bId, title, nickName, passwd,"
+				+ "content, regDate FROM Board "
+				+ "	ORDER BY " + order.getProperty() + " " + order.getDirection().name()
+				+ "	LIMIT " + pageable.getPageSize() 
+				+ " OFFSET " + pageable.getOffset();
+				
+		return new PageImpl<Post>(
+				jdbcTemplate.query(sql, new RowMapper<Post>() {
+					
+					@Override
+					public Post mapRow(ResultSet rs, int rowNum) throws SQLException {
+						Post post = new Post();
+						post.setBoardId(rs.getLong("bId"));
+						post.setTitle(rs.getString("title"));
+						post.setNickname(rs.getString("nickName"));
+						post.setPasswd(rs.getString("passwd"));
+						post.setContent(rs.getString("content"));
+						post.setRegDate(rs.getDate("regDate"));
+						return post;	
+					}
+				}),
+				pageable,
+				countPost());
+		
+	}
 	
-
+	public long countPost() {
+		String sql = "SELECT count(*) FROM Board";
+		return jdbcTemplate.queryForObject(sql, Long.class);
+	}
+	
+	/**
+	 * 닉네임으로 자기글 검색하기
+	 * @param nickName
+	 * @return
+	 */
+	public Post viewPostByNickName(String nickName) {
+		String sql = "SELECT * FROM Board WHERE nickName = ?";
+		try {
+			return jdbcTemplate.queryForObject(sql, new RowMapper<Post>() {
+				
+				@Override
+				public Post mapRow(ResultSet rs, int rowNum) throws SQLException {
+					Post post = new Post();
+					post.setBoardId(rs.getLong("bId"));
+					post.setTitle(rs.getString("title"));
+					post.setNickname(rs.getString("nickName"));
+					post.setPasswd(rs.getString("passwd"));
+					post.setContent(rs.getString("content"));
+					post.setRegDate(rs.getDate("regDate"));
+					return post;	
+				}
+			}, nickName);
+		} catch (EmptyResultDataAccessException e) {
+			return null;
+		}
+	}
+	
 }

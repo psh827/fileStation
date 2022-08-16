@@ -86,6 +86,9 @@ button { cursor: pointer;}
   display: flex;
   align-items: center;
 }
+.Questions_table tr td:first-child{
+	padding-left: 15px;
+}
 .Questions_table span.textLine {
   display: block;
   padding-top: 7px;
@@ -131,6 +134,7 @@ label {
 
 .writer {
    margin-bottom: 20px;
+   padding: 36px 0 6px 12px;
 }
 
 .modal_btn{
@@ -209,5 +213,15 @@ a.delete {
     font-size:1.2em;
     font-weight:bold;
     cursor:default;
+}
+
+.search_btn {
+	color : white;
+	height: 100%;
+    width: 100%;
+    position: relative;
+    line-height: 1em;
+    display: inline;
+    padding: 15px 30px;
 }
 

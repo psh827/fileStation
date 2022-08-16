@@ -1,0 +1,57 @@
+@charset "UTF-8";
+@import "./seven.css";
+@font-face {
+    font-family: 'OTWelcomeRA';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2110@1.0/OTWelcomeRA.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+:root {
+  --content-width: 1530px;
+  --main-color: #4425a7;
+  --sub-color: #f8f5ff;
+}
+.card_container {
+  font-family: 'OTWelcomeRA';
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.service_title {
+  font-family: 'OTWelcomeRA';
+  color: black;
+  font-size: 17px;
+  line-height: 23px;
+  text-align: center;
+}
+.card_box {
+  background-color: var(--sub-color);
+  width: 400px;
+  height: 145px;
+  margin: 10px;
+  padding: 10px;
+  border-radius: 10px;
+}
+.card_text {
+  font-size: 15px;
+  line-height: 20px;
+}
+.card_img {
+  text-align: center;
+  margin: 15px 0;
+}
+.img_text {
+  font-weight: bold;
+}
+
+ @media ( max-width: 859px ) {
+  .card_box {
+    width: 40%;
+    height: 140px;
+  }
+  .card_text {
+    font-size: 13px;
+    line-height: 15px;
+  }
+}
