@@ -9,7 +9,7 @@ import lombok.Setter;
 @Setter
 public class OurFile {
 	
-	private long fId;
+	private long fileId;
 	private String passwd;
 	private String fileOriName;
 	private String fileName;

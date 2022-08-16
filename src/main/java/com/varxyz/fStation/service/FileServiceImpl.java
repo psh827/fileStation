@@ -33,6 +33,11 @@ public class FileServiceImpl implements FileService{
 	}
 	
 	@Override
+	public OurFile getFileByfileId(String fileId) {
+		return fileDao.getFileByfileId(fileId);
+	}
+	
+	@Override
 	public int deleteFile(String passwd) {
 		// TODO Auto-generated method stub
 		return 0;

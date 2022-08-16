@@ -10,4 +10,5 @@ public interface FileService {
 	int addText(Text text);
 	List<OurFile> getFile(String passwd);
 	int deleteFile(String passwd);
+	OurFile getFileByfileId(String fileId);
 }

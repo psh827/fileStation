@@ -1,16 +1,29 @@
 package com.varxyz.fStation.controller.file;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.OutputStream;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.FileSystemResource;
+import org.springframework.core.io.Resource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -129,6 +142,7 @@ public class FileController {
         
 		return "file/file_main";
 	}
+	
 	@GetMapping("/file/download")
 	public String downloadForm() {
 		return "file/download";
@@ -146,9 +160,29 @@ public class FileController {
 		request.setAttribute("fileList", fileList);
 		
 		return "file/download_station";
-		
-		
 	}
 	
+	
+	@RequestMapping(value= "/file/download_detail", method = { RequestMethod.GET })
+	@ResponseBody
+	public void fileDown(@RequestParam("fileId") String fileId,
+						HttpServletRequest request, HttpServletResponse response) throws Exception {
+		OurFile of = fileService.getFileByfileId(fileId);
+		String path = of.getUrl();
+		String fileName = of.getFileOriName();
+		response.setContentType("application/octet-stream");
+		String orgname = new String(fileName.getBytes("UTF-8"), "iso-8859-1");
+		response.setHeader("Content-Disposition", "attachment; filename=\""+orgname+"\""); 
+		OutputStream os = response.getOutputStream();
+			FileInputStream fis = new FileInputStream(path + File.separator + fileName);
+			int n = 0;
+			byte[] b = new byte[512];
+			while((n = fis.read(b)) != -1 ) {
+				os.write(b, 0, n);
+			}
+			fis.close();
+			os.close();
+	}
+
 	
 }

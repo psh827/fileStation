@@ -75,6 +75,7 @@ public class FileDao {
 				@Override
 				public OurFile mapRow(ResultSet rs, int rowNum) throws SQLException {
 					OurFile of = new OurFile();
+					of.setFileId(rs.getLong("fId"));
 					of.setFileName(rs.getString("fileName"));
 					of.setFileOriName(rs.getString("fileOriName"));
 					of.setFileSize(rs.getLong("fileSize"));
@@ -89,8 +90,33 @@ public class FileDao {
 		} catch (EmptyResultDataAccessException e) {
 			return null;
 		}
+	}
+	
+	public OurFile getFileByfileId(String fileId) {
 		
-		
+		try {
+			String sql = "SELECT * FROM File WHERE fId = ?";
+			
+			return jdbcTemplate.queryForObject(sql, new RowMapper<OurFile>() {
+
+				@Override
+				public OurFile mapRow(ResultSet rs, int rowNum) throws SQLException {
+					OurFile of = new OurFile();
+					of.setFileId(rs.getLong("fId"));
+					of.setFileName(rs.getString("fileName"));
+					of.setFileOriName(rs.getString("fileOriName"));
+					of.setFileSize(rs.getLong("fileSize"));
+					of.setFileType(rs.getString("fileType"));
+					of.setPasswd(rs.getString("passwd"));
+					of.setUrl(rs.getString("url"));
+					of.setRegDate(rs.getTimestamp("regDate"));
+					return of;
+				}
+				
+			}, fileId);
+		} catch (EmptyResultDataAccessException e) {
+			return null;
+		}
 	}
 
 	/**
