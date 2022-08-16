@@ -1,9 +1,13 @@
 package com.varxyz.fStation.dao;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
 
 import org.apache.tomcat.jdbc.pool.DataSource;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 
 import com.varxyz.fStation.domain.OurFile;
 import com.varxyz.fStation.domain.Text;
@@ -21,11 +25,11 @@ public class FileDao {
 	 */
 	public int addFile(List<OurFile> ourFile) {
 		try {
-			String sql = "INSERT INTO File (passwd, fileName, fileSize, fileType, url)"
-					+ " VALUES (?, ?, ?, ?, ?)";
+			String sql = "INSERT INTO File (passwd, fileOriName, fileName, fileSize, fileType, url)"
+					+ " VALUES (?, ?, ?, ?, ?, ?)";
 			
 			for(OurFile of : ourFile) {
-				jdbcTemplate.update(sql, of.getPasswd(), of.getFileName(), of.getFileSize(), of.getFileType(), of.getUrl());
+				jdbcTemplate.update(sql, of.getPasswd(), of.getFileOriName(), of.getFileName(), of.getFileSize(), of.getFileType(), of.getUrl());
 			}
 			
 			System.out.println("입력성공");
@@ -62,8 +66,31 @@ public class FileDao {
 	 * @return
 	 */
 	public List<OurFile> getFile(String passwd) {
-		String sql = "SELECT * FROM File WHERE passwd = ?";
-		return null;
+		
+		try {
+			String sql = "SELECT * FROM File WHERE passwd = ?";
+			
+			return jdbcTemplate.query(sql, new RowMapper<OurFile>() {
+
+				@Override
+				public OurFile mapRow(ResultSet rs, int rowNum) throws SQLException {
+					OurFile of = new OurFile();
+					of.setFileName(rs.getString("fileName"));
+					of.setFileOriName(rs.getString("fileOriName"));
+					of.setFileSize(rs.getLong("fileSize"));
+					of.setFileType(rs.getString("fileType"));
+					of.setPasswd(rs.getString("passwd"));
+					of.setUrl(rs.getString("url"));
+					of.setRegDate(rs.getTimestamp("regDate"));
+					return of;
+				}
+				
+			}, passwd);
+		} catch (EmptyResultDataAccessException e) {
+			return null;
+		}
+		
+		
 	}
 
 	/**

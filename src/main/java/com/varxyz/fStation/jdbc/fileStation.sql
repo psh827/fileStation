@@ -2,7 +2,8 @@ CREATE TABLE File(
 	fId			BIGINT 			PRIMARY KEY AUTO_INCREMENT,
 	passwd		VARCHAR(17)		NOT NULL,
 	url 		VARCHAR(300)	NOT NULL,
-	fileName	VARCHAR(500)	NOT NULL,
+	fileOriName	VARCHAR(500)	NOT NULL,
+	fileName 	VARCHAR(500)	NOT NULL,
 	fileSize	BIGINT			NOT NULL,
 	fileType	VARCHAR(10)		NOT NULL, -- IMG, VIDEO
 	regDate		TIMESTAMP		NOT NULL DEFAULT CURRENT_TIMESTAMP
@@ -34,6 +35,10 @@ CREATE TABLE BoardImage(
 )AUTO_INCREMENT 3001;
 
 INSERT INTO Board (title, nickName, passwd, content) VALUES ('좀 긴게 예쁜거 같아','nam', '1111', '아무리 테스트지만 내용을 들어갑시다');
+INSERT INTO Board (title, nickName, passwd, content) VALUES ('22','nam', '2222', '아무리 테스트지만 내용을 들어갑시다');
+INSERT INTO Board (title, nickName, passwd, content) VALUES ('33','nam', '3333', '아무리 테스트지만 내용을 들어갑시다');
+INSERT INTO Board (title, nickName, passwd, content) VALUES ('44','nam', '4444', '아무리 테스트지만 내용을 들어갑시다');
+INSERT INTO Board (title, nickName, passwd, content) VALUES ('55','nam', '5555', '아무리 테스트지만 내용을 들어갑시다');
 
 SELECT COUNT(*) FROM Board;
 

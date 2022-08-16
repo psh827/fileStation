@@ -11,6 +11,7 @@ public class OurFile {
 	
 	private long fId;
 	private String passwd;
+	private String fileOriName;
 	private String fileName;
 	private long fileSize;
 	private String fileType;

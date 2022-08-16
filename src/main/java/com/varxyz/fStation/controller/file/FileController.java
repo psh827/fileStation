@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -86,8 +87,11 @@ public class FileController {
 				//파일명 중 확장자만 추출                                                //lastIndexOf(".") - 뒤에 있는 . 의 index번호
 				String originalFileExtension = originalFile.substring(originalFile.lastIndexOf("."));
 				
+				String storedFileName = UUID.randomUUID().toString().replaceAll("-", "") + originalFileExtension;
+				
 				ourFile.setPasswd(passwd);
-				ourFile.setFileName(originalFile);
+				ourFile.setFileOriName(originalFile);
+				ourFile.setFileName(storedFileName);
 				ourFile.setFileSize(mt.getSize());
 				String fileT = "";
 				if(originalFileExtension.equals(".jpg") || originalFileExtension.equals(".jpeg") ||
@@ -125,7 +129,26 @@ public class FileController {
         
 		return "file/file_main";
 	}
+	@GetMapping("/file/download")
+	public String downloadForm() {
+		return "file/download";
+	}
 	
+	@PostMapping("/file/download")
+	public String download(HttpServletRequest request) {
+		String passwd = request.getParameter("passwd");
+		List<OurFile> fileList = fileService.getFile(passwd);
+		if (fileList.size() == 0) {
+			request.setAttribute("msg", "비밀번호가 틀렸습니다.");
+			request.setAttribute("url", "download");
+			return "alert";
+		}
+		request.setAttribute("fileList", fileList);
+		
+		return "file/download_station";
+		
+		
+	}
 	
 	
 }

@@ -1,5 +1,6 @@
 package com.varxyz.fStation.service;
 
+import java.awt.print.Pageable;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,7 +9,6 @@ import com.varxyz.fStation.dao.BoardDao;
 import com.varxyz.fStation.domain.Post;
 
 public class BoardServiceImpl implements BoardService{
-
 	@Autowired
 	BoardDao boardDao;
 	

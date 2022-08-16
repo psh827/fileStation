@@ -9,7 +9,7 @@ import com.varxyz.fStation.domain.OurFile;
 import com.varxyz.fStation.domain.Text;
 
 public class FileServiceImpl implements FileService{
-	
+
 	@Autowired
 	FileDao fileDao;
 	
@@ -29,14 +29,14 @@ public class FileServiceImpl implements FileService{
 
 	@Override
 	public List<OurFile> getFile(String passwd) {
-		// TODO Auto-generated method stub
-		return null;
+		return fileDao.getFile(passwd);
 	}
-
+	
 	@Override
 	public int deleteFile(String passwd) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
+
 
 }
