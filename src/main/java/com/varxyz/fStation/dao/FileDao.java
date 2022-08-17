@@ -68,7 +68,7 @@ public class FileDao {
 	public List<OurFile> getFile(String passwd) {
 		
 		try {
-			String sql = "SELECT * FROM File WHERE passwd = ?";
+			String sql = "SELECT * FROM File WHERE passwd = ? AND deleteCheck = ?";
 			
 			return jdbcTemplate.query(sql, new RowMapper<OurFile>() {
 
@@ -82,11 +82,12 @@ public class FileDao {
 					of.setFileType(rs.getString("fileType"));
 					of.setPasswd(rs.getString("passwd"));
 					of.setUrl(rs.getString("url"));
+					of.setDeleteCheck(rs.getString("deleteCheck"));
 					of.setRegDate(rs.getTimestamp("regDate"));
 					return of;
 				}
 				
-			}, passwd);
+			}, passwd, "NO");
 		} catch (EmptyResultDataAccessException e) {
 			return null;
 		}
@@ -124,9 +125,18 @@ public class FileDao {
 	 * @param passwd
 	 * @return
 	 */
-	public int deleteFile(String passwd) {
-		String sql = "DELETE FROM File WHERE passwd = ?";
-		return 0;
+	public int deleteFile(String deleteType, String passwd) {
+		try {
+			String sql = "UPDATE File SET deleteCheck = ? WHERE passwd = ?";
+			jdbcTemplate.update(sql, deleteType, passwd);
+			
+			return 1;
+		} catch (Exception e) {
+			
+			e.printStackTrace();
+			return 0;
+		}
+		
 	}
 
 	public void jee() {

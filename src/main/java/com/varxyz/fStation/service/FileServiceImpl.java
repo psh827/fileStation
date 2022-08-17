@@ -38,8 +38,8 @@ public class FileServiceImpl implements FileService{
 	}
 	
 	@Override
-	public int deleteFile(String passwd) {
-		return 0;
+	public int deleteFile(String deleteType, String passwd) {
+		return fileDao.deleteFile(deleteType, passwd);
 	}
 
 	@Override

@@ -3,17 +3,25 @@ package com.varxyz.fStation.controller.file;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.UUID;
+import java.util.stream.Collectors;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipOutputStream;
 
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
@@ -29,6 +37,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
+import org.springframework.util.StreamUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -63,19 +72,29 @@ public class FileController {
 	@Autowired
 	FileServiceImpl fileService;
 	
+	/**
+	 * 업로드 홈페이지.
+	 * @return
+	 */
 	@GetMapping("/file/file_main")
 	public String main() {
 		return "file/file_main";
 	}
 	
-//	@PostMapping("/file/file_main")
+	/**
+	 * 파일 업로드. ajax통신
+	 * @param model
+	 * @param files
+	 * @param passwd
+	 * @param textarea
+	 * @return
+	 * @throws IOException
+	 */
 	@RequestMapping(value = "/file/addFile", method = { RequestMethod.POST })
 	@ResponseBody
 	public String addMenuItem(Model model, @RequestParam(value="files", required = false) 
 				MultipartFile[] files, @RequestParam("passwd") String passwd,
 				@RequestParam(value="textarea", required = false) String textarea) throws IOException {
-		
-		System.out.println(textarea);
 		
 		passwd = passwd.split(",")[0];
 		List<OurFile> ourFileList = new ArrayList<OurFile>();
@@ -98,7 +117,6 @@ public class FileController {
 		//file처리
 		if(files != null) {
 			for(MultipartFile mt : files) {	
-				System.out.println(mt);
 				OurFile ourFile = new OurFile();		
 				//파일명
 				String originalFile = mt.getOriginalFilename();
@@ -148,13 +166,23 @@ public class FileController {
 		return "file/file_main";
 	}
 	
+	/**
+	 * 파일 다운로드 홈
+	 * @return
+	 */
 	@GetMapping("/file/download")
 	public String downloadForm() {
 		return "file/download";
 	}
 	
+	/**
+	 * 파일 다운로드 비밀번호 검사
+	 * @param request
+	 * @return
+	 * @throws ParseException 
+	 */
 	@PostMapping("/file/download")
-	public String download(HttpServletRequest request) {
+	public String download(HttpServletRequest request) throws ParseException {
 		String passwd = request.getParameter("passwd");
 		List<OurFile> fileList = fileService.getFile(passwd);
 		if (fileList.size() == 0) {
@@ -162,12 +190,43 @@ public class FileController {
 			request.setAttribute("url", "download");
 			return "alert";
 		}
+		
+		for(OurFile of : fileList) {
+			Date date = new Date();
+			Calendar cl = Calendar.getInstance();
+			cl.setTime(of.getRegDate());
+			cl.add(Calendar.DATE, 1);
+			Date checkDate = new Date(cl.getTimeInMillis());
+			if(date.after(checkDate)) {
+				fileService.deleteFile("YES", passwd);
+				String path = "C:\\fileStation\\";
+				String fileName = of.getFileOriName();
+				File file = new File(path + fileName);
+				file.delete();
+			}
+		}
+		
+		for(OurFile of : fileList) {
+			if(of.getDeleteCheck().equals("YES")) {
+				request.setAttribute("msg", "다운로드 기간이 만료되었습니다");
+				request.setAttribute("url", "download");
+				return "alert";
+			}
+		}
+		
+		request.setAttribute("passwd", passwd);
 		request.setAttribute("fileList", fileList);
 		
 		return "file/download_station";
 	}
 	
-	
+	/**
+	 * 파일 다운로드.
+	 * @param fileId
+	 * @param request
+	 * @param response
+	 * @throws Exception
+	 */
 	@RequestMapping(value= "/file/download_detail", method = { RequestMethod.GET })
 	@ResponseBody
 	public void fileDown(@RequestParam("fileId") String fileId,
@@ -189,8 +248,8 @@ public class FileController {
 			os.close();
 	}
 
-	@RequestMapping(value = "file/downloadAll")
-	public void downloadAll(@RequestParam("bbsId") String bbsId, @RequestParam("atchmnflId") String atchmnflId, HttpServletResponse response) {
+	@RequestMapping(value = "/file/downloadAll")
+	public void downloadAll(@RequestParam("passwd") String passwd, HttpServletResponse response) {
 
 	    response.setStatus(HttpServletResponse.SC_OK);
 	    response.setContentType("application/zip");
@@ -204,14 +263,14 @@ public class FileController {
 	        zipOut = new ZipOutputStream(response.getOutputStream());
 
 		// DB에 저장되어 있는 파일 목록을 읽어온다.
-	        List<CmmnNttAtflDtlVO> atchmnFileInfoList = bbsService.atchmnFlList(atchmnflId);
+	        List<OurFile> ourFileList = fileService.getFile(passwd);
 
 		// 실제 Server에 파일들이 저장된 directory 경로를 구해온다.
-	        String filePath = BbsInfoFinder.mapFileLoadPath(bbsId);
+	        String filePath = ourFileList.get(0).getUrl();
 
 		// File 객체를 생성하여 List에 담는다.
-	        List<File> fileList = atchmnFileInfoList.stream().map(fileInfo -> {
-	            return new File(filePath + "/" + fileInfo.getStreFileNm());
+	        List<File> fileList = ourFileList.stream().map(fileInfo -> {
+	            return new File(filePath + "/" + fileInfo.getFileOriName());
 	        }).collect(Collectors.toList());
 
 		// 루프를 돌며 ZipOutputStream에 파일들을 계속 주입해준다.
@@ -235,8 +294,30 @@ public class FileController {
 	        try { if(fos != null)fos.close(); } catch (IOException e4) {System.out.println(e4.getMessage());/*ignore*/}
 	    }
 	}
-	    
-	
-
+	/**
+	 * 파일 삭제
+	 */
+	@PostMapping("/file/deleteAll")
+	public String deleteAll(HttpServletRequest request) {
+		String passwd = request.getParameter("passwd");
+		String radio = request.getParameter("delete");
+		List<OurFile> fileList = fileService.getFile(passwd);
+		if(radio.equals("1")) {
+			for(OurFile of : fileList) {
+				String path = "C:\\fileStation\\";
+				String fileName = of.getFileOriName();
+				File file = new File(path + fileName);
+				file.delete();
+			}						
+		}
+		int result = fileService.deleteFile("YES", passwd);
+		if(result == 0) {
+			request.setAttribute("msg", "삭제오류");
+			request.setAttribute("url", "download");
+			return "alert";
+		}
+		
+		return "file/download";
+	}
 	
 }

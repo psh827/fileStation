@@ -16,7 +16,7 @@
             </a>
           </li>
           <li class="nav_item">
-            <a href="" class="nav_link">
+            <a href="<c:url value='/file/download'/>" class="nav_link">
               <i class="fa-solid fa-download fa-lg"></i>
               <span class="hidden" hidden>다운로드</span>
             </a>

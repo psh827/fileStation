@@ -62,6 +62,12 @@
             </div>
           </form>
         </div>
+        <div class="items-wrap">
+          <div class="items">
+            <div class="percent">0.00%</div>
+          </div>
+          <div class="total_now_Count"><span class="left_size"></span> / <span class="total_size"></span></div>
+        </div>
       </div>
     </div>
     <script src="http://code.jquery.com/jquery-latest.js"></script>

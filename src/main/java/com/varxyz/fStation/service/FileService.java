@@ -9,7 +9,7 @@ public interface FileService {
 	int	addFile(List<OurFile> ourFile);
 	int addText(Text text);
 	List<OurFile> getFile(String passwd);
-	int deleteFile(String passwd);
+	int deleteFile(String deleteType, String passwd);
 	OurFile getFileByfileId(String fileId);
 	void jee();
 	void nam();

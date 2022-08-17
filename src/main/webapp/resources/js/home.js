@@ -16,6 +16,7 @@ $(document).ready(function() {
    			$(this).css("font-size", "16px").css("font-weight", "normal").css("overflow-y", "auto")
 		}
     })
+    $('.total_size').text(maxUploadSize+"Mb");
 });
 
 /*$(".textInput").on("click", function(){
@@ -45,11 +46,13 @@ var fileList = new Array();
 // 파일 사이즈 리스트
 var fileSizeList = new Array();
 // 등록 가능한 파일 사이즈 MB
-var uploadSize = 50;
+var uploadSize = 200;
 // 등록 가능한 총 파일 사이즈 MB
-var maxUploadSize = 500;
+var maxUploadSize = 4000;
 
 var uploadFiles = [];
+
+var graphCount = 0;
 $(function() {
     // 파일 드롭 다운
     fileDropDown();
@@ -138,6 +141,18 @@ function selectFile(fileObject) {
             
             var fileSizeKb = fileSize / 1024; // 파일 사이즈(단위 :kb)
             var fileSizeMb = fileSizeKb / 1024;    // 파일 사이즈(단위 :Mb)
+            
+            graphCount += fileSizeMb;
+            graphPercent = totalFileSize / graphCount
+            var leftSize = graphCount
+            $('.percent').text(graphPercent.toFixed(2) + "%")
+            $('.items').css("width", graphPercent)
+            $('.left_size').text(leftSize.toFixed(2) + "Mb")
+            
+
+            $('.percent').text(graphPercent.toFixed(2) + "%")
+            $('.items').css("width", graphPercent)
+            $('.left_size').text(leftSize.toFixed(2) + "Mb")
             
             var fileSizeStr = "";
             if ((1024*1024) <= fileSize) {    // 파일 용량이 1메가 이상인 경우 

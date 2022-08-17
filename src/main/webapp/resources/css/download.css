@@ -58,6 +58,7 @@ a {
     overflow-x: hidden;
     overflow-y: scroll;
 }
+
  @media all and (max-width: 768px) {
     
   table, thead, tbody, th, td, tr {
@@ -99,7 +100,5 @@ a {
   td {
     border-bottom: 1px solid #e5e5e5;
   }
-  
-  
-  
+
   }

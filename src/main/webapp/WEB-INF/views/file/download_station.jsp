@@ -14,56 +14,21 @@
     <link rel="stylesheet" href="<c:url value='/resources/css/initial.css'/>">
     <link rel="stylesheet" href="<c:url value='/resources/css/default.css'/>">
     <link rel="stylesheet" href="<c:url value='/resources/css/style.css'/>">
-    <link rel="stylesheet" href="<c:url value='/resources/css/upload.css'/>">
+    <%-- <link rel="stylesheet" href="<c:url value='/resources/css/upload.css'/>"> --%>
     <link rel="stylesheet" href="<c:url value='/resources/css/download.css'/>">
     <script
       src="https://kit.fontawesome.com/62a067f302.js"
       crossorigin="anonymous"
     ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
   </head>
   <body>
     <div class="main_container">
       <!--왼쪽 navigation-->
       <nav>
-        <!-- <a class="logo" href="#">File Station</a> -->
-        <ul class="nav_ul">
-          <li class="nav_item">
-            <a href="#" class="nav_link logo">
-              <span class="logo_span">File Station</spanc>
-              <span class="hidden" hidden>로고</span>
-            </a>
-          </li>
-          <li class="nav_item">
-            <a href="#" class="nav_link">
-              <i class="fa-solid fa-house fa-lg"></i>
-              <span class="hidden" hidden>홈(업로드)</span>
-            </a>
-          </li>
-          <li class="nav_item">
-            <a href="" class="nav_link">
-              <i class="fa-solid fa-download fa-lg"></i>
-              <span class="hidden" hidden>다운로드</span>
-            </a>
-          </li>
-          <li class="nav_item">
-            <a href="" class="nav_link">
-              <i class="fa-solid fa-person-chalkboard fa-lg"></i>
-              <span class="hidden" hidden>서비스 소개</span>
-            </a>
-          </li>
-          <li class="nav_item">
-            <a href="" class="nav_link">
-              <i class="fa-solid fa-question fa-lg"></i>
-              <span class="hidden" hidden>자주 하는 질문</span>
-            </a>
-          </li>
-          <li class="nav_item">
-            <a href="" class="nav_link">
-              <i class="fa-solid fa-chalkboard-user fa-lg"></i>
-              <span class="hidden" hidden>건의사항</span>
-            </a>
-          </li>
-        </ul>
+          <jsp:include page="../incl/nav.jsp"/>
       </nav>
       <!-- 하얀색 영역 -->
       <div class="main-inner__container">
@@ -92,9 +57,36 @@
       	</c:when>
       </c:choose>
       <div class="text_box"></div>
+      <a class="modal_btn delete" rel="modal:open" href="#modal1" type="button">삭제하기</a>
+      <form>
+      	<input hidden name="passwd" value="${passwd}"/>
+      	<button type="submit" formaction="downloadAll" formmethod="post">전체 다운로드</button>
+      </form>
       </div>
     </div>
+    <!-- modal body -->
+<div id="modal1" class="modal" >
+   <form action="deleteAll" method="post" class="modal_delete">
+      <p class="delete_title">삭제 하시겠습니까?</p>
+      <div class="yes_or_no">
+      <label for="Yes" >확인</label> 
+      <input type="checkbox" name="delete" value="1" id="Yes" checked />&nbsp;&nbsp;&nbsp;&nbsp;
+      <label for="No">취소</label>
+      <input type="checkbox" name="delete" value="0" id="No"/>
+      </div>
+      <input hidden name="passwd" value="${passwd}"/>
+      <input class="submit_btn" type="submit" value="확인"/>
+
+   </form>
+</div>
     <script src="http://code.jquery.com/jquery-latest.js"></script>
     <script src="<c:url value='/resources/js/download.js'/>"></script>
+    <script>
+       $(document).on('click', '.modify', function(){
+          var toTextarea = $(".Questions_inner")
+          $(toTextarea).replaceWith('<textarea class="Questions_inner textarea">${post.content}</textarea>')
+          $('.modify').replaceWith('<button class="Questions_btn comfirm middle" type="button" name="revoke">등록하기</button>')
+       })
+   </script>
   </body>
 </html>

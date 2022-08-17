@@ -6,7 +6,7 @@ CREATE TABLE File(
 	fileName 	VARCHAR(500)	NOT NULL,
 	fileSize	BIGINT			NOT NULL,
 	fileType	VARCHAR(10)		NOT NULL, -- IMG, VIDEO
-	deleteCheck	CHAR(1)			NOT NULL DEFAULT 'Y',
+	deleteCheck	VARCHAR(3)		NOT NULL DEFAULT 'NO',
 	regDate		TIMESTAMP		NOT NULL DEFAULT CURRENT_TIMESTAMP
 )AUTO_INCREMENT 1001;
 
@@ -51,6 +51,10 @@ SELECT * FROM BoardImage;
 
 UPDATE Board SET content = 'test test test' WHERE bId = '1';
 
+ALTER TABLE File convert to charset utf8;
+ALTER TABLE Text convert to charset utf8;
+ALTER TABLE Board convert to charset utf8;
+ALTER TABLE File convert to charset utf8;
 
 DROP TABLE File;
 DROP TABLE Text;
