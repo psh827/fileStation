@@ -129,5 +129,24 @@ public class FileDao {
 		return 0;
 	}
 
+	public void jee() {
+		
+	}
+
+	public void nam() {
+		
+	}
+
+	public void jung() {
+		
+	}
+
+	public void hoon() {
+		
+	}
+
+	
+	
+	
 	
 }

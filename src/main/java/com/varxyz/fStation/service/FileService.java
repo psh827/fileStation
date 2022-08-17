@@ -11,4 +11,8 @@ public interface FileService {
 	List<OurFile> getFile(String passwd);
 	int deleteFile(String passwd);
 	OurFile getFileByfileId(String fileId);
+	void jee();
+	void nam();
+	void jung();
+	void hoon();
 }

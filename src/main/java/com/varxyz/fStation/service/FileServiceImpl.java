@@ -39,8 +39,27 @@ public class FileServiceImpl implements FileService{
 	
 	@Override
 	public int deleteFile(String passwd) {
-		// TODO Auto-generated method stub
 		return 0;
+	}
+
+	@Override
+	public void jee() {
+		fileDao.jee();
+	}
+
+	@Override
+	public void nam() {
+		fileDao.nam();
+	}
+
+	@Override
+	public void jung() {
+		fileDao.jung();
+	}
+
+	@Override
+	public void hoon() {
+		fileDao.hoon();
 	}
 
 
