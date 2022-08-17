@@ -40,17 +40,25 @@ public class BoardController {
 	@Autowired
 	BoardServiceImpl boardService;
 	
+	/**
+	 * 게시판 메인 페이지
+	 * @param request
+	 * @param model
+	 * @param session
+	 * @return
+	 */
 	@GetMapping("/board/boardmain")
 	public String boardForm(HttpServletRequest request, Model model, HttpSession session) {
 		session.invalidate();
-
+		/**
+		 * 페이징
+		 */
 		int page = 0;
 		if(request.getParameter("page") != null) {
 			page = Integer.parseInt(request.getParameter("page"));			
 		}
 		Pageable pageable = PageRequest.of(page, 8, Sort.Direction.ASC, "regDate");
 		Page<Post> ulist = boardService.findAll(pageable);
-		
 		int pageNumber = ulist.getPageable().getPageNumber(); //현재페이지
 		int totalPages = ulist.getTotalPages(); //총 페이지 수. 검색에따라 10개면 10개..
 		int pageBlock = 5; //블럭의 수 1, 2, 3, 4, 5	

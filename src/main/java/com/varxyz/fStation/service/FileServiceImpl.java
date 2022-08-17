@@ -44,11 +44,6 @@ public class FileServiceImpl implements FileService{
 	}
 
 	@Override
-	public void jee() {
-		fileDao.jee();
-	}
-
-	@Override
 	public long getFileAmountByMonth() {
 		return fileDao.getFileAmountByMonth();
 	}
@@ -63,5 +58,10 @@ public class FileServiceImpl implements FileService{
 		fileDao.hoon();
 	}
 
+	@Override
+	public List<Integer> jee() {
+		return fileDao.jee();
+		
+	}
 
 }

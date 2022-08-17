@@ -2,6 +2,7 @@ package com.varxyz.fStation.dao;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.tomcat.jdbc.pool.DataSource;
@@ -139,15 +140,36 @@ public class FileDao {
 		
 	}
 
-	public void jee() {
-		
+
+	
+	
+	
+	public List<Integer> jee() {
+		List<String> checkList = new ArrayList<String>();
+		List<Integer> countList = new ArrayList<Integer>();
+		checkList.add("IMG");
+		checkList.add("VIDEO");
+		checkList.add("DOCUMENT");
+		checkList.add("ETC");
+		try {
+			String sql = "SELECT count(*) FROM File WHERE fileType=? ";
+			String sql2 = "SELECT count(*) FROM Text";
+			for(int i = 0; i < checkList.size(); i++) {
+				countList.add(jdbcTemplate.queryForObject(sql, Integer.class, checkList.get(i)));
+			}
+			countList.add(jdbcTemplate.queryForObject(sql2, Integer.class));
+			return countList;
+			
+		} catch (EmptyResultDataAccessException e) {
+			return null;
+		}
 	}
 	
 	/**
 	 * 월별 업로드된 총 파일크기 가져오기
 	 * WHERE TO_CHAR(REGDATE, 'YYYYMMDD') > '20190701'
 	 */
-	public long getFileAmountByMonth(String month) {
+	public long getFileAmountByMonth() {
 		String sql = "SELECT SUM(fileSize) FROM File WHERE Month(regDate) = MONTH(CURRENT_DATE()) AND YEAR(regDate) = YEAR(CURRENT_DATE())";
 		return jdbcTemplate.queryForObject(sql, Long.class);
 	}

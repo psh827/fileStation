@@ -20,6 +20,15 @@ public class PostDeleteController {
 	@Autowired
 	BoardServiceImpl boardService;
 
+	/**
+	 * 게시글 삭제 
+	 * bId통해 게시글 데이터를 받아 삭제함
+	 * @param model
+	 * @param request
+	 * @param session
+	 * @return
+	 * @throws Exception
+	 */
 	@PostMapping("/board/delete")
 	public String deleteForm(Model model,HttpServletRequest request, HttpSession session) throws Exception {
 		long bId = (long) session.getAttribute("bId");
