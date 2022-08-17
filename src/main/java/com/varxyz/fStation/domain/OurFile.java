@@ -16,6 +16,7 @@ public class OurFile {
 	private long fileSize;
 	private String fileType;
 	private String url;
+	private char deleteCheck;
 	private Date regDate;
 	
 }

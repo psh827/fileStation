@@ -48,65 +48,40 @@
                <th><span class="textLine">Title</span></th>
                <th><span class="textLine">Date</span></th>
             </tr>
-            <%-- <c:forEach var="postlist" items="${posttList}"> --%>
-            <%-- <c:forEach var="item" items="${posttList}" begin="1" end="${fn:length(posttList) + 1}" step="1" varStatus="i"> --%>
-            <%-- <c:forEach var="i" items="${pagePost}">
-                <tr>
-                  <td class="Q_no"><span class="textLine">${i}</span></td>
-                  <td><a data-value="${i.getBId()}" class="modal_btn"  rel="modal:open" href="#modal1"><span class="textLine">${i.getTitle()}</span></a></td>
-                  <td class="Q_date"><span class="textLine">${i.getRegDate()}</span></td>
-                </tr>
-            </c:forEach> --%>
-				<%-- <c:forEach var="item" items="${ulist.content}" begin="1" end="${fn:length(posttList) + 1}" step="1" varStatus="i"> --%>
-				<c:forEach items="${ulist.content}" var="user">
-				<tr>
-					<td>${user.boardId}</td>
-					<td><a data-value="${user.boardId}" class="modal_btn"  rel="modal:open" href="#modal1"><span class="textLine">${user.getTitle()}</span></a></td>
-					<td>${user.regDate}</td>
-				</tr>
-			</c:forEach>
+            <c:forEach items="${ulist.content}" var="user">
+            <tr>
+               <td>${user.boardId}</td>
+               <td><a data-value="${user.boardId}" class="modal_btn"  rel="modal:open" href="#modal1"><span class="textLine">${user.getTitle()}</span></a></td>
+               <td>${user.regDate}</td>
+            </tr>
+         </c:forEach>
             </table>
           </div>
 
 <!-- 페이징 영역 시작 -->
-	<div class="text-xs-center">
-		<ul class="pagination">
-		
-			<!-- 이전 -->
-			<c:choose>
-				<c:when test="${ulist.first}"></c:when>
-				<c:otherwise>
-					<li class="page-item"><a class="page-link" href="<c:url value='/board/boardmain?page=0'/>">처음</a></li>
-					<li class="page-item"><a class="page-link" href="<c:url value='/board/boardmain?page=${ulist.number-1}'/>">&larr;</a></li>
-				</c:otherwise>
-			</c:choose>
-
-			<!-- 페이지 그룹 -->
-			<c:forEach begin="${startBlockPage}" end="${endBlockPage}" var="i">
-				<c:choose>
-					<c:when test="${ulist.pageable.pageNumber+1 == i}">
-						<li class="page-item disabled"><a class="page-link" href="<c:url value='/board/boardmain?page=${i-1}'/>">${i}</a></li>
-					</c:when>
-					<c:otherwise>
-						<li class="page-item"><a class="page-link" href="<c:url value='/board/boardmain?page=${i-1}'/>">${i}</a></li>
-					</c:otherwise>
-				</c:choose>
-			</c:forEach>
-			
-			<!-- 다음 -->
-			<c:choose>
-				<c:when test="${ulist.last}"></c:when>
-				<c:otherwise>
-					<li class="page-item "><a class="page-link" href="<c:url value='/board/boardmain?page=${ulist.number+1}'/>">&rarr;</a></li>
-					<li class="page-item "><a class="page-link" href="<c:url value='/board/boardmain?page=${ulist.totalPages-1}'/>">마지막</a></li>
-				</c:otherwise>
-			</c:choose>
-			
-		</ul>
-	</div>
-	<!-- 페이징 영역 끝 -->
-
-
+   <div class="text-xs-center">
+      <ul class="pagination">
+      
+         <!-- 이전 -->
+               <li class="page-item"><a class="page-link" href="<c:url value='/board/boardmain?page=0'/>">처음</a></li>
+               <li class="page-item"><a class="page-link" href="<c:url value='/board/boardmain?page=${ulist.number-1}'/>">&larr;</a></li>
+         <!-- 페이지 그룹 -->
+         <c:forEach begin="${startBlockPage}" end="${endBlockPage}" var="i">
+            <c:choose>
+               <c:when test="${ulist.pageable.pageNumber+1 == i}">
+                  <li class="page-item disabled"><a class="page-link" href="<c:url value='/board/boardmain?page=${i-1}'/>">${i}</a></li>
+               </c:when>
+               <c:otherwise>
+                  <li class="page-item"><a class="page-link" href="<c:url value='/board/boardmain?page=${i-1}'/>">${i}</a></li>
+               </c:otherwise>
+            </c:choose>
+         </c:forEach>
+         <!-- 다음 -->
+          <li class="page-item "><a class="page-link" href="<c:url value='/board/boardmain?page=${ulist.number+1}'/>">&rarr;</a></li>
+          <li class="page-item "><a class="page-link" href="<c:url value='/board/boardmain?page=${ulist.totalPages-1}'/>">마지막</a></li>
+      </ul>
+   </div>
+   <!-- 페이징 영역 끝 -->
         </div>
       </div>
     </div>
