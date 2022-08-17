@@ -68,7 +68,7 @@
       <!-- 하얀색 영역 -->
       <div class="main-inner__container">
       <c:choose>
-      	<c:when test="${fn:length(fileList) <= 14 }">
+      	<c:when test="${fn:length(fileList) <= 20 }">
       	<div class="table_flex" style="display:flex;">
       		<table>
       		<thead>
@@ -79,7 +79,7 @@
 	      		<th> </th>
 	      		</tr>
       		</thead>
-	        <c:forEach var="i" begin="1" end="14">
+	        <c:forEach var="i" begin="1" end="${fn:length(fileList) }">
 	        	<tr>
 	        		<td class="no${i}">${i}</td>
 	        		<td class="file_name_${i}">${fileList[i - 1].fileOriName}<span hidden> ${fileList[i - 1].fileId}</span></td>
@@ -88,56 +88,10 @@
 	        	</tr>
 	        </c:forEach>
         	</table>
-        	<div class="empty_box">
-      		</div>
-        	<div class="text_box">
-      		</div>
-        	</div>
-      	</c:when>
-      	<c:when test="${fn:length(fileList) >= 15}">
-      	<div class="table_flex" style="display:flex;">
-      	<table>
-      		<thead>
-      			<tr>
-	      		<th>No</th>
-	      		<th>파일이름</th>
-	      		<th>파일용량</th>
-	      		<th> </th>
-	      		</tr>
-      		</thead>
-	        <c:forEach var="i" begin="1" end="10">
-	        	<tr>
-	        		<td class="no${i}">${i}</td>
-	        		<td class="file_name_${i}">${fileList[i - 1].fileOriName}<span hidden> ${fileList[i - 1].fileId}</span></td>
-	        		<td class="file_size_${i}">${fileList[i - 1].fileSize}</td>
-	        		<td><a href="<c:url value='/file/download_detail?fileId=${fileList[i - 1].fileId}'/>">다운로드</a></td>
-	        	</tr>
-	        </c:forEach>
-        	</table>
-        	<table class="second_table">
-      		<thead>
-      			<tr>
-	      		<th>No</th>
-	      		<th>파일이름</th>
-	      		<th>파일용량</th>
-	      		<th> </th>
-	      		</tr>
-      		</thead>
-	        <c:forEach var="i" begin="11" end="20">
-	        	<tr>
-	        		<td class="no${i}">${i}</td>
-	        		<td class="file_name_${i}">${fileList[i - 1].fileOriName}<span hidden> ${fileList[i - 1].fileId}</span></td>
-	        		<td class="file_size_${i}">${fileList[i - 1].fileSize}</td>
-	        		<td><a href="<c:url value='/file/download_detail?fileId=${fileList[i - 1].fileId}'/>">다운로드</a></td>
-	        	</tr>
-	        </c:forEach>
-        	</table>
-        	<div class="text_box">
-      		</div>
         	</div>
       	</c:when>
       </c:choose>
-      	
+      <div class="text_box"></div>
       </div>
     </div>
     <script src="http://code.jquery.com/jquery-latest.js"></script>

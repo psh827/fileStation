@@ -1,13 +1,18 @@
 package com.varxyz.fStation.controller.file;
 
+import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
+import java.net.URL;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
+import java.util.Map;
 import java.util.UUID;
 
 import javax.servlet.ServletOutputStream;
@@ -183,6 +188,55 @@ public class FileController {
 			fis.close();
 			os.close();
 	}
+
+	@RequestMapping(value = "file/downloadAll")
+	public void downloadAll(@RequestParam("bbsId") String bbsId, @RequestParam("atchmnflId") String atchmnflId, HttpServletResponse response) {
+
+	    response.setStatus(HttpServletResponse.SC_OK);
+	    response.setContentType("application/zip");
+	    response.addHeader("Content-Disposition", "attachment; filename=\"allToOne.zip\"");
+
+	    FileOutputStream fos = null;
+	    ZipOutputStream zipOut = null;
+	    FileInputStream fis = null;
+
+	    try {
+	        zipOut = new ZipOutputStream(response.getOutputStream());
+
+		// DB에 저장되어 있는 파일 목록을 읽어온다.
+	        List<CmmnNttAtflDtlVO> atchmnFileInfoList = bbsService.atchmnFlList(atchmnflId);
+
+		// 실제 Server에 파일들이 저장된 directory 경로를 구해온다.
+	        String filePath = BbsInfoFinder.mapFileLoadPath(bbsId);
+
+		// File 객체를 생성하여 List에 담는다.
+	        List<File> fileList = atchmnFileInfoList.stream().map(fileInfo -> {
+	            return new File(filePath + "/" + fileInfo.getStreFileNm());
+	        }).collect(Collectors.toList());
+
+		// 루프를 돌며 ZipOutputStream에 파일들을 계속 주입해준다.
+	        for(File file : fileList) {
+	            zipOut.putNextEntry(new ZipEntry(file.getName()));
+	            fis = new FileInputStream(file);
+
+	            StreamUtils.copy(fis, zipOut);
+
+	            fis.close();
+	            zipOut.closeEntry();
+	        }
+
+	        zipOut.close();
+
+	    } catch (IOException e) {
+	        System.out.println(e.getMessage());
+	        try { if(fis != null)fis.close(); } catch (IOException e1) {System.out.println(e1.getMessage());/*ignore*/}
+	        try { if(zipOut != null)zipOut.closeEntry();} catch (IOException e2) {System.out.println(e2.getMessage());/*ignore*/}
+	        try { if(zipOut != null)zipOut.close();} catch (IOException e3) {System.out.println(e3.getMessage());/*ignore*/}
+	        try { if(fos != null)fos.close(); } catch (IOException e4) {System.out.println(e4.getMessage());/*ignore*/}
+	    }
+	}
+	    
+	
 
 	
 }
