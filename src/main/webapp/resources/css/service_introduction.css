@@ -19,27 +19,28 @@
   flex-wrap: wrap;
 }
 .service_title {
-  font-family: 'OTWelcomeRA';
-  color: black;
-  font-size: 17px;
-  line-height: 23px;
-  text-align: center;
+    font-family: 'OTWelcomeRA';
+    color: black;
+    font-size: 19px;
+    line-height: 29px;
+    text-align: center;
+    font-weight: 600;
 }
 .card_box {
   background-color: var(--sub-color);
   width: 400px;
-  height: 145px;
+  height: 170px;
   margin: 10px;
-  padding: 10px;
+  padding: 20px;
   border-radius: 10px;
 }
 .card_text {
-  font-size: 15px;
+  font-size: 16px;
   line-height: 20px;
 }
 .card_img {
   text-align: center;
-  margin: 15px 0;
+  margin: 21px 0;
 }
 .img_text {
   font-weight: bold;
@@ -49,9 +50,29 @@
   .card_box {
     width: 40%;
     height: 140px;
+    padding : 10px;
   }
   .card_text {
     font-size: 13px;
     line-height: 15px;
+  }
+  
+  .card_img {
+  	margin: 11px 0;
+  }
+}
+
+ @media ( max-width: 1030px ) {
+  .card_box {
+    width: 40%;
+    height: 140px;
+    padding : 10px;
+  }
+  .card_text {
+    font-size: 13px;
+    line-height: 15px;
+  }
+  .card_img {
+  	margin: 11px 0;
   }
 }

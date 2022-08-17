@@ -41,8 +41,18 @@ INSERT INTO Board (title, nickName, passwd, content) VALUES ('33','nam', '3333',
 INSERT INTO Board (title, nickName, passwd, content) VALUES ('44','nam', '4444', '아무리 테스트지만 내용을 들어갑시다');
 INSERT INTO Board (title, nickName, passwd, content) VALUES ('55','nam', '5555', '아무리 테스트지만 내용을 들어갑시다');
 
+SELECT SUM(fileSize) FROM File WHERE regDate >'2022-08-01' AND regDate < '2022-08-31';
+SELECT SUM(fileSize) FROM File WHERE regDate >'2022-08-01';
+
+SELECT SUM(fileSize) FROM File WHERE Month(regDate) = MONTH(CURRENT_DATE()) AND YEAR(regDate) = YEAR(CURRENT_DATE());
+
+SELECT month('2022-06-03')
+
+SELECT MONTH(NOW());
 
 SELECT COUNT(*) FROM Board;
+
+UPDATE File SET regDate = '2022-06-11 11:20:23.0' WHERE fId=1001;
 
 SELECT * FROM File;
 SELECT * FROM Text;

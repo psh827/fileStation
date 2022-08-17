@@ -142,10 +142,16 @@ public class FileDao {
 	public void jee() {
 		
 	}
-
-	public void nam() {
-		
+	
+	/**
+	 * 월별 업로드된 총 파일크기 가져오기
+	 * WHERE TO_CHAR(REGDATE, 'YYYYMMDD') > '20190701'
+	 */
+	public long getFileAmountByMonth(String month) {
+		String sql = "SELECT SUM(fileSize) FROM File WHERE Month(regDate) = MONTH(CURRENT_DATE()) AND YEAR(regDate) = YEAR(CURRENT_DATE())";
+		return jdbcTemplate.queryForObject(sql, Long.class);
 	}
+	
 
 	public void jung() {
 		

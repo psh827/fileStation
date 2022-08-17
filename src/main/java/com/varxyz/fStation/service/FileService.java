@@ -12,7 +12,7 @@ public interface FileService {
 	int deleteFile(String deleteType, String passwd);
 	OurFile getFileByfileId(String fileId);
 	void jee();
-	void nam();
+	long getFileAmountByMonth();
 	void jung();
 	void hoon();
 }
