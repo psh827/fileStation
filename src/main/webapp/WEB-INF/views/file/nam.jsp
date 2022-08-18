@@ -32,13 +32,13 @@
         <form:form method="get">
         	<form:select class="month_selection" path="month">
         		<option value="unknown">--선택--</option>
-        		<option label="1월" value="1월">
-        		<option label="2월" value="2월">
-        		<option label="3월" value="3월">
-        		<option label="4월" value="4월">
-        		<option label="5월" value="5월">
-        		<option label="6월" value="6월">
-        		<option label="7월" value="7월">
+        		<option label="1월" value="01-01">
+        		<option label="2월" value="02-01">
+        		<option label="3월" value="03-01">
+        		<option label="4월" value="04-01">
+        		<option label="5월" value="05-01">
+        		<option label="6월" value="06-01">
+        		<option label="7월" value="07-01">
         		<option label="8월" value="8월">
         		<option label="9월" value="9월">
         		<option label="10월" value="10월">

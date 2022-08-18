@@ -61,6 +61,42 @@ public class FileDao {
 		}
 	}
 	
+	
+	/**
+	 * 텍스트 불러오기
+	 * @param passwd
+	 * @return
+	 */
+	public String getTextByPasswd(String passwd) {
+		try {
+			String sql = "SELECT content FROM Text WHERE passwd = ? AND deleteCheck = ?";
+			return jdbcTemplate.queryForObject(sql, String.class, passwd, "NO");
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
+	/**
+	 * 텍스트 삭제
+	 * @param deleteType
+	 * @param passwd
+	 * @return
+	 */
+	public int deleteText(String deleteType, String passwd) {
+		try {
+			String sql = "UPDATE Text SET deleteCheck = ? WHERE passwd = ?";
+			jdbcTemplate.update(sql, deleteType, passwd);
+			return 1;
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			return 0;
+		}
+	}
+
+	
 	/**
 	 * 파일 다운로드
 	 * @param passwd
@@ -139,10 +175,6 @@ public class FileDao {
 		}
 		
 	}
-
-
-	
-	
 	
 	public List<Integer> jee() {
 		List<String> checkList = new ArrayList<String>();
@@ -183,8 +215,4 @@ public class FileDao {
 		
 	}
 
-	
-	
-	
-	
 }

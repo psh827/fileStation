@@ -56,7 +56,10 @@
         	</div>
       	</c:when>
       </c:choose>
-      <div class="text_box"></div>
+      <div class="text_box" id="text">
+      	${downloadText}
+      </div>
+      <button type="button" id="copyBtn">복사하기</button>
       <a class="modal_btn delete" rel="modal:open" href="#modal1" type="button">삭제하기</a>
       <form>
       	<input hidden name="passwd" value="${passwd}"/>

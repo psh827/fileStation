@@ -1,4 +1,12 @@
-$(document).on('click', '.download_btn', function(){
-	let fileId = $(this).prev().prev().text().split(" ")[1]
-	console.log(fileId)
-})
+function copyClipboard() {
+  const text = document.getElementById('text').textContent;
+  const textarea = document.createElement('textarea');
+  textarea.textContent = text;
+  document.body.append(textarea);
+  textarea.select();
+  document.execCommand('copy');
+  textarea.remove();
+}
+
+const button = document.getElementById('copyBtn');
+button.addEventListener('click', copyClipboard);

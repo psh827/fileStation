@@ -101,7 +101,7 @@ public class FileController {
 		Text text = new Text();
 		text.setPasswd(passwd);
 		//text처리
-		if(textarea != null) {
+		if(textarea != "") {
 			text.setContent(textarea);
 			int textResult = fileService.addText(text);
 			if(textResult == 0) {
@@ -185,19 +185,28 @@ public class FileController {
 	public String download(HttpServletRequest request) throws ParseException {
 		String passwd = request.getParameter("passwd");
 		List<OurFile> fileList = fileService.getFile(passwd);
-		if (fileList.size() == 0) {
+		String downloadText = fileService.getTextByPasswd(passwd);
+		
+		if (fileList.size() == 0 && downloadText == null) {
 			request.setAttribute("msg", "비밀번호가 틀렸습니다.");
 			request.setAttribute("url", "download");
 			return "alert";
 		}
 		
 		for(OurFile of : fileList) {
+			//지금 시간
 			Date date = new Date();
 			Calendar cl = Calendar.getInstance();
+			//등록 시간 설정
 			cl.setTime(of.getRegDate());
+			//등록 시간에 하루 추가
 			cl.add(Calendar.DATE, 1);
 			Date checkDate = new Date(cl.getTimeInMillis());
+			//지금 시간이 등록시간 이후라면
 			if(date.after(checkDate)) {
+				if(downloadText != null) {
+					fileService.deleteText("YES", passwd);
+				}
 				fileService.deleteFile("YES", passwd);
 				String path = "C:\\fileStation\\";
 				String fileName = of.getFileOriName();
@@ -216,6 +225,7 @@ public class FileController {
 		
 		request.setAttribute("passwd", passwd);
 		request.setAttribute("fileList", fileList);
+		request.setAttribute("downloadText", downloadText);
 		
 		return "file/download_station";
 	}
@@ -302,6 +312,8 @@ public class FileController {
 		String passwd = request.getParameter("passwd");
 		String radio = request.getParameter("delete");
 		List<OurFile> fileList = fileService.getFile(passwd);
+		String downloadText = fileService.getTextByPasswd(passwd);
+		
 		if(radio.equals("1")) {
 			for(OurFile of : fileList) {
 				String path = "C:\\fileStation\\";
@@ -311,7 +323,8 @@ public class FileController {
 			}						
 		}
 		int result = fileService.deleteFile("YES", passwd);
-		if(result == 0) {
+		int result2 = fileService.deleteText("YES", passwd);
+		if(result == 0 || result2 == 0) {
 			request.setAttribute("msg", "삭제오류");
 			request.setAttribute("url", "download");
 			return "alert";

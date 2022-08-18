@@ -43,6 +43,7 @@ a {
   color: #73685d;
 }
 .text_box {
+	position: relative;
 	width: 70%;
 	height: 34%;
 	background: #f8f5ff;
@@ -50,8 +51,11 @@ a {
 	border-radius: 5px;
 	box-shadow: 0 2px 5px rgba(0,0,0,.25);
 	margin-top: 15px;
+	overflow: auto
 }
+
 .table_flex {
+	min-height: 63%;
 	max-height: 63%;
     border-radius: 15px;
     box-shadow: 0 2px 5px rgb(0 0 0 / 25%);
