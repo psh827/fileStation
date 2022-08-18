@@ -67,6 +67,12 @@ ALTER TABLE Text convert to charset utf8;
 ALTER TABLE Board convert to charset utf8;
 ALTER TABLE File convert to charset utf8;
 
+SELECT regDate FROM File WHERE regDate BETWEEN '2022-08-01 00:00:00' AND '2022-08-31 23:59:59'  GROUP BY passwd;
+
+SELECT Month(regDate) FROM File GROUP BY passwd;
+SELECT MONTH('2022-08-01');
+
+SELECT count(distinct passwd) FROM File WHERE Month(regDate) = MONTH('2022-08-01') AND YEAR(regDate) = YEAR(CURRENT_DATE());
 DROP TABLE File;
 DROP TABLE Text;
 DROP TABLE BoardImage;

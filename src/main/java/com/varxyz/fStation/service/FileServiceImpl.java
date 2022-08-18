@@ -2,6 +2,7 @@ package com.varxyz.fStation.service;
 
 import java.sql.Date;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
@@ -64,8 +65,8 @@ public class FileServiceImpl implements FileService{
 	}
 
 	@Override
-	public void jung() {
-		fileDao.jung();
+	public List<Integer> jung(List<String> monthList) {
+		return fileDao.jung(monthList);
 	}
 
 	@Override

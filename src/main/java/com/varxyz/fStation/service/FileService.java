@@ -1,6 +1,7 @@
 package com.varxyz.fStation.service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.varxyz.fStation.domain.OurFile;
 import com.varxyz.fStation.domain.Text;
@@ -15,6 +16,6 @@ public interface FileService {
 	OurFile getFileByfileId(String fileId);
 	long getFileAmountByMonth();
 	public List<Integer> jee();
-	void jung();
+	List<Integer> jung(List<String> monthList);
 	void hoon();
 }

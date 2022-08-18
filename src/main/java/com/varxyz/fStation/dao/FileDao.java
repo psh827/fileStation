@@ -3,7 +3,11 @@ package com.varxyz.fStation.dao;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.tomcat.jdbc.pool.DataSource;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -205,10 +209,15 @@ public class FileDao {
 		String sql = "SELECT SUM(fileSize) FROM File WHERE Month(regDate) = MONTH(CURRENT_DATE()) AND YEAR(regDate) = YEAR(CURRENT_DATE())";
 		return jdbcTemplate.queryForObject(sql, Long.class);
 	}
-	
-
-	public void jung() {
 		
+	//월별 이용자 수 구하기
+	public List<Integer> jung(List<String> monthList) {
+		List<Integer> countList = new ArrayList<Integer>();
+		String sql = "SELECT count(distinct passwd) FROM File WHERE Month(regDate) = MONTH(?) AND YEAR(regDate) = YEAR(CURRENT_DATE());";
+		for(int i = 0; i < monthList.size(); i++) {
+			countList.add(jdbcTemplate.queryForObject(sql, Integer.class, monthList.get(i)));
+		}
+		return countList;		
 	}
 
 	public void hoon() {

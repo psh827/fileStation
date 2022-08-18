@@ -41,9 +41,9 @@
           </li>
         </ul>
         
-        <script>
+       <!--  <script>
         $("li.nav_item").click(function(){
         	$(this).addClass("active");
-        })
+        }) -->
         
         </script>
