@@ -37,10 +37,10 @@ CREATE TABLE BoardImage(
 )AUTO_INCREMENT 3001;
 
 INSERT INTO Board (title, nickName, passwd, content) VALUES ('좀 긴게 예쁜거 같아','nam', '1111', '아무리 테스트지만 내용을 들어갑시다');
-INSERT INTO Board (title, nickName, passwd, content) VALUES ('22','nam', '2222', '아무리 테스트지만 내용을 들어갑시다');
-INSERT INTO Board (title, nickName, passwd, content) VALUES ('33','nam', '3333', '아무리 테스트지만 내용을 들어갑시다');
+INSERT INTO Board (title, nickName, passwd, content) VALUES ('22','제목 길게길게길게길게하기', '2222', '아무리 테스트지만 내용을 들어갑시다');
+INSERT INTO Board (title, nickName, passwd, content) VALUES ('33','제목 길게길게길게길게하기', '3333', '아무리 테스트지만 내용을 들어갑시다');
 INSERT INTO Board (title, nickName, passwd, content) VALUES ('44','nam', '4444', '아무리 테스트지만 내용을 들어갑시다');
-INSERT INTO Board (title, nickName, passwd, content) VALUES ('55','nam', '5555', '아무리 테스트지만 내용을 들어갑시다');
+INSERT INTO Board (title, nickName, passwd, content) VALUES ('55','제목을 길게 하는게 이쁜거 같아아아~?', '5555', '아무리 테스트지만 내용을 들어갑시다');
 
 SELECT SUM(fileSize) FROM File WHERE regDate >'2022-08-01' AND regDate < '2022-08-31';
 SELECT SUM(fileSize) FROM File WHERE regDate >'2022-08-01';

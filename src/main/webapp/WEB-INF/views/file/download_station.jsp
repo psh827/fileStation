@@ -56,15 +56,20 @@
         	</div>
       	</c:when>
       </c:choose>
-      <div class="text_box" id="text">
-      	${downloadText}
+      <div class="bottom_container">
+     	<div class="text_box" id="text"></div>
+     	<button type="button" id="copyBtn">복사하기</button>
+     	<div class="time_container">
+	   	    <div class="time_box">${downloadText}</div>
+		   	   <div class="dd_btn">
+		         <a class="modal_btn delete" rel="modal:open" href="#modal1" type="button">삭제하기</a>
+			      <form class="download_form">
+			      	<input hidden name="passwd" value="${passwd}"/>
+			      	<button type="submit" formaction="downloadAll" formmethod="post" class="total_download_btn">전체 다운로드</button>
+			      </form>
+		   	   </div> 
+	     	</div>
       </div>
-      <button type="button" id="copyBtn">복사하기</button>
-      <a class="modal_btn delete" rel="modal:open" href="#modal1" type="button">삭제하기</a>
-      <form>
-      	<input hidden name="passwd" value="${passwd}"/>
-      	<button type="submit" formaction="downloadAll" formmethod="post">전체 다운로드</button>
-      </form>
       </div>
     </div>
     <!-- modal body -->

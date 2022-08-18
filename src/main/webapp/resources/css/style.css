@@ -57,6 +57,10 @@ nav > ul > li {
   align-items: center;
 }
 
+nav > ul > li i:hover {
+	color : white;
+}
+
 nav > ul > li.active {
   background-color: #37179c;
   border-radius: 8px;

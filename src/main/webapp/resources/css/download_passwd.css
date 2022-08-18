@@ -1,0 +1,38 @@
+@charset "UTF-8";
+.passwd_container {
+	display: flex;
+    justify-content: center;
+    align-items: center;
+    height: calc(100% - 476px);
+}
+
+.submit_btn {
+	margin-left: 12px;
+    background-color: #4425a7;
+    border-style: none;
+    border-radius: 5px;
+    width: 50px;
+    height: 30px;
+    color: white;
+    padding-top: 9px;
+}
+
+.passwd_border {
+	border: 1px dashed gray;
+    padding: 80px;
+    border-radius: 25px;
+}
+
+.main-inner__container {
+	padding: 25px 25px 25px 25px;
+}
+
+.download_title {
+    font-family: 'OTWelcomeRA';
+    color: black;
+    font-size: 19px;
+    line-height: 29px;
+    text-align: center;
+    font-weight: 600;
+    margin-top: 226px;
+}

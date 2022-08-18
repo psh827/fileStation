@@ -106,3 +106,92 @@ a {
   }
 
   }
+
+.bottom_container {
+	display: flex;
+    height: 34%;
+    position: relative;
+}
+
+.text_box {
+	width: 70%;
+	height: 100%;
+	background: #f8f5ff;
+	border-radius: 5px;
+	box-shadow: 0 2px 5px rgba(0,0,0,.25);
+	margin-top: 15px;
+	overflow : auto;
+}
+
+ .time_box {
+ 	width: 100%;
+    height: 50%;
+    background-color: #f8f5ff;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgb(0 0 0 / 25%);
+    margin: 0 0 0 15px;
+ }
+ 
+
+.total_download_btn {
+	margin-left: 14px;
+    background-color: #4425a7;
+    border-style: none;
+    border-radius: 5px;
+    width: 100%;
+    height: 100%;
+    color: white;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    font-size: 15px;
+    padding: 33px 28px;
+    cursor: pointer;
+}
+
+.time_container {
+	width: 29%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    margin-top: 15px;
+}
+
+.dd_btn {
+	display: flex;
+    margin-top: 25px;
+    margin-left: 15px;
+}
+
+.modal_btn {
+    display: inline-block;
+    height: 100%;
+    line-height: 6;
+    width: 50%;
+    text-align: center;
+    background: #4425a7;
+    color: white;
+    border-radius: 5px;
+}
+
+.delete:hover, .total_download_btn:hover {
+	background : #2f245c;
+}
+
+.download_form {
+	width: 50%;
+}
+
+#copyBtn{
+	position: absolute;
+    bottom: -4%;
+    right: 29.9%;
+    border: 0;
+    background: none;
+    color: gray;
+    cursor: pointer;
+}
+
+#copyBtn:hover {
+	color: black;
+}

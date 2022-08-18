@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="<c:url value='/resources/css/initial.css'/>">
     <link rel="stylesheet" href="<c:url value='/resources/css/default.css'/>">
     <link rel="stylesheet" href="<c:url value='/resources/css/style.css'/>">
-    <link rel="stylesheet" href="<c:url value='/resources/css/upload.css'/>">
+    <link rel="stylesheet" href="<c:url value='/resources/css/download_passwd.css'/>">
     <script
       src="https://kit.fontawesome.com/62a067f302.js"
       crossorigin="anonymous"
@@ -27,11 +27,16 @@
       </nav>
       <!-- 하얀색 영역 -->
       <div class="main-inner__container">
-        <form action="download" method="post">
-        	<label>비밀번호 입력</label>
-        	<input type="password" name="passwd">
-        	<input type="submit" value="go"/>
-        </form>
+      <h3 class="download_title">파일 다운로드</h3>
+      <div class="passwd_container">
+    	  <div class="passwd_border">
+        	<form action="download" method="post">
+        		<label>비밀번호 입력</label>&nbsp&nbsp&nbsp&nbsp&nbsp
+        		<input type="password" name="passwd">
+        		<input type="submit" value="Go" class="submit_btn"/>
+        	</form>
+      	</div>
+      </div>
       </div>
     </div>
     <script src="http://code.jquery.com/jquery-latest.js"></script>

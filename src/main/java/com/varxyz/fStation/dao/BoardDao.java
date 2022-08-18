@@ -197,23 +197,34 @@ public class BoardDao {
 	 * @param nickName
 	 * @return
 	 */
-	public Post viewPostByNickName(String nickName) {
-		String sql = "SELECT * FROM Board WHERE nickName = ?";
+	public Page<Post> getPostByNickName(String nickName, Pageable pageable) {
+		Order order = pageable.getSort().isEmpty()
+				? Order.by("bId")
+				: pageable.getSort().toList().get(0);
+		String sql = "SELECT bId, title, nickName, passwd,"
+				+ "content, regDate FROM Board WHERE nickName = ?"
+				+ "	ORDER BY " + order.getProperty() + " " + order.getDirection().name()
+				+ "	LIMIT " + pageable.getPageSize() 
+				+ " OFFSET " + pageable.getOffset();
+		
 		try {
-			return jdbcTemplate.queryForObject(sql, new RowMapper<Post>() {
-				
-				@Override
-				public Post mapRow(ResultSet rs, int rowNum) throws SQLException {
-					Post post = new Post();
-					post.setBoardId(rs.getLong("bId"));
-					post.setTitle(rs.getString("title"));
-					post.setNickname(rs.getString("nickName"));
-					post.setPasswd(rs.getString("passwd"));
-					post.setContent(rs.getString("content"));
-					post.setRegDate(rs.getDate("regDate"));
-					return post;	
-				}
-			}, nickName);
+			return new PageImpl<Post>(
+					jdbcTemplate.query(sql, new RowMapper<Post>() {
+						
+						@Override
+						public Post mapRow(ResultSet rs, int rowNum) throws SQLException {
+							Post post = new Post();
+							post.setBoardId(rs.getLong("bId"));
+							post.setTitle(rs.getString("title"));
+							post.setNickname(rs.getString("nickName"));
+							post.setPasswd(rs.getString("passwd"));
+							post.setContent(rs.getString("content"));
+							post.setRegDate(rs.getDate("regDate"));
+							return post;	
+						}
+					},nickName),
+					pageable,
+					countPost());
 		} catch (EmptyResultDataAccessException e) {
 			return null;
 		}

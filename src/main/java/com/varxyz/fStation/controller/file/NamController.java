@@ -37,6 +37,14 @@ public class NamController {
 	@Autowired
 	FileServiceImpl fileService;
 	
+	/**
+	 * 월별 업로드된 파일크기
+	 * @param request
+	 * @param model
+	 * @param session
+	 * @param month
+	 * @return
+	 */
 	@GetMapping("/file/nam")
 	public String FileGraph(HttpServletRequest request, Model model, HttpSession session, MonthCommand month) {
 		Date date = new Date();

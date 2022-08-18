@@ -14,7 +14,7 @@ public interface BoardService {
 	int	modifyPost(Post post);
 	int deletePost(Post post);
 	public Post viewPostByBid(long bId);
-	
 	Page<Post> findAll(Pageable pageable);
+	Page<Post> getPostByNickName(String nickName, Pageable pageable);
 	long countPost();
 }

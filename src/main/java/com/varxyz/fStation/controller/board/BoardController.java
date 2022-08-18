@@ -72,4 +72,30 @@ public class BoardController {
 		
 		return "board/boardmain";
 	}
+	
+	@GetMapping("/board/findPost")
+	public String searchPostByNickName(HttpServletRequest request, Model model, HttpSession session) {
+		String nickName = request.getParameter("nickName");
+		
+		int page = 0;
+		if(request.getParameter("page") != null) {
+			page = Integer.parseInt(request.getParameter("page"));			
+		}
+		Pageable pageable = PageRequest.of(page, 8, Sort.Direction.ASC, "regDate");
+		Page<Post> postlist = boardService.getPostByNickName(nickName, pageable);
+		int pageNumber = postlist.getPageable().getPageNumber(); //현재페이지
+		int totalPages = postlist.getTotalPages(); //총 페이지 수. 검색에따라 10개면 10개..
+		int pageBlock = 5; //블럭의 수 1, 2, 3, 4, 5	
+		int startBlockPage = ((pageNumber)/pageBlock)*pageBlock+1; //현재 페이지가 7이라면 1*5+1=6
+		int endBlockPage = startBlockPage+pageBlock-1; //6+5-1=10. 6,7,8,9,10해서 10.
+		endBlockPage= totalPages<endBlockPage? totalPages:endBlockPage;
+		
+		
+		model.addAttribute("startBlockPage", startBlockPage);
+		model.addAttribute("endBlockPage", endBlockPage);
+		model.addAttribute("postlist", postlist);
+		
+		
+		return "board/findPost";
+	}
 }

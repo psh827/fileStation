@@ -38,8 +38,7 @@
         <div class="Questions_container">
           <div class="subheading">건의사항</div>
           <div class="Questions_banner">
-            <button class="Questions_btn" type="button" name="writing" onclick='location.href="<c:url value='/board/write_board'/>"'>글작성</button>
-            <button class="Questions_btn right" type="button" name="mywriting"><a class="modal_btn search_btn"  rel="modal:open" href="#modal2">검색하기</a></button>
+            <button class="Questions_btn" type="button" name="writing" onclick='location.href="<c:url value='/board/boardmain'/>"'>메인으로</button>
           </div>
           <div class="posting_list">
             <table class="Questions_table">
@@ -48,7 +47,7 @@
                <th><span class="textLine">Title</span></th>
                <th><span class="textLine">Date</span></th>
             </tr>
-            <c:forEach items="${ulist.content}" var="user">
+            <c:forEach items="${postlist.content}" var="user">
             <tr>
                <td>${user.boardId}</td>
                <td><a data-value="${user.boardId}" class="modal_btn"  rel="modal:open" href="#modal1"><span class="textLine">${user.getTitle()}</span></a></td>
@@ -63,22 +62,22 @@
       <ul class="pagination">
       
          <!-- 이전 -->
-               <li class="page-item"><a class="page-link" href="<c:url value='/board/boardmain?page=0'/>">처음</a></li>
-               <li class="page-item"><a class="page-link" href="<c:url value='/board/boardmain?page=${ulist.number-1}'/>">&larr;</a></li>
+               <li class="page-item"><a class="page-link" href="<c:url value='/board/findPost?page=0'/>">처음</a></li>
+               <li class="page-item"><a class="page-link" href="<c:url value='/board/findPost?page=${postlist.number-1}'/>">&larr;</a></li>
          <!-- 페이지 그룹 -->
          <c:forEach begin="${startBlockPage}" end="${endBlockPage}" var="i">
             <c:choose>
-               <c:when test="${ulist.pageable.pageNumber+1 == i}">
-                  <li class="page-item disabled"><a class="page-link" href="<c:url value='/board/boardmain?page=${i-1}'/>">${i}</a></li>
+               <c:when test="${postlist.pageable.pageNumber+1 == i}">
+                  <li class="page-item disabled"><a class="page-link" href="<c:url value='/board/findPost?page=${i-1}'/>">${i}</a></li>
                </c:when>
                <c:otherwise>
-                  <li class="page-item"><a class="page-link" href="<c:url value='/board/boardmain?page=${i-1}'/>">${i}</a></li>
+                  <li class="page-item"><a class="page-link" href="<c:url value='/board/findPost?page=${i-1}'/>">${i}</a></li>
                </c:otherwise>
             </c:choose>
          </c:forEach>
          <!-- 다음 -->
-          <li class="page-item "><a class="page-link" href="<c:url value='/board/boardmain?page=${ulist.number+1}'/>">&rarr;</a></li>
-          <li class="page-item "><a class="page-link" href="<c:url value='/board/boardmain?page=${ulist.totalPages-1}'/>">마지막</a></li>
+          <li class="page-item "><a class="page-link" href="<c:url value='/board/findPost?page=${postlist.number+1}'/>">&rarr;</a></li>
+          <li class="page-item "><a class="page-link" href="<c:url value='/board/findPost?page=${postlist.totalPages-1}'/>">마지막</a></li>
       </ul>
    </div>
    <!-- 페이징 영역 끝 -->
@@ -91,14 +90,6 @@
    <form action="post" method="post" class="modal_body">
       <input class="modal_hidden_input" hidden name="bId" value="" />
       비밀번호 : <input type="password" name="passwd" maxlength="4" />
-      <input class="submit_btn" type="submit" value="확인" />
-   </form>
-</div>
-
-<!-- modal body2 -->
-<div id="modal2" class="modal" >
-   <form action="findPost" method="get" class="modal_body">
-      닉네임 : <input type="text" name="nickName"/>
       <input class="submit_btn" type="submit" value="확인" />
    </form>
 </div>
