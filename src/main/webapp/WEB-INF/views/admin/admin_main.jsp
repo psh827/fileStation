@@ -80,24 +80,24 @@
           <div class="admin_container">
             <div class="admin_box top left"></div>
             <div class="admin_box top right">
-            <h1>확장자 별 총 업로드 수</h1>
-            <div class="pie_box">
-	            <div class="chart-div">
-	              <canvas id="pieChartCanvas" width="150px" height="150px"></canvas>
+            	<h1>확장자 별 총 업로드 수</h1>
+	            <div class="pie_box">
+		            <div class="chart-div">
+		              <canvas id="pieChartCanvas" width="150px" height="150px"></canvas>
+		            </div>
+		            <table>
+		            <tr class="pie_txt_box">
+		            <c:forEach var="i" begin="0" end="${fn:length(checkList) - 1}">
+					<td><label>${checkStrList[i]}</label></td>
+					</c:forEach>
+					</tr>
+					<tr class="pie_txt_box">
+					<c:forEach var="i" begin="0" end="${fn:length(checkList) - 1}">
+					<td class="pie_number">${checkList[i]}</td>
+					</c:forEach>
+					</tr>
+		            </table>
 	            </div>
-	            <table>
-	            <tr class="pie_txt_box">
-	            <c:forEach var="i" begin="0" end="${fn:length(checkList) - 1}">
-				<td><label>${checkStrList[i]}</label></td>
-				</c:forEach>
-				</tr>
-				<tr class="pie_txt_box">
-				<c:forEach var="i" begin="0" end="${fn:length(checkList) - 1}">
-				<td class="pie_number">${checkList[i]}</td>
-				</c:forEach>
-				</tr>
-	            </table>
-            </div>
             </div>
             <script type="text/javascript">
             window.onload = function () {
@@ -113,11 +113,38 @@
             	    }]
             	};
             </script>
-            <div class="admin_box bottom left"></div>
+            <div class="admin_box bottom left" style="padding: 0; overflow: hidden;">
+            	<div id="chart_div" style="width: 100%; height: 100%;">
+      				<c:forEach var="i" begin="0" end="${fn:length(monthCount) - 1}">
+      					<p>${monthList[i]} = ${monthCount[i]}</p>
+      				</c:forEach>
+   	  			</div>
+            </div>
             <div class="admin_box bottom right"></div>
           </div>
         </div>
       </div>
     </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript">      
+	  google.load("visualization", "1", {packages:["corechart"]});     
+	  var month = ${monthList}
+	  var count = ${monthCount}
+	  console.log(count[0])
+	  console.log(month)
+	  google.setOnLoadCallback(drawChart);      
+	  function drawChart() {        
+		 var data = google.visualization.arrayToDataTable([          
+			 ['Month', 'Count'],          
+			 [month[0],  Number(count[0])],          
+			 [month[1],  Number(count[1])],          
+			 [month[2],  Number(count[2])],          
+			 [month[3],  Number(count[3])],
+			 [month[4],  Number(count[4])]  ]);        
+		 var options = {          title: '월 별 사용자 수'        };        
+		 var chart = new google.visualization.LineChart(document.getElementById('chart_div'));        
+		 chart.draw(data, options);      }
+  </script>
   </body>
 </html>

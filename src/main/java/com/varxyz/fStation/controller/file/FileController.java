@@ -160,9 +160,6 @@ public class FileController {
 	        	return "alert";
 	        }
 		}
-		
-		
-        
 		return "file/file_main";
 	}
 	
@@ -193,6 +190,7 @@ public class FileController {
 			return "alert";
 		}
 		
+		//0818 17:50분업로드 19일에 5시 50분에 77777777 체크하기!
 		for(OurFile of : fileList) {
 			//지금 시간
 			Date date = new Date();
