@@ -20,7 +20,7 @@ button { cursor: pointer;}
   border: 1px solid black;
   border-radius: 15px;
   height: 150px;
-  margin: 40px 0;
+  margin: 40px 0 10px 0;
 }
 .Questions_banner button:nth-of-type(1) {
    margin-left: 60px;
@@ -225,3 +225,32 @@ a.delete {
     padding: 15px 30px;
 }
 
+.search_box {
+	display: flex;
+}
+.search_box button.search-n-btn {
+    margin-left: 0;	
+}
+.btn-sm {
+    margin-top:5px;
+    width: 50px;
+    height: 33px;
+    left: 30px;
+    background: #c0b6e1;
+    border: none;
+    border-radius: 5px;
+    color: white;
+}
+.search-n-btn {
+    border-style: none;
+    background: none;
+}
+select {
+	display: none;
+}
+
+.list-btn {
+    border-style: none;
+    background: none;
+    color: mediumpurple;
+}

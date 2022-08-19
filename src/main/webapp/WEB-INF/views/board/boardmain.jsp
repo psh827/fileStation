@@ -38,9 +38,25 @@
         <div class="Questions_container">
           <div class="subheading">건의사항</div>
           <div class="Questions_banner">
-            <button class="Questions_btn" type="button" name="writing" onclick='location.href="<c:url value='/board/write_board'/>"'>글작성</button>
-            <button class="Questions_btn right" type="button" name="mywriting"><a class="modal_btn search_btn"  rel="modal:open" href="#modal2">검색하기</a></button>
+            <button class="Questions_btn" style="margin-right: 30px;" type="button" name="writing" onclick='location.href="<c:url value='/board/write_board'/>"'>글작성</button>
+            
+		    <!-- 검색 영역 시작-->
+			<form action="boardmain" class="form-inline d-flex justify-content-end"
+				method="GET">
+				<div class="search_box">
+						<label style="margin: 0 auto; padding-top: 16px;">닉네임</label>
+  						<select name="field" id="field" class="form-control form-control-sm">
+							<option value="nickname">닉네임</option>
+						</select>
+				<input type="text" id="nickname" name="nickname" class="form-control form-control-sm"
+					style="margin: 10px;"> 
+				<input type="submit" class="btn btn-outline-info btn-sm" value="검색">
+				</div>
+			</form>
+			<!-- 검색 영역 끝 -->
+            
           </div>
+          <button class="list-btn" onclick='location.href="<c:url value='/board/boardmain'/>"'>목록보기</button>
           <div class="posting_list">
             <table class="Questions_table">
             <tr>
@@ -63,22 +79,22 @@
       <ul class="pagination">
       
          <!-- 이전 -->
-               <li class="page-item"><a class="page-link" href="<c:url value='/board/boardmain?page=0'/>">처음</a></li>
-               <li class="page-item"><a class="page-link" href="<c:url value='/board/boardmain?page=${ulist.number-1}'/>">&larr;</a></li>
+               <li class="page-item"><a class="page-link" href="<c:url value='/board/boardmain?field=${param.field}&nickname=${param.nickname}&page=0'/>">처음</a></li>
+               <li class="page-item"><a class="page-link" href="<c:url value='/board/boardmain?field=${param.field}&nickname=${param.nickname}&page=${ulist.number-1}'/>">&larr;</a></li>
          <!-- 페이지 그룹 -->
          <c:forEach begin="${startBlockPage}" end="${endBlockPage}" var="i">
             <c:choose>
                <c:when test="${ulist.pageable.pageNumber+1 == i}">
-                  <li class="page-item disabled"><a class="page-link" href="<c:url value='/board/boardmain?page=${i-1}'/>">${i}</a></li>
+                  <li class="page-item disabled"><a class="page-link" href="<c:url value='/board/boardmain?field=${param.field}&nickname=${param.nickname}&page=${i-1}'/>">${i}</a></li>
                </c:when>
                <c:otherwise>
-                  <li class="page-item"><a class="page-link" href="<c:url value='/board/boardmain?page=${i-1}'/>">${i}</a></li>
+                  <li class="page-item"><a class="page-link" href="<c:url value='/board/boardmain?field=${param.field}&nickname=${param.nickname}&page=${i-1}'/>">${i}</a></li>
                </c:otherwise>
             </c:choose>
          </c:forEach>
          <!-- 다음 -->
-          <li class="page-item "><a class="page-link" href="<c:url value='/board/boardmain?page=${ulist.number+1}'/>">&rarr;</a></li>
-          <li class="page-item "><a class="page-link" href="<c:url value='/board/boardmain?page=${ulist.totalPages-1}'/>">마지막</a></li>
+          <li class="page-item "><a class="page-link" href="<c:url value='/board/boardmain?field=${param.field}&nickname=${param.nickname}&page=${ulist.number+1}'/>">&rarr;</a></li>
+          <li class="page-item "><a class="page-link" href="<c:url value='/board/boardmain?field=${param.field}&nickname=${param.nickname}&page=${ulist.totalPages-1}'/>">마지막</a></li>
       </ul>
    </div>
    <!-- 페이징 영역 끝 -->

@@ -17,6 +17,7 @@
     <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/style.css'/>" />
     <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/Questions.css'/>" />
     <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/admin.css'/>" />
+    <link rel="stylesheet" href="<c:url value='/resources/css/nam.css'/>">
     <script src="<c:url value='/resources/js/subpage.js'/>"></script>
     <script src="<c:url value='/resources/js/admin.js'/>"></script>
     <script
@@ -78,7 +79,35 @@
         <div class="Questions_container">
           <div class="subheading">관리자 페이지</div>
           <div class="admin_container">
-            <div class="admin_box top left"></div>
+            <div class="admin_box top left">
+            	<div class="input-container">
+			        <form method="get">
+			        	<select class="month_selection" name="month">
+			        		<option value="unknown">--선택--</option>
+			        		<option label="1월" value="01-01">
+			        		<option label="2월" value="02-01">
+			        		<option label="3월" value="03-01">
+			        		<option label="4월" value="04-01">
+			        		<option label="5월" value="05-01">
+			        		<option label="6월" value="06-01">
+			        		<option label="7월" value="07-01">
+			        		<option label="8월" value="08-01">
+			        		<option label="9월" value="09-01">
+			        		<option label="10월" value="10-01">
+			        		<option label="11월" value="11-01">
+			        		<option label="12월" value="12-01">
+			        	</select>
+			        </form>
+          <!--막대그래프 바  -->
+          <div class="zt-span6 last">
+			<p>&nbsp;</p>
+			<p>&nbsp;</p>
+			<h3><strong>월별 업로드된 파일 크기</strong></h3>
+			<div class="zt-skill-bar"><div data-width="${amount }" style=""><span class="month">8월</span><span class="amount">${amount }MB</span></div></div>
+        </div>
+      </div>
+            
+            </div>
             <div class="admin_box top right">
             	<h1>확장자 별 총 업로드 수</h1>
 	            <div class="pie_box">
@@ -127,6 +156,7 @@
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
     <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+  <script src="<c:url value='/resources/js/get_size.js'/>"></script>
     <script type="text/javascript">      
 	  google.load("visualization", "1", {packages:["corechart"]});     
 	  var month = ${monthList}
@@ -145,6 +175,36 @@
 		 var options = {          title: '월 별 사용자 수'        };        
 		 var chart = new google.visualization.LineChart(document.getElementById('chart_div'));        
 		 chart.draw(data, options);      }
-  </script>
+ 
+    (function($) {
+    	  "use strict";
+    	  $(function() {
+    	    function animated_contents() {
+    	      $(".zt-skill-bar > div ").each(function(i) {
+    	        var $this = $(this),
+    	          skills = $this.data('width');
+
+    	        $this.css({
+    	          'width': skills / 10 + '%'
+    	        });
+
+    	      });
+    	    }
+
+    	    if (jQuery().appear) {
+    	      $('.zt-skill-bar').appear().on('appear', function() {
+    	        animated_contents();
+    	      });
+    	    } else {
+    	      animated_contents();
+    	    }
+    	  });
+    	}(jQuery));
+	    var default_month = '${defaultMonth}'
+	    default_month = default_month.split('-')[1].replace("0", "")
+	    default_month = Number(default_month)
+	    $('.month_selection option:eq(' + default_month + ')').prop("selected", true);
+    
+    </script>
   </body>
 </html>

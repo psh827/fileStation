@@ -29,8 +29,8 @@
       <!-- 하얀색 영역 -->
       <div class="main-inner__container">
         <div class="input-container">
-        <form:form method="get">
-        	<form:select class="month_selection" path="month">
+        <form method="get">
+        	<select class="month_selection" name="month">
         		<option value="unknown">--선택--</option>
         		<option label="1월" value="01-01">
         		<option label="2월" value="02-01">
@@ -39,24 +39,25 @@
         		<option label="5월" value="05-01">
         		<option label="6월" value="06-01">
         		<option label="7월" value="07-01">
-        		<option label="8월" value="8월">
-        		<option label="9월" value="9월">
-        		<option label="10월" value="10월">
-        		<option label="11월" value="11월">
-        		<option label="12월" value="12월">
-        	</form:select>
-        </form:form>
+        		<option label="8월" value="08-01">
+        		<option label="9월" value="09-01">
+        		<option label="10월" value="10-01">
+        		<option label="11월" value="11-01">
+        		<option label="12월" value="12-01">
+        	</select>
+        </form>
           <!--막대그래프 바  -->
           <div class="zt-span6 last">
 			<p>&nbsp;</p>
 			<p>&nbsp;</p>
 			<h3><strong>월별 업로드된 파일 크기</strong></h3>
-			<div class="zt-skill-bar"><div data-width="${amount }" style="">8월<span>${amount }MB</span></div></div>
+			<div class="zt-skill-bar"><div data-width="${amount }" style=""><span class="month">8월</span><span class="amount">${amount }MB</span></div></div>
         </div>
       </div>
     </div>
     <script src="http://code.jquery.com/jquery-latest.js"></script>
     <script src="<c:url value='/resources/js/home.js'/>"></script>
+    <script src="<c:url value='/resources/js/get_size.js'/>"></script>
     <script>
     (function($) {
     	  "use strict";
@@ -82,6 +83,11 @@
     	    }
     	  });
     	}(jQuery));
+	    var default_month = '${defaultMonth}'
+	    default_month = default_month.split('-')[1].replace("0", "")
+	    default_month = Number(default_month)
+	    $('.month_selection option:eq(' + default_month + ')').prop("selected", true);
+    
     </script>
   </body>
 </html>

@@ -34,7 +34,7 @@
             </a>
           </li>
           <li class="nav_item">
-            <a href="<c:url value='/board/boardmain?page=0'/>" class="nav_link">
+            <a href="<c:url value='/board/boardmain'/>" class="nav_link">
               <i class="fa-solid fa-chalkboard-user fa-lg"></i>
               <span class="hidden" hidden>건의사항</span>
             </a>

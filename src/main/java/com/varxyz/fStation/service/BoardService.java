@@ -17,4 +17,5 @@ public interface BoardService {
 	Page<Post> findAll(Pageable pageable);
 	Page<Post> getPostByNickName(String nickName, Pageable pageable);
 	long countPost();
+	long countPostByNickName(String nickName);
 }

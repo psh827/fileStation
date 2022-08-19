@@ -36,11 +36,12 @@ CREATE TABLE BoardImage(
 	CONSTRAINT BoardImage_boardFk_FK FOREIGN KEY (boardFk) REFERENCES Board(bId)
 )AUTO_INCREMENT 3001;
 
-INSERT INTO Board (title, nickName, passwd, content) VALUES ('좀 긴게 예쁜거 같아','nam', '1111', '아무리 테스트지만 내용을 들어갑시다');
-INSERT INTO Board (title, nickName, passwd, content) VALUES ('22','제목 길게길게길게길게하기', '2222', '아무리 테스트지만 내용을 들어갑시다');
-INSERT INTO Board (title, nickName, passwd, content) VALUES ('33','제목 길게길게길게길게하기', '3333', '아무리 테스트지만 내용을 들어갑시다');
-INSERT INTO Board (title, nickName, passwd, content) VALUES ('44','nam', '4444', '아무리 테스트지만 내용을 들어갑시다');
-INSERT INTO Board (title, nickName, passwd, content) VALUES ('55','제목을 길게 하는게 이쁜거 같아아아~?', '5555', '아무리 테스트지만 내용을 들어갑시다');
+INSERT INTO Board (title, nickName, passwd, content) VALUES ('nam','nam', '1111', '아무리 테스트지만 내용을 들어갑시다');
+INSERT INTO Board (title, nickName, passwd, content) VALUES ('test','test', '2222', '아무리 테스트지만 내용을 들어갑시다');
+INSERT INTO Board (title, nickName, passwd, content) VALUES ('jee','jee', '2222', '아무리 테스트지만 내용을 들어갑시다');
+INSERT INTO Board (title, nickName, passwd, content) VALUES ('윤정','윤정', '2222', '아무리 테스트지만 내용을 들어갑시다');
+INSERT INTO Board (title, nickName, passwd, content) VALUES ('형주','형주', '2222', '아무리 테스트지만 내용을 들어갑시다');
+
 
 SELECT SUM(fileSize) FROM File WHERE regDate >'2022-08-01' AND regDate < '2022-08-31';
 SELECT SUM(fileSize) FROM File WHERE regDate >'2022-08-01';
@@ -60,6 +61,12 @@ SELECT * FROM Text;
 SELECT * FROM Board;
 SELECT * FROM BoardImage;
 
+
+SELECT bId, title, nickName, passwd,content, regDate FROM Board WHERE nickName = 'nam'
+ ORDER BY regDate ASC LIMIT 8 OFFSET 0
+
+SELECT count(*) FROM Board WHERE nickName = 'nam';
+
 UPDATE Board SET content = 'test test test' WHERE bId = '1';
 
 ALTER TABLE File convert to charset utf8;
@@ -77,3 +84,5 @@ DROP TABLE File;
 DROP TABLE Text;
 DROP TABLE BoardImage;
 DROP TABLE Board;
+
+SELECT count(*) FROM Board WHERE nickName = 'nam';

@@ -205,9 +205,13 @@ public class FileDao {
 	 * 월별 업로드된 총 파일크기 가져오기
 	 * WHERE TO_CHAR(REGDATE, 'YYYYMMDD') > '20190701'
 	 */
-	public long getFileAmountByMonth() {
-		String sql = "SELECT SUM(fileSize) FROM File WHERE Month(regDate) = MONTH(CURRENT_DATE()) AND YEAR(regDate) = YEAR(CURRENT_DATE())";
-		return jdbcTemplate.queryForObject(sql, Long.class);
+	public long getFileAmountByMonth(String month) {
+		try {
+			String sql = "SELECT SUM(fileSize) FROM File WHERE Month(regDate) = MONTH(?) AND YEAR(regDate) = YEAR(CURRENT_DATE())";
+			return jdbcTemplate.queryForObject(sql, Long.class, month);
+		} catch (NullPointerException e) {
+			return 0;
+		}
 	}
 		
 	//월별 이용자 수 구하기

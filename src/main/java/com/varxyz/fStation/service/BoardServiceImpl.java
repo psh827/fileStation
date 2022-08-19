@@ -61,5 +61,10 @@ public class BoardServiceImpl implements BoardService{
 	public Page<Post> getPostByNickName(String nickName, Pageable pageable) {
 		return boardDao.getPostByNickName(nickName, pageable);
 	}
+
+	@Override
+	public long countPostByNickName(String nickName) {
+		return boardDao.countPostByNickName(nickName);
+	}
 	
 }

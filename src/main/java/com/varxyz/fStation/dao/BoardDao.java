@@ -204,7 +204,7 @@ public class BoardDao {
 		String sql = "SELECT bId, title, nickName, passwd,"
 				+ "content, regDate FROM Board WHERE nickName = ?"
 				+ "	ORDER BY " + order.getProperty() + " " + order.getDirection().name()
-				+ "	LIMIT " + pageable.getPageSize() 
+				+ "	LIMIT " + pageable.getPageSize()
 				+ " OFFSET " + pageable.getOffset();
 		
 		try {
@@ -224,10 +224,15 @@ public class BoardDao {
 						}
 					},nickName),
 					pageable,
-					countPost());
+					countPostByNickName(nickName));
 		} catch (EmptyResultDataAccessException e) {
 			return null;
 		}
+	}
+	
+	public long countPostByNickName(String nickName) {
+		String sql = "SELECT count(*) FROM Board WHERE nickName = ?";
+		return jdbcTemplate.queryForObject(sql, Long.class, nickName);
 	}
 	
 }

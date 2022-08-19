@@ -60,8 +60,8 @@ public class FileServiceImpl implements FileService{
 	}
 
 	@Override
-	public long getFileAmountByMonth() {
-		return fileDao.getFileAmountByMonth();
+	public long getFileAmountByMonth(String month) {
+		return fileDao.getFileAmountByMonth(month);
 	}
 
 	@Override

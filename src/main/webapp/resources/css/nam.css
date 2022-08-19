@@ -24,7 +24,7 @@
     }
 
     .zt-skill-bar div {
-        background-color: #ffc600;
+        background-color: #317cd9;
         position: relative;
         padding-left: 25px;
         width: 0;
@@ -35,7 +35,7 @@
                 border-radius: 2px;
     }
 
-    .zt-skill-bar span {
+    .zt-skill-bar span.amount {
         display: block;
         position: absolute;
         right: 0;
@@ -50,7 +50,7 @@
                 border-radius: 0 2px 2px 0;
     }
 
-    .zt-skill-bar span:before {
+    .zt-skill-bar span.mount:before {
         content: "";
         position: absolute;
         width: 6px;

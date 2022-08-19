@@ -14,7 +14,7 @@ public interface FileService {
 	List<OurFile> getFile(String passwd);
 	int deleteFile(String deleteType, String passwd);
 	OurFile getFileByfileId(String fileId);
-	long getFileAmountByMonth();
+	long getFileAmountByMonth(String month);
 	public List<Integer> jee();
 	List<Integer> jung(List<String> monthList);
 	void hoon();
