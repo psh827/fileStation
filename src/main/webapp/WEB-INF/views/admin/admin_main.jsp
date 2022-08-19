@@ -165,14 +165,33 @@
 	  console.log(month)
 	  google.setOnLoadCallback(drawChart);      
 	  function drawChart() {        
-		 var data = google.visualization.arrayToDataTable([          
+		 var data = google.visualization.arrayToDataTable([      
 			 ['Month', 'Count'],          
 			 [month[0],  Number(count[0])],          
 			 [month[1],  Number(count[1])],          
 			 [month[2],  Number(count[2])],          
 			 [month[3],  Number(count[3])],
 			 [month[4],  Number(count[4])]  ]);        
-		 var options = {          title: '월 별 사용자 수'        };        
+			 data.addColumn('number', '명');
+		 var options = {
+			title: '월 별 사용자 수',
+			backgroundColor : '#32314d',
+		    colors: [ '#42cef5'],
+		 	tooltip: { isHtml: true },
+		 	legend: 'none',
+		 	hAxis: {
+		          title: '월',
+		          textStyle: {
+		        	  italic : false
+		          }
+		        },
+		 	 vAxis: {
+		          title: '명',
+		          textStyle: {
+		        	  italic : false
+		          }
+		        }
+		 };        
 		 var chart = new google.visualization.LineChart(document.getElementById('chart_div'));        
 		 chart.draw(data, options);      }
  
@@ -183,10 +202,15 @@
     	      $(".zt-skill-bar > div ").each(function(i) {
     	        var $this = $(this),
     	          skills = $this.data('width');
-
-    	        $this.css({
-    	          'width': skills / 10 + '%'
-    	        });
+				if(skills / 10 < 4){
+	    	        $this.css({
+	    	          'width': '10%'
+	    	        });
+				}else{
+					$this.css({
+		    	          'width': skills / 10 + '%'
+		    	    });
+				}
 
     	      });
     	    }
