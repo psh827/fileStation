@@ -60,7 +60,7 @@
      	<div class="text_box" id="text">${downloadText.content}</div>
      	<button type="button" id="copyBtn">복사하기</button>
      	<div class="time_container">
-	   	    <div class="time_box"></div>
+	   	    <div class="time_box"><span class="time_span"></span></div>
 		   	   <div class="dd_btn">
 		         <a class="modal_btn delete" rel="modal:open" href="#modal1" type="button">삭제하기</a>
 			      <form class="download_form">
@@ -96,7 +96,7 @@
           $('.modify').replaceWith('<button class="Questions_btn comfirm middle" type="button" name="revoke">등록하기</button>')
        })
        
-       const remainTime = document.querySelector(".time_box");
+       const remainTime = document.querySelector(".time_span");
 	   var regDate = new Date('${fileList[0].regDate}')
 	   var textDate = new Date('${downloadText.regDate}')
 	   /* regDate.setDate(regDate.getDate() + 1) */

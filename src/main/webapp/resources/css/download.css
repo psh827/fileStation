@@ -62,6 +62,12 @@ a {
     overflow-x: hidden;
     overflow-y: scroll;
 }
+.time_span {
+	font-size: 40px;
+    padding-top: 43px;
+    display: inline-block;
+    color: #483D8B;
+}
 
  @media all and (max-width: 768px) {
     
