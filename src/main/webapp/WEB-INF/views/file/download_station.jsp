@@ -57,7 +57,7 @@
       	</c:when>
       </c:choose>
       <div class="bottom_container">
-     	<div class="text_box" id="text">${downloadText}</div>
+     	<div class="text_box" id="text">${downloadText.content}</div>
      	<button type="button" id="copyBtn">복사하기</button>
      	<div class="time_container">
 	   	    <div class="time_box"></div>
@@ -95,6 +95,38 @@
           $(toTextarea).replaceWith('<textarea class="Questions_inner textarea">${post.content}</textarea>')
           $('.modify').replaceWith('<button class="Questions_btn comfirm middle" type="button" name="revoke">등록하기</button>')
        })
+       
+       const remainTime = document.querySelector(".time_box");
+	   var regDate = new Date('${fileList[0].regDate}')
+	   var textDate = new Date('${downloadText.regDate}')
+	   /* regDate.setDate(regDate.getDate() + 1) */
+	   regDate.setMinutes(regDate.getMinutes() + 10)
+	   /* textDate.setDate(textDate.getDate() + 1) */
+	   textDate.setMinutes(textDate.getMinutes() + 10)
+	   console.log(regDate)
+	   function diffDay() {
+		let masTime;
+		if(regDate == 'Invalid Date'){
+			masTime = new Date(textDate);			
+		}else if(regDate != 'Invalid Date' && textDate != 'Invalid Date'){
+			masTime = new Date(regDate);
+		}
+		
+		console.log(masTime)
+	   	const todayTime = new Date();
+	   	const diff = masTime - todayTime;
+	       
+	   	const diffHour =String( Math.floor((diff / (1000*60*60)) % 24)).padStart(2,"0");
+		const diffMin = String(Math.floor((diff / (1000*60)) % 60)).padStart(2,"0");
+		const diffSec = String(Math.floor(diff / 1000 % 60)).padStart(2,"0");
+		remainTime.innerText = diffHour + '시간 ' + diffMin + '분 ' + diffSec + '초';
+	   }
+	   diffDay();
+	   setInterval(diffDay, 1000);
+	   if (remainTime.innerText == "0시간 0분 0초"){
+		   location.href = "file/download";
+	   }
+       
    </script>
   </body>
 </html>

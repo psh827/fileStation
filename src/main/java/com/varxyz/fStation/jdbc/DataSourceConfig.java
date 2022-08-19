@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
+import org.springframework.scheduling.annotation.ScheduledAnnotationBeanPostProcessor;
 import org.springframework.transaction.PlatformTransactionManager;
 
 import com.varxyz.fStation.dao.BoardDao;
@@ -67,7 +68,6 @@ public class DataSourceConfig {
 	public BoardDao boardDao() {
 		return new BoardDao(dataSource());
 	}
-	
 	
 	
 }

@@ -18,6 +18,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.UUID;
 import java.util.stream.Collectors;
 import java.util.zip.ZipEntry;
@@ -182,43 +184,12 @@ public class FileController {
 	public String download(HttpServletRequest request) throws ParseException {
 		String passwd = request.getParameter("passwd");
 		List<OurFile> fileList = fileService.getFile(passwd);
-		String downloadText = fileService.getTextByPasswd(passwd);
+		Text downloadText = fileService.getTextByPasswd(passwd);
 		
 		if (fileList.size() == 0 && downloadText == null) {
 			request.setAttribute("msg", "비밀번호가 틀렸습니다.");
 			request.setAttribute("url", "download");
 			return "alert";
-		}
-		
-		//0818 17:50분업로드 19일에 5시 50분에 77777777 체크하기!
-		for(OurFile of : fileList) {
-			//지금 시간
-			Date date = new Date();
-			Calendar cl = Calendar.getInstance();
-			//등록 시간 설정
-			cl.setTime(of.getRegDate());
-			//등록 시간에 하루 추가
-			cl.add(Calendar.DATE, 1);
-			Date checkDate = new Date(cl.getTimeInMillis());
-			//지금 시간이 등록시간 이후라면
-			if(date.after(checkDate)) {
-				if(downloadText != null) {
-					fileService.deleteText("YES", passwd);
-				}
-				fileService.deleteFile("YES", passwd);
-				String path = "C:\\fileStation\\";
-				String fileName = of.getFileOriName();
-				File file = new File(path + fileName);
-				file.delete();
-			}
-		}
-		
-		for(OurFile of : fileList) {
-			if(of.getDeleteCheck().equals("YES")) {
-				request.setAttribute("msg", "다운로드 기간이 만료되었습니다");
-				request.setAttribute("url", "download");
-				return "alert";
-			}
 		}
 		
 		request.setAttribute("passwd", passwd);
@@ -310,7 +281,7 @@ public class FileController {
 		String passwd = request.getParameter("passwd");
 		String radio = request.getParameter("delete");
 		List<OurFile> fileList = fileService.getFile(passwd);
-		String downloadText = fileService.getTextByPasswd(passwd);
+		Text downloadText = fileService.getTextByPasswd(passwd);
 		
 		if(radio.equals("1")) {
 			for(OurFile of : fileList) {
@@ -330,5 +301,5 @@ public class FileController {
 		
 		return "file/download";
 	}
-	
 }
+	

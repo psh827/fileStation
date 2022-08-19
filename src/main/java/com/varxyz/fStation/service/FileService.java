@@ -9,9 +9,13 @@ import com.varxyz.fStation.domain.Text;
 public interface FileService {
 	int	addFile(List<OurFile> ourFile);
 	int addText(Text text);
-	String getTextByPasswd(String passwd);
+	List<Text> getAllText();
+	Text getTextByPasswd(String passwd);
+	int deleteAllText(Text text);
 	int deleteText(String string, String passwd);
+	List<OurFile> getAllFile();
 	List<OurFile> getFile(String passwd);
+	int deleteAll(OurFile of);
 	int deleteFile(String deleteType, String passwd);
 	OurFile getFileByfileId(String fileId);
 	long getFileAmountByMonth(String month);

@@ -18,5 +18,6 @@ public class OurFile {
 	private String url;
 	private String deleteCheck;
 	private Date regDate;
+	private Date deleteDate;
 	
 }

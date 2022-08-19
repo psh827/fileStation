@@ -11,6 +11,7 @@ import java.util.Map;
 
 import org.apache.tomcat.jdbc.pool.DataSource;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.dao.IncorrectResultSizeDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 
@@ -71,14 +72,59 @@ public class FileDao {
 	 * @param passwd
 	 * @return
 	 */
-	public String getTextByPasswd(String passwd) {
+	public Text getTextByPasswd(String passwd) {
 		try {
-			String sql = "SELECT content FROM Text WHERE passwd = ? AND deleteCheck = ?";
-			return jdbcTemplate.queryForObject(sql, String.class, passwd, "NO");
+			String sql = "SELECT * FROM Text WHERE passwd = ? AND deleteCheck = ?";
+			return jdbcTemplate.queryForObject(sql, new RowMapper<Text>() {
+
+				@Override
+				public Text mapRow(ResultSet rs, int rowNum) throws SQLException {
+					Text text = new Text();
+					text.setContent(rs.getString("content"));
+					text.setRegDate(rs.getTimestamp("regDate"));
+					return text;
+				}
+				
+			}, passwd, "NO");
 			
-		} catch (Exception e) {
+		}catch(EmptyResultDataAccessException e) {
 			e.printStackTrace();
 			return null;
+		} catch (IncorrectResultSizeDataAccessException e) {
+			e.printStackTrace();
+			return null;
+		} catch(Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
+	public List<Text> getAllText() {
+		try {
+			String sql = "SELECT * FROM Text WHERE deleteCheck = ?";
+			return jdbcTemplate.query(sql, new RowMapper<Text>() {
+
+				@Override
+				public Text mapRow(ResultSet rs, int rowNum) throws SQLException {
+					Text text = new Text();
+					text.setTId(rs.getLong("tId"));
+					text.setDeleteDate(rs.getTimestamp("deleteDate"));
+					return text;
+				}
+			}, "NO");
+		} catch (Exception e) {
+			return null;
+		}
+	}
+	
+	public int deleteAllText(Text text) {
+		try {
+			String sql = "UPDATE Text SET deleteCheck = ? WHERE tId = ?";
+			jdbcTemplate.update(sql, "YES", text.getTId());
+			return 1;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return 0;
 		}
 	}
 	
@@ -134,6 +180,31 @@ public class FileDao {
 		}
 	}
 	
+	public List<OurFile> getAllFile() {
+		try {
+			String sql = "SELECT * FROM File WHERE deleteCheck = ?";
+			return jdbcTemplate.query(sql, new RowMapper<OurFile>() {
+
+				@Override
+				public OurFile mapRow(ResultSet rs, int rowNum) throws SQLException {
+					OurFile of = new OurFile();
+					of.setFileId(rs.getLong("fId"));
+					of.setFileOriName(rs.getString("fileOriName"));
+					of.setDeleteDate(rs.getTimestamp("deleteDate"));
+					return of;
+				}
+				
+			}, "NO");
+		} catch (Exception e) {
+			return null;
+		}
+	}
+	
+	/**
+	 * 파일pk로 파일 가져오기
+	 * @param fileId
+	 * @return
+	 */
 	public OurFile getFileByfileId(String fileId) {
 		
 		try {
@@ -161,6 +232,20 @@ public class FileDao {
 		}
 	}
 
+	
+	public int deleteAll(OurFile of) {
+		try {
+			String sql = "UPDATE File SET deleteCheck = ? WHERE fId = ?";
+			jdbcTemplate.update(sql, "YES", of.getFileId());
+			System.out.println("삭제완료");
+			return 1;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return 0;
+		}
+		
+	}
+	
 	/**
 	 * 파일 삭제
 	 * @param passwd

@@ -33,10 +33,20 @@ public class FileServiceImpl implements FileService{
 	}
 	
 	@Override
-	public String getTextByPasswd(String passwd) {
+	public Text getTextByPasswd(String passwd) {
 		return fileDao.getTextByPasswd(passwd);
 	}
 
+	@Override
+	public List<Text> getAllText() {
+		return fileDao.getAllText();
+	}
+	
+	@Override
+	public int deleteAllText(Text text) {
+		return fileDao.deleteAllText(text);
+	}
+	
 	@Override
 	@Transactional
 	public int deleteText(String deleteType, String passwd) {
@@ -49,8 +59,19 @@ public class FileServiceImpl implements FileService{
 	}
 	
 	@Override
+	public List<OurFile> getAllFile() {
+		return fileDao.getAllFile();
+	}
+	
+	@Override
 	public OurFile getFileByfileId(String fileId) {
 		return fileDao.getFileByfileId(fileId);
+	}
+	
+	@Override
+	public int deleteAll(OurFile of) {
+		return fileDao.deleteAll(of);
+		
 	}
 	
 	@Override
@@ -79,7 +100,5 @@ public class FileServiceImpl implements FileService{
 		return fileDao.jee();
 		
 	}
-
-	
 
 }

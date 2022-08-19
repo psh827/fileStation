@@ -12,4 +12,5 @@ public class Text {
 	private String passwd;
 	private String content;
 	private Date regDate;
+	private Date deleteDate;
 }

@@ -7,7 +7,8 @@ CREATE TABLE File(
 	fileSize	BIGINT			NOT NULL,
 	fileType	VARCHAR(10)		NOT NULL, -- IMG, VIDEO
 	deleteCheck	VARCHAR(3)		NOT NULL DEFAULT 'NO',
-	regDate		TIMESTAMP		NOT NULL DEFAULT CURRENT_TIMESTAMP
+	regDate		TIMESTAMP		NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	deleteDate 	TIMESTAMP		NOT NULL DEFAULT (DATE_ADD(NOW(), INTERVAL 1 day))
 )AUTO_INCREMENT 1001;
 
 CREATE TABLE Text (
@@ -15,7 +16,8 @@ CREATE TABLE Text (
 	passwd 		VARCHAR(17)		NOT NULL,
 	content		VARCHAR(16350)	NOT NULL,
 	deleteCheck	VARCHAR(3)		NOT NULL DEFAULT 'NO',
-	regDate		TIMESTAMP		NOT NULL DEFAULT CURRENT_TIMESTAMP
+	regDate		TIMESTAMP		NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	deleteDate 	TIMESTAMP		NOT NULL DEFAULT (DATE_ADD(NOW(), INTERVAL 1 day))
 )AUTO_INCREMENT 2001;
 
 CREATE TABLE Board(
@@ -61,12 +63,17 @@ SELECT * FROM Text;
 SELECT * FROM Board;
 SELECT * FROM BoardImage;
 
+<<<<<<< Updated upstream
 
 SELECT bId, title, nickName, passwd,content, regDate FROM Board WHERE nickName = 'nam'
  ORDER BY regDate ASC LIMIT 8 OFFSET 0
 
 SELECT count(*) FROM Board WHERE nickName = 'nam';
+DELETE FROM Text WHERE tId = 2001;
 
+UPDATE filestation.file
+SET passwd='987654321', url='C:\\fileStation\\', fileOriName='지윤정.zip', fileName='8675ee35c94b4741b2d68b828d4b1616.zip', fileSize=136631, fileType='DOCUMENT', deleteCheck='NO', regDate='2022-08-19 15:55:00', deleteDate='2022-08-19 16:55:00'
+WHERE fId=1019;
 UPDATE Board SET content = 'test test test' WHERE bId = '1';
 
 ALTER TABLE File convert to charset utf8;
