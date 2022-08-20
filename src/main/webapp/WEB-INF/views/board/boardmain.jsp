@@ -40,35 +40,45 @@
           <div class="Questions_banner">
             <button class="Questions_btn" style="margin-right: 30px;" type="button" name="writing" onclick='location.href="<c:url value='/board/write_board'/>"'>글작성</button>
             
-		    <!-- 검색 영역 시작-->
-			<form action="boardmain" class="form-inline d-flex justify-content-end"
-				method="GET">
-				<div class="search_box">
-						<label style="margin: 0 auto; padding-top: 16px;">닉네임</label>
-  						<select name="field" id="field" class="form-control form-control-sm">
-							<option value="nickname">닉네임</option>
-						</select>
-				<input type="text" id="nickname" name="nickname" class="form-control form-control-sm"
-					style="margin: 10px;"> 
-				<input type="submit" class="btn btn-outline-info btn-sm" value="검색">
-				</div>
-			</form>
-			<!-- 검색 영역 끝 -->
+          <!-- 검색 영역 시작-->
+         <form action="boardmain" class="form-inline d-flex justify-content-end"
+            method="GET">
+            <div class="search_box">
+                  <label style="margin: 0 auto; padding-top: 16px;">닉네임</label>
+                    <select name="field" id="field" class="form-control form-control-sm">
+                     <option value="nickname">닉네임</option>
+                  </select>
+            <input type="text" id="nickname" name="nickname" class="form-control form-control-sm"
+               style="margin: 10px;"> 
+            <input type="submit" class="btn btn-outline-info btn-sm" value="검색">
+            </div>
+         </form>
+         <!-- 검색 영역 끝 -->
             
           </div>
           <button class="list-btn" onclick='location.href="<c:url value='/board/boardmain'/>"'>목록보기</button>
           <div class="posting_list">
             <table class="Questions_table">
             <tr>
-               <th><span class="textLine">No</span></th>
+               <th style="width:10%"><span class="textLine">No</span></th>
                <th><span class="textLine">Title</span></th>
-               <th><span class="textLine">Date</span></th>
+               <th style="width:10%"><span class="textLine">Date</span></th>
+               <th style="width:10%;text-align: center;"><span class="textLine">답변여부</span></th>
             </tr>
             <c:forEach items="${ulist.content}" var="user">
             <tr>
                <td>${user.boardId}</td>
                <td><a data-value="${user.boardId}" class="modal_btn"  rel="modal:open" href="#modal1"><span class="textLine">${user.getTitle()}</span></a></td>
                <td>${user.regDate}</td>
+               <c:choose>
+               	<c:when test="${empty user.adminContent}">
+               		<td style="text-align: center;">미답변</td>	
+               	</c:when>
+               	<c:otherwise>
+               		<td style="text-align: center;">답변완료</td>
+               	</c:otherwise>
+               </c:choose>
+               
             </tr>
          </c:forEach>
             </table>

@@ -30,6 +30,7 @@
         <div class="input-container">
           <input class="file" id="input_file" type="file" multiple>
           <form name="uploadForm" id="uploadForm" enctype="multipart/form-data" method="post" onsubmit="return false;">
+          <div class="top-container">
             <div id="root">
                 <div class="contents">
                   <div class="upload-box">
@@ -51,6 +52,7 @@
                   <button type="button" class="delete_all">전체삭제</button>
               </div>
               <textarea placeholder="TEXT" class="textInput" name="textInput" ></textarea>
+            </div>
             </div>
             <div class="file_input_grp">
                 <div class="passwd_input">

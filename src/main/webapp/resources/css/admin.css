@@ -160,3 +160,35 @@ div.google-visualization-tooltip{
 div.google-visualization-tooltip > ul > li > span{
 	color: black !important;
 }
+
+.admin_title{
+	height: 35px;
+    line-height: 25px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid;
+}
+
+.admin_item{
+	padding: 10px;
+    border-bottom: 1px solid;
+    height: 60px;
+}
+
+.admin_link{
+	display: flex;
+    width: 100%;
+    height: 100%;
+    line-height: 47px;
+}
+
+.admin_bId{
+	flex-grow: 1;
+}
+
+.admin_span_title{
+	flex-grow: 4;
+}
+
+.admin_regDate{
+	flex-grow: 1;
+}

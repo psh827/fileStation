@@ -28,6 +28,11 @@ public class BoardServiceImpl implements BoardService{
 	}
 
 	@Override
+	public List<Post> getAllPostToAdmin() {
+		return boardDao.getAllPostToAdmin();
+	}
+	
+	@Override
 	public Post viewPostByPasswd(long bId, String passwd) {
 		return boardDao.viewPostByPasswd(bId, passwd);
 	}
@@ -37,6 +42,11 @@ public class BoardServiceImpl implements BoardService{
 		return boardDao.modifyPost(post);
 	}
 
+	@Override
+	public int adminComment(Post post) {
+		return boardDao.adminComment(post);
+	}
+	
 	@Override
 	public int deletePost(Post post) {
 		return boardDao.deletePost(post);
@@ -66,5 +76,4 @@ public class BoardServiceImpl implements BoardService{
 	public long countPostByNickName(String nickName) {
 		return boardDao.countPostByNickName(nickName);
 	}
-	
 }

@@ -149,7 +149,35 @@
       				</c:forEach>
    	  			</div>
             </div>
-            <div class="admin_box bottom right"></div>
+            <div class="admin_box bottom right">
+            	<p class="admin_title">새로 올라온 건의사항</p>
+            	<ul>
+            		<c:choose>
+            			<c:when test="${fn:length(adminPost) < 6 }">
+            				<c:forEach var="post" items="${adminPost}">
+            					<li class="admin_item">
+	            					<a class="admin_link" href="<c:url value="/board/post?boardId=${post.boardId}"/>">
+		            					<span class="admin_bId admin_span">${post.boardId}</span>
+		            					<span class="admin_span_title admin_span">${post.title}</span>
+		            					<span class="admin_regDate admin_span">${post.regDate }</span>
+	            					</a>
+            					</li>	            					
+            				</c:forEach>
+            			</c:when>
+            			<c:otherwise>
+		            		<c:forEach var="i" begin="0" end="5">
+		            			<li class="admin_item">
+									<a class="admin_link" href="<c:url value="/board/post?boardId=${adminPost[i].boardId}"/>">
+		            					<span class="admin_bId admin_span">${adminPost[i].boardId}</span>
+		            					<span class="admin_span_title admin_span">${adminPost[i].title}</span>
+		            					<span class="admin_regDate admin_span">${adminPost[i].regDate }</span>
+	            					</a>
+								</li>
+		            		</c:forEach>
+            			</c:otherwise>
+            		</c:choose>
+            	</ul>
+            </div>
           </div>
         </div>
       </div>

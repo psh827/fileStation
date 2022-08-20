@@ -92,7 +92,7 @@ public class FileController {
 	 * @return
 	 * @throws IOException
 	 */
-	@RequestMapping(value = "/file/addFile", method = { RequestMethod.POST })
+	@RequestMapping(value = "/file/addFile", method = { RequestMethod.POST })	
 	@ResponseBody
 	public String addMenuItem(Model model, @RequestParam(value="files", required = false) 
 				MultipartFile[] files, @RequestParam("passwd") String passwd,
@@ -100,11 +100,12 @@ public class FileController {
 		
 		passwd = passwd.split(",")[0];
 		List<OurFile> ourFileList = new ArrayList<OurFile>();
+		System.out.println("textarea = " + textarea);
 		Text text = new Text();
 		text.setPasswd(passwd);
+		text.setContent(textarea);
 		//text처리
-		if(textarea != "") {
-			text.setContent(textarea);
+		if(!text.getContent().equals("")) {
 			int textResult = fileService.addText(text);
 			if(textResult == 0) {
 				model.addAttribute("msg", "업로드오류");
@@ -281,7 +282,6 @@ public class FileController {
 		String passwd = request.getParameter("passwd");
 		String radio = request.getParameter("delete");
 		List<OurFile> fileList = fileService.getFile(passwd);
-		Text downloadText = fileService.getTextByPasswd(passwd);
 		
 		if(radio.equals("1")) {
 			for(OurFile of : fileList) {

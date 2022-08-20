@@ -21,12 +21,13 @@ CREATE TABLE Text (
 )AUTO_INCREMENT 2001;
 
 CREATE TABLE Board(
-	bId			BIGINT			PRIMARY KEY AUTO_INCREMENT,
-	title		VARCHAR(200)	NOT NULL,
-	nickName	VARCHAR(30)		NOT NULL,
-	passwd		VARCHAR(4)		NOT NULL,
-	content		VARCHAR(300)	NOT NULL,
-	regDate		TIMESTAMP		NOT NULL DEFAULT CURRENT_TIMESTAMP
+	bId				BIGINT			PRIMARY KEY AUTO_INCREMENT,
+	title			VARCHAR(200)	NOT NULL,
+	nickName		VARCHAR(30)		NOT NULL,
+	passwd			VARCHAR(4)		NOT NULL,
+	content			VARCHAR(1000)	NOT NULL,
+	adminContent	VARCHAR(500),
+	regDate			TIMESTAMP		NOT NULL DEFAULT CURRENT_TIMESTAMP
 )AUTO_INCREMENT 5062;
 
 CREATE TABLE BoardImage(
@@ -63,7 +64,7 @@ SELECT * FROM Text;
 SELECT * FROM Board;
 SELECT * FROM BoardImage;
 
-<<<<<<< Updated upstream
+SELECT * FROM Board WHERE adminContent IS null
 
 SELECT bId, title, nickName, passwd,content, regDate FROM Board WHERE nickName = 'nam'
  ORDER BY regDate ASC LIMIT 8 OFFSET 0

@@ -13,6 +13,7 @@ public class Post {
 	private String nickname;
 	private String passwd;
 	private String content;
+	private String adminContent;
 	private Date regDate;
 
 }

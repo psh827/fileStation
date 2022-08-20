@@ -88,6 +88,7 @@ textarea {
   width: 100%;
   height: 30px;
   border: 1px solid #d8dee8;
+  padding: 10px 5px 5px 5px;
 }
 label {
   margin: 5px;
@@ -121,4 +122,15 @@ label {
   height: 400px;
   width: 100%;
   display: block;
+}
+.botton-btn {
+   text-align: center;
+}
+.input-top {
+   border-style:none;
+   border-bottom: 1px solid #d8dee8;
+   margin-left: 15px;
+}
+input:-webkit-autofill, input:-webkit-autofill:hover, input:-webkit-autofill:focus, input:-webkit-autofill:active {
+  transition: background-color 5000s ease-in-out 0s;
 }

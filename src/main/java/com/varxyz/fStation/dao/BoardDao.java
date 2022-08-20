@@ -65,6 +65,33 @@ public class BoardDao {
 		});
 	}
 	
+	/**
+	 * 관리자페이지 새로운 글 가져오기.
+	 * @return
+	 */
+	public List<Post> getAllPostToAdmin() {
+		try {
+			String sql = "SELECT * FROM Board WHERE adminContent IS null";
+			return jdbcTemplate.query(sql, new RowMapper<Post>() {
+
+				@Override
+				public Post mapRow(ResultSet rs, int rowNum) throws SQLException {
+					Post post = new Post();
+					post.setBoardId(rs.getLong("bId"));
+					post.setTitle(rs.getString("title"));
+					post.setNickname(rs.getString("nickName"));
+					post.setPasswd(rs.getString("passwd"));
+					post.setContent(rs.getString("content"));
+					post.setRegDate(rs.getDate("regDate"));
+					return post;
+				}
+				
+			});
+		} catch (EmptyResultDataAccessException e) {
+			return null;
+		}
+	}
+	
 	
 	/**
 	 * 자기글 보기
@@ -84,6 +111,7 @@ public class BoardDao {
 					post.setNickname(rs.getString("nickName"));
 					post.setPasswd(rs.getString("passwd"));
 					post.setContent(rs.getString("content"));
+					post.setAdminContent(rs.getString("adminContent"));
 					post.setRegDate(rs.getDate("regDate"));
 					return post;	
 				}
@@ -106,6 +134,7 @@ public class BoardDao {
 				post.setNickname(rs.getString("nickName"));
 				post.setPasswd(rs.getString("passwd"));
 				post.setContent(rs.getString("content"));
+				post.setAdminContent(rs.getString("adminContent"));
 				post.setRegDate(rs.getDate("regDate"));
 				return post;	
 			}
@@ -121,6 +150,21 @@ public class BoardDao {
 		String sql = "UPDATE Board SET content = ? WHERE bId = ?";
 		try {
 			jdbcTemplate.update(sql, post.getContent(), post.getBoardId());
+			return 1;
+		} catch (Exception e) {
+			return 0;
+		}
+	}
+	
+	/**
+	 * 관리자 댓글
+	 * @param post
+	 * @return
+	 */
+	public int adminComment(Post post) {
+		String sql = "UPDATE Board SET adminContent = ? WHERE bId = ?";
+		try {
+			jdbcTemplate.update(sql, post.getAdminContent(), post.getBoardId());
 			return 1;
 		} catch (Exception e) {
 			return 0;
@@ -162,7 +206,7 @@ public class BoardDao {
 				? Order.by("bId")
 				: pageable.getSort().toList().get(0);
 		String sql = "SELECT bId, title, nickName, passwd,"
-				+ "content, regDate FROM Board "
+				+ "content, adminContent, regDate FROM Board "
 				+ "	ORDER BY " + order.getProperty() + " " + order.getDirection().name()
 				+ "	LIMIT " + pageable.getPageSize() 
 				+ " OFFSET " + pageable.getOffset();
@@ -178,6 +222,7 @@ public class BoardDao {
 						post.setNickname(rs.getString("nickName"));
 						post.setPasswd(rs.getString("passwd"));
 						post.setContent(rs.getString("content"));
+						post.setAdminContent(rs.getString("adminContent"));
 						post.setRegDate(rs.getDate("regDate"));
 						return post;	
 					}
@@ -234,5 +279,5 @@ public class BoardDao {
 		String sql = "SELECT count(*) FROM Board WHERE nickName = ?";
 		return jdbcTemplate.queryForObject(sql, Long.class, nickName);
 	}
-	
+
 }

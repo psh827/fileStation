@@ -10,8 +10,10 @@ import com.varxyz.fStation.domain.Post;
 public interface BoardService {
 	int writePost(Post post);
 	List<Post> getAllPost();
+	List<Post> getAllPostToAdmin();
 	Post viewPostByPasswd(long bId, String passwd);
 	int	modifyPost(Post post);
+	int adminComment(Post post);
 	int deletePost(Post post);
 	public Post viewPostByBid(long bId);
 	Page<Post> findAll(Pageable pageable);

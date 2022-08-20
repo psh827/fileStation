@@ -49,6 +49,10 @@ button { cursor: pointer;}
   font-size: 16px;
   padding-top: 10px;
 }
+.Questions_btn:hover {
+ background: #e0daf5;
+ color:var(--main-color);
+}
 
 .Questions_btn.middle {
   left: 20%;
@@ -79,7 +83,7 @@ button { cursor: pointer;}
 .Questions_table tr th:nth-of-type(1) {
   border-radius: 14px 0 0 0;
 }
-.Questions_table tr th:nth-of-type(3) {
+.Questions_table tr th:nth-of-type(4) {
   border-radius: 0 14px 0 0;
 }
 .Questions_table tr td a {
@@ -87,7 +91,7 @@ button { cursor: pointer;}
   align-items: center;
 }
 .Questions_table tr td:first-child{
-	padding-left: 15px;
+   padding-left: 15px;
 }
 .Questions_table span.textLine {
   display: block;
@@ -170,12 +174,26 @@ label {
 .Questions_inner{
   border: 1px solid #d8dee8;
   border-radius: 10px;
-  height: 400px;
+  height: 300px;
+  width: 100%;
+  display: block;
+  margin-bottom: 25px;
+  padding: 20px;
+  overflow-y: auto; 
+}
+
+.admin_inner{
+  border: 1px solid #d8dee8;
+  border-radius: 10px;
+  height: 100px;
   width: 100%;
   display: block;
   margin-bottom: 65px;
   padding: 20px;
+  overflow-y: auto;
+  resize: none;
 }
+
 a.delete {
  width: 130px;
  height: 40px;
@@ -216,8 +234,8 @@ a.delete {
 }
 
 .search_btn {
-	color : white;
-	height: 100%;
+   color : white;
+   height: 100%;
     width: 100%;
     position: relative;
     line-height: 1em;
@@ -226,10 +244,10 @@ a.delete {
 }
 
 .search_box {
-	display: flex;
+   display: flex;
 }
 .search_box button.search-n-btn {
-    margin-left: 0;	
+    margin-left: 0;   
 }
 .btn-sm {
     margin-top:5px;
@@ -241,12 +259,23 @@ a.delete {
     border-radius: 5px;
     color: white;
 }
+.btn-sm:hover {
+   margin-top:5px;
+    width: 50px;
+    height: 33px;
+    left: 30px;
+    background: var(--main-color);
+    border: none;
+    border-radius: 5px;
+    color: white;
+    border-style: none;
+}
 .search-n-btn {
     border-style: none;
     background: none;
 }
 select {
-	display: none;
+   display: none;
 }
 
 .list-btn {

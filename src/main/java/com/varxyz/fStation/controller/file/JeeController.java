@@ -8,6 +8,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.varxyz.fStation.domain.Post;
+import com.varxyz.fStation.service.BoardServiceImpl;
 import com.varxyz.fStation.service.FileServiceImpl;
 
 @Controller
@@ -26,8 +29,11 @@ public class JeeController {
 	@Autowired
 	FileServiceImpl fileService; 
 	
+	@Autowired
+	BoardServiceImpl boardService;
+	
 	@GetMapping("/admin/admin")
-	public String jeeForm(HttpServletRequest request) {
+	public String jeeForm(HttpServletRequest request, HttpSession session) {
 		//jee
 		List<Integer> checkList = fileService.jee();
 		List<String> checkStrList = new ArrayList<String>();
@@ -74,6 +80,13 @@ public class JeeController {
 		}
 		request.setAttribute("defaultMonth", format.format(date));
 		request.setAttribute("amount", amount);
+		
+		//hoon
+		List<Post> adminPost =  boardService.getAllPostToAdmin();
+		session.setAttribute("admin", "admin");
+		request.setAttribute("adminPost", adminPost);
+		
+		
 		return "admin/admin_main";
 	}
 	

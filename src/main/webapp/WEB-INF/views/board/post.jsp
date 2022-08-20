@@ -44,11 +44,27 @@
             ${post.title }
             </div>
             <span hidden class="bId_hidden">${bId}</span>
-            <div class="Questions_inner">${post.content}</div>
+            <div class="Questions_inner"><c:out value="${post.content}" escapeXml="false"/></div>
+            <c:choose>
+            	<c:when test="${empty post.adminContent}">
+		            <div class="admin_inner">아직 답변이 달리지 않았습니다.</div>
+            	</c:when>
+            	<c:otherwise>
+            		<div class="admin_inner">${post.adminContent}</div>
+            	</c:otherwise>
+            </c:choose>
             <div class="write_btn_box">
-              <button class="Questions_btn" type="button" name="list" onclick='location.href="<c:url value='/board/boardmain?page=0'/>"'>목록으로</button>
-              <button class="Questions_btn modify middle" type="button" name="revoke">수정하기</button>
-              <a class="modal_btn delete" rel="modal:open" href="#modal1" type="button">삭제하기</a>
+              <c:choose>
+              	<c:when test="${!empty admin}">
+              		<button class="Questions_btn" type="button" name="list" onclick='location.href="<c:url value='/admin/admin'/>"'>관리자페이지로</button>
+              		<button class="Questions_btn admin_modify middle" type="button" name="revoke">댓글달기</button>
+              	</c:when>
+              	<c:otherwise>
+					<button class="Questions_btn" type="button" name="list" onclick='location.href="<c:url value='/board/boardmain?page=0'/>"'>목록으로</button>
+              		<button class="Questions_btn modify middle" type="button" name="revoke">수정하기</button>
+              		<a class="modal_btn delete" rel="modal:open" href="#modal1" type="button">삭제하기</a>              	
+              	</c:otherwise>
+              </c:choose>
             </div>
           </div>
           </div>
@@ -73,8 +89,16 @@
     <script>
        $(document).on('click', '.modify', function(){
           var toTextarea = $(".Questions_inner")
-          $(toTextarea).replaceWith('<textarea class="Questions_inner textarea">${post.content}</textarea>')
+          var text = $(".Questions_inner").html()
+          text = text.replaceAll("<br>", "\n")
+          $(toTextarea).replaceWith('<textarea class="Questions_inner textarea">' + text + '</textarea>')
           $('.modify').replaceWith('<button class="Questions_btn comfirm middle" type="button" name="revoke">등록하기</button>')
+       })
+       
+       $(document).on('click', '.admin_modify', function(){
+    	   var toTextarea = $(".admin_inner")
+           $(toTextarea).replaceWith('<textarea class="admin_inner textarea"></textarea>')
+           $('.admin_modify').replaceWith('<button class="Questions_btn admin_comfirm middle" type="button" name="revoke">등록하기</button>')
        })
    </script>
   </body>

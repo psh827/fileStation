@@ -22,17 +22,29 @@ public class ModifyBoardController {
 	
 	@RequestMapping(value = "/board/modify_board", method = { RequestMethod.POST })
 	@ResponseBody
-	public int getMenuItemForModal(HttpServletRequest request) throws UnsupportedEncodingException{
+	public Post getMenuItemForModal(HttpServletRequest request) throws UnsupportedEncodingException{
 		long bId = Long.parseLong(request.getParameter("bId"));
 		String content = request.getParameter("content");
-		System.out.println(bId);
-		System.out.println(content);
 		
 		Post post = new Post();
 		post.setBoardId(bId);
-		post.setContent(content);
+		post.setContent(content.replace("\n", "<br>"));
 		int result = boardService.modifyPost(post);
 		
-	   return result;
+	   return post;
+	}
+	
+	@RequestMapping(value = "/board/admin_comment", method = { RequestMethod.POST })
+	@ResponseBody
+	public Post adminComment(HttpServletRequest request) throws UnsupportedEncodingException{
+		long bId = Long.parseLong(request.getParameter("bId"));
+		String content = request.getParameter("content");
+		
+		Post post = new Post();
+		post.setBoardId(bId);
+		post.setAdminContent(content.replace("\n", "<br>"));
+		int result = boardService.adminComment(post);
+		
+	   return post;
 	}
 }

@@ -29,23 +29,23 @@
           <form:form modelAttribute="postCommand" method="post">
           <div class="post_box">
             <div class="title_box">
-              작성자이름<form:input path="nickName" type="text" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              작성자이름<form:input path="nickName" type="text" class="input-top"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
               <label>비밀글</label>
-              <form:input type="password" path="passwd"  maxlength="4" name="hide" placeholder="네자리를 입력하세요." />
+              <form:input class="input-top" type="password" path="passwd"  maxlength="4" name="hide" placeholder="네자리를 입력하세요."/>
             </div>
             <label>제목</label><br>
-            <form:input class="write_title" type="text" placeholder="제목을 입력하세요." path="title" /><br>
+            <form:input class="write_title" type="text" placeholder="제목을 입력하세요." path="title"/><br>
             <label>내용</label><br>
-            <form:textarea name="textarea" rows="20" cols="170" placeholder="글 내용을 입력하세요." path="content"></form:textarea><br>
-            <label>첨부파일</label><input type="file"><br>
-            <button class="write_btn" type="submit">작성하기</button>
-            <button class="write_btn" type="button"><a id="write_a" href="/fileStation/board/boardmain" style="color:white;">목록으로</a></button>
+            <form:textarea name="textarea" rows="20" cols="170" placeholder="글 내용을 입력하세요." path="content" style="padding: 10px 5px 5px 5px;"></form:textarea><br>
+            <div class="botton-btn">
+               <button class="write_btn" type="submit">작성하기</button>
+               <button class="write_btn" type="button"onclick='location.href="<c:url value='/board/boardmain'/>"'>목록으로</button>
+            </div>
           </div>
           </form:form>
           
           </div>
         </div>
       </div>
-    </div>
 </body>
 </html>
