@@ -24,7 +24,6 @@ $(document).ready(function() {
    	$(this).css("font-size", "16px").css("font-weight", "normal").css("overflow-y", "auto")
 })*/
     
-
 $(".delete_all").on("click", function(){
     let textarea = $(".textInput")
     textarea.val("")
@@ -320,6 +319,26 @@ function uploadFile() {
 
 	//텍스트 체크
 	var textarea = $('.textInput').val();
+
+    let number = password.search(/[0-9]/g);
+    let english = password.search(/[a-z]/ig);
+    let spece = password.search(/[`~!@@#$%^&*|₩₩₩'₩";:₩/?]/gi);
+    
+    if (password.length < 8 || password.length > 20) {
+        alert("8자리 ~ 20자리 이내로 입력해주세요.");
+        return false;
+
+    } else if (password.search(/\s/) != -1) {
+        alert("비밀번호는 공백 없이 입력해주세요.");
+        return false;
+
+    } else if (number < 0 || english < 0 || spece < 0) {
+        alert("영문,숫자,특수문자를 혼합하여 입력해주세요.");
+        return false;
+
+    } else {
+        console.log(password)
+    }
 
     console.log(password)
     
