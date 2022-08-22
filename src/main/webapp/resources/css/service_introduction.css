@@ -61,6 +61,19 @@
   	margin: 11px 0;
   }
 }
+.img-box {
+	background-image: url(../img/comcom.png);
+    width: 299px;
+    height: 299px;
+    background-size: 300px;
+    margin: 0 auto;
+}
+
+ @media ( max-width: 1450px ) {
+   .img-box {
+ 	 display: none;
+ 	}
+  }
 
  @media ( max-width: 1030px ) {
   .card_box {
@@ -76,3 +89,14 @@
   	margin: 11px 0;
   }
 }
+  @media all and ( max-width: 790px ) {
+     .img-box {
+    display: block;
+    width: 200px;
+    background-size: 200px;
+    background-repeat: no-repeat;
+    margin: 0 auto;
+    background-position: center;
+    height: 200px;
+ 	}
+  }

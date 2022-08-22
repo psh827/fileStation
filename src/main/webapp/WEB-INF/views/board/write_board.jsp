@@ -32,7 +32,7 @@
           <div class="post_box">
             <div class="title_box">
             	<div class="title_name">
- 	             작성자이름<form:input path="nickName" type="text" class="input-top"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+ 	             작성자이름<form:input path="nickName" type="text" class="input-top" maxlength='20'/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             	</div>
             	<div class="title_passwd">
     	          <label>비밀글</label>
@@ -43,10 +43,10 @@
             <div class="title_container">
             <label>제목</label><br>
             <span class="title_label">제목을 입력하세요</span>
-            <form:input class="write_title" type="text" path="title"/><br>
+            <form:input class="write_title" type="text" path="title" /><br>
             </div>
             <label>내용</label><br>
-            <form:textarea name="textarea" rows="20" cols="170" placeholder="글 내용을 입력하세요." path="content" style="padding: 10px 5px 5px 5px;"></form:textarea><br>
+            <form:textarea name="textarea" required rows="20" cols="170" placeholder="글 내용을 입력하세요." path="content" style="padding: 10px 5px 5px 5px;"></form:textarea><br>
             <div class="botton-btn">
                <button class="write_btn" type="submit">작성하기</button>
                <button class="write_btn" type="button"onclick='location.href="<c:url value='/board/boardmain'/>"'>목록으로</button>

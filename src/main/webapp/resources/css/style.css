@@ -206,7 +206,6 @@ input[type="checkbox"]#gnbcheck:checked ~ #gnbbtn {
   
   .main-inner__container {
   	padding: 60px 10px;
+	}
 }
-}
-  
 

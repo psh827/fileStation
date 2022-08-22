@@ -78,8 +78,10 @@
         파일 스테이션에서 제공 되는 파일 업로드, 다운로드 서비스는 무료 입니다.
       </div>
     </div>
-
+    
       </div>
+    <div class="img-box">
+	</div>
     </div>
   </body>
 </html>

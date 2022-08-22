@@ -54,7 +54,7 @@ public class WriteboardController {
 		
 		int reuslt = boardService.writePost(post);
 		if(reuslt == 0) {
-			model.addAttribute("msg", "동록 오류");
+			model.addAttribute("msg", "등록 오류");
 			model.addAttribute("url", "write_board");
 			return "alert";
 		}
