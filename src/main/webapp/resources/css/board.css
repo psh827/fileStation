@@ -23,7 +23,7 @@ button { cursor: pointer;}
   background-image: url(../img/filestation.png);
   background-size: 672px;
   background-repeat: no-repeat;
-  background-position: 500px -22px;
+  background-position: right -22px;
   background-color: #ffd7c2;
 }
 .Questions_banner button:nth-of-type(1) {
