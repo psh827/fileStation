@@ -17,13 +17,14 @@ $(document).ready(function() {
 		}
     })
     $('.total_size').text(maxUploadSize+"Mb");
+    
+   
 });
 
-/*$(".textInput").on("click", function(){
-   	$(this).attr("placeholder", "")
-   	$(this).css("font-size", "16px").css("font-weight", "normal").css("overflow-y", "auto")
-})*/
-    
+/*<span class="speed">90KB/sec</span>
+            <span class="percent">0% done</span>
+	        <input value="삭제" class="file_input" type="button" href="#" onclick="deleteFile(${fIndex}); return false;">*/
+
 $(".delete_all").on("click", function(){
     let textarea = $(".textInput")
     textarea.val("")
@@ -144,12 +145,7 @@ function selectFile(fileObject) {
             graphCount += fileSizeMb;
             graphPercent = totalFileSize / graphCount
             var leftSize = graphCount
-            $('.percent').text(graphPercent.toFixed(2) + "%")
-            $('.items').css("width", graphPercent)
-            $('.left_size').text(leftSize.toFixed(2) + "Mb")
-            
-
-            $('.percent').text(graphPercent.toFixed(2) + "%")
+            $('.items .percent').text(graphPercent.toFixed(2) + "%")
             $('.items').css("width", graphPercent)
             $('.left_size').text(leftSize.toFixed(2) + "Mb")
             
@@ -197,7 +193,11 @@ function selectFile(fileObject) {
                 } else {
                     fileaddFileList(fileIndex, fileName, fileSizeStr);
                 }
-
+                
+				$(`div#fileTr_${fileIndex}`).find('.bar').animate({
+					'width': '100%'
+				}, 500, 'swing')
+				
                 // 파일 번호 증가
                 fileIndex++;
             }
@@ -240,16 +240,29 @@ function addFileList(fIndex, fileName, fileSizeStr) {
         <div class="progress">
             <div class="bar"></div>
         </div>
-        <div class="status">
+        <div class="status status${fIndex}">
             <span class="percent">100% done</span>
-            <span class="speed">90KB/sec</span>
+        	<input value="삭제" class="file_input" type="button" href="#" onclick="deleteFile(${fIndex}); return false;">
         </div>
-        <input value="삭제" class="file_input" type="button" href="#" onclick="deleteFile(${fIndex}); return false;">
         </div>
     </div>
   `
 
     $('#files').append(html);
+    let boxNum = $(`.status${fIndex} .percent`);
+    console.log($(boxNum).prop('Counter', 0))
+
+    $(boxNum).prop('Counter', 0).animate({Counter: '100'}, {
+         duration: 500,
+         easing: 'swing',
+         step: function(now){
+         boxNum.text(Math.ceil(now) + "% done")
+         },
+         complete: function(){
+           console.log('완료');
+         }
+    });
+    
 }
 
 function fileaddFileList(fIndex, fileName, fileSizeStr) {
@@ -271,16 +284,29 @@ function fileaddFileList(fIndex, fileName, fileSizeStr) {
         <div class="progress">
             <div class="bar"></div>
         </div>
-        <div class="status">
+        <div class="status status${fIndex}">
             <span class="percent">100% done</span>
-            <span class="speed">90KB/sec</span>
+	        <input value="삭제" class="file_input" type="button" href="#" onclick="deleteFile(${fIndex}); return false;">
         </div>
-        <input value="삭제" class="file_input" type="button" href="#" onclick="deleteFile(${fIndex}); return false;">
         </div>
     </div>
   `
 
     $('#files').append(html);
+    let boxNum = $(`.status${fIndex} .percent`);
+    console.log($(boxNum).prop('Counter', 0))
+
+    $(boxNum).prop('Counter', 0).animate({Counter: '100'}, {
+         duration: 500,
+         easing: 'swing',
+         step: function(now){
+         boxNum.text(Math.ceil(now) + "% done")
+         },
+         complete: function(){
+           console.log('완료');
+         }
+    });
+	
 }
 
 //업로드 파일 삭제
@@ -308,6 +334,7 @@ function deleteFile(fIndex) {
         $("fileListTable").hide();
     }
 }
+
 
 // 파일 등록
 function uploadFile() {
