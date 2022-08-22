@@ -65,7 +65,9 @@ a {
 .time_span {
 	font-size: 40px;
     color: #483D8B;
-    margin-left: 60px;
+    display: block;
+    height: 100%;
+    line-height: 3.4;
 }
 
     

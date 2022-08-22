@@ -21,10 +21,6 @@ $(document).ready(function() {
    
 });
 
-/*<span class="speed">90KB/sec</span>
-            <span class="percent">0% done</span>
-	        <input value="삭제" class="file_input" type="button" href="#" onclick="deleteFile(${fIndex}); return false;">*/
-
 $(".delete_all").on("click", function(){
     let textarea = $(".textInput")
     textarea.val("")
@@ -90,7 +86,6 @@ function fileDropDown() {
         if (files != null) {
             if (files.length < 1) {
                 /* alert("폴더 업로드 불가"); */
-                console.log("폴더 업로드 불가");
                 return;
             } else {
                 selectFile(files)
@@ -133,7 +128,6 @@ function selectFile(fileObject) {
             var ext = fileNameArr[fileNameArr.length - 1];
             
             var fileSize = files[i].size; // 파일 사이즈(단위 :byte)
-            console.log("fileSize="+fileSize);
             if (fileSize <= 0) {
                 console.log("0kb file return");
                 return;
@@ -143,7 +137,7 @@ function selectFile(fileObject) {
             var fileSizeMb = fileSizeKb / 1024;    // 파일 사이즈(단위 :Mb)
             
             graphCount += fileSizeMb;
-            graphPercent = totalFileSize / graphCount
+            graphPercent = (graphCount / maxUploadSize) * 100
             var leftSize = graphCount
             $('.items .percent').text(graphPercent.toFixed(2) + "%")
             $('.items').css("width", graphPercent)
@@ -151,13 +145,10 @@ function selectFile(fileObject) {
             
             var fileSizeStr = "";
             if ((1024*1024) <= fileSize) {    // 파일 용량이 1메가 이상인 경우 
-                console.log("fileSizeMb="+fileSizeMb.toFixed(2));
                 fileSizeStr = fileSizeMb.toFixed(2) + " Mb";
             } else if ((1024) <= fileSize) {
-                console.log("fileSizeKb="+parseInt(fileSizeKb));
                 fileSizeStr = parseInt(fileSizeKb) + " kb";
             } else {
-                console.log("fileSize="+parseInt(fileSize));
                 fileSizeStr = parseInt(fileSize) + " byte";
             }
 
@@ -197,6 +188,8 @@ function selectFile(fileObject) {
 				$(`div#fileTr_${fileIndex}`).find('.bar').animate({
 					'width': '100%'
 				}, 500, 'swing')
+				
+				console.log("upload fileTotalSize = " + totalFileSize)
 				
                 // 파일 번호 증가
                 fileIndex++;
@@ -250,7 +243,6 @@ function addFileList(fIndex, fileName, fileSizeStr) {
 
     $('#files').append(html);
     let boxNum = $(`.status${fIndex} .percent`);
-    console.log($(boxNum).prop('Counter', 0))
 
     $(boxNum).prop('Counter', 0).animate({Counter: '100'}, {
          duration: 500,
@@ -294,7 +286,6 @@ function fileaddFileList(fIndex, fileName, fileSizeStr) {
 
     $('#files').append(html);
     let boxNum = $(`.status${fIndex} .percent`);
-    console.log($(boxNum).prop('Counter', 0))
 
     $(boxNum).prop('Counter', 0).animate({Counter: '100'}, {
          duration: 500,
@@ -313,8 +304,12 @@ function fileaddFileList(fIndex, fileName, fileSizeStr) {
 function deleteFile(fIndex) {
     console.log("deleteFile.fIndex=" + fIndex);
     // 전체 파일 사이즈 수정
+    console.log("deleteFileSize = " + fileSizeList[fIndex]);
     totalFileSize -= fileSizeList[fIndex];
 
+	var fileSize = fileSizeList[fIndex];
+	
+    console.log("fileSizeList[fIndex] = " + fileSizeList[fIndex])
     // 파일 배열에서 삭제
     delete fileList[fIndex];
 
@@ -325,6 +320,24 @@ function deleteFile(fIndex) {
     $("#fileTr_" + fIndex).remove();
     
     console.log("totalFileSize="+totalFileSize);
+    
+    
+
+    graphCount -= fileSize;
+    console.log("graphCount = "+ graphCount);
+    let graphPercent = 0.0
+    console.log("totalFileSize.toFixed(2) / graphCount.toFixed(2) = "+ totalFileSize.toFixed(2) / graphCount.toFixed(2));
+    console.log("left = " + totalFileSize.toFixed(2) % graphCount.toFixed(2))
+    
+    if(totalFileSize <= 0){
+		graphPercent = 0
+	}else{
+	    graphPercent = (graphCount.toFixed(2) / maxUploadSize) * 100
+	}
+    var leftSize = graphCount
+    $('.items .percent').text(graphPercent.toFixed(2) + "%")
+    $('.items').css("width", graphPercent)
+    $('.left_size').text(leftSize.toFixed(2) + "Mb")
     
     if (totalFileSize > 0) {
         $("#fileDragDesc").hide(); 
@@ -364,10 +377,8 @@ function uploadFile() {
         return false;
 
     } else {
-        console.log(password)
     }
 
-    console.log(password)
     
     // 파일이 있는지 체크
     if (uploadFileList.length == 0 && textarea == "") {
@@ -397,12 +408,9 @@ function uploadFile() {
     if (confirm("등록 하시겠습니까?")) {
         // 등록할 파일 리스트를 formData로 데이터 입력
         var form = $('#uploadForm');
-        console.log(form)
         var formData = new FormData(form[0]);
         for (var i = 0; i < uploadFileList.length; i++) {
-            console.log(fileList[uploadFileList[i]])
             formData.append('files', fileList[uploadFileList[i]]);
-            console.log(formData.get('files'))
         }
         formData.append('passwd', password);
         formData.append("textarea", textarea);
@@ -417,7 +425,6 @@ function uploadFile() {
             dataType : 'json',
             cache : false,
             success : function(result) {
-				console.log(result)
                 if (result.data.length > 0) {
                     alert("성공");
                 } else {

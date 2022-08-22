@@ -3,7 +3,7 @@
 	
 	<!-- 햄버거 버튼-->
 	<input type="checkbox" id="gnbcheck" name="gnbcheck">
-    <label for="gnbcheck" id="gnbbtn">
+    <label for="gnbcheck" class="gnbcheck" id="gnbbtn">
       <span></span>
       <span></span>
       <span></span>

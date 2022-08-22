@@ -88,8 +88,16 @@
       <ul class="pagination">
       
          <!-- 이전 -->
+         <c:choose>
+         	<c:when test="${ulist.number-1 < 0}">
+         		<li class="page-item"><a class="page-link" href="<c:url value='/board/boardmain?field=${param.field}&nickname=${param.nickname}&page=0'/>">처음</a></li>
+               <li class="page-item"><a class="page-link">&larr;</a></li>
+         	</c:when>
+         	<c:otherwise>
                <li class="page-item"><a class="page-link" href="<c:url value='/board/boardmain?field=${param.field}&nickname=${param.nickname}&page=0'/>">처음</a></li>
                <li class="page-item"><a class="page-link" href="<c:url value='/board/boardmain?field=${param.field}&nickname=${param.nickname}&page=${ulist.number-1}'/>">&larr;</a></li>
+         	</c:otherwise>
+         </c:choose>
          <!-- 페이지 그룹 -->
          <c:forEach begin="${startBlockPage}" end="${endBlockPage}" var="i">
             <c:choose>
@@ -102,8 +110,16 @@
             </c:choose>
          </c:forEach>
          <!-- 다음 -->
-          <li class="page-item "><a class="page-link" href="<c:url value='/board/boardmain?field=${param.field}&nickname=${param.nickname}&page=${ulist.number+1}'/>">&rarr;</a></li>
-          <li class="page-item "><a class="page-link" href="<c:url value='/board/boardmain?field=${param.field}&nickname=${param.nickname}&page=${ulist.totalPages-1}'/>">마지막</a></li>
+         <c:choose>
+         	<c:when test="${ulist.number+1 > ulist.totalPages-1}">
+         		<li class="page-item "><a class="page-link">&rarr;</a></li>
+          		<li class="page-item "><a class="page-link" href="<c:url value='/board/boardmain?field=${param.field}&nickname=${param.nickname}&page=${ulist.totalPages-1}'/>">마지막</a></li>
+         	</c:when>
+         	<c:otherwise>
+	          <li class="page-item "><a class="page-link" href="<c:url value='/board/boardmain?field=${param.field}&nickname=${param.nickname}&page=${ulist.number+1}'/>">&rarr;</a></li>
+	          <li class="page-item "><a class="page-link" href="<c:url value='/board/boardmain?field=${param.field}&nickname=${param.nickname}&page=${ulist.totalPages-1}'/>">마지막</a></li>
+         	</c:otherwise>
+         </c:choose>
       </ul>
    </div>
    <!-- 페이징 영역 끝 -->
