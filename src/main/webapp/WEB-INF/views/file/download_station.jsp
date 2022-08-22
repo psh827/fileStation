@@ -60,7 +60,7 @@
      	<div class="text_box" id="text">${downloadText.content}</div>
      	<button type="button" id="copyBtn">복사하기</button>
      	<div class="time_container">
-	   	    <div class="time_box"><span class="time_span"></span></div>
+	   	    <p class="time_box"><span class="time_span"></span></p>
 		   	   <div class="dd_btn">
 		         <a class="modal_btn delete" rel="modal:open" href="#modal1" type="button">삭제하기</a>
 			      <form class="download_form">

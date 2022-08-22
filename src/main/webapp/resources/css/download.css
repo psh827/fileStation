@@ -64,56 +64,11 @@ a {
 }
 .time_span {
 	font-size: 40px;
-    padding-top: 46px;
-    display: inline-block;
     color: #483D8B;
     margin-left: 60px;
 }
 
- @media all and (max-width: 768px) {
     
-  table, thead, tbody, th, td, tr {
-    display: block;
-  }
-  
-  th {
-    text-align: right;
-  }
-  
-  table {
-    position: relative; 
-    padding-bottom: 0;
-    border: none;
-    box-shadow: 0 0 10px rgba(0,0,0,.2);
-  }
-  
-  thead {
-    float: left;
-    white-space: nowrap;
-  }
-  
-  tbody {
-    overflow-x: auto;
-    overflow-y: hidden;
-    position: relative;
-    white-space: nowrap;
-  }
-  
-  tr {
-    display: inline-block;
-    vertical-align: top;
-  }
-  
-  th {
-    border-bottom: 1px solid #a39485;
-  }
-  
-  td {
-    border-bottom: 1px solid #e5e5e5;
-  }
-
-  }
-
 .bottom_container {
 	display: flex;
     height: 34%;
@@ -137,6 +92,10 @@ a {
     border-radius: 5px;
     box-shadow: 0 2px 5px rgb(0 0 0 / 25%);
     margin: 0 0 0 15px;
+    display: flex;
+    justify-content : center;
+    align-content: center;
+  
  }
  
 
@@ -201,4 +160,40 @@ a {
 
 #copyBtn:hover {
 	color: black;
+}
+@media (max-width : 390px) {
+	.time_span {
+	 font-size: 25px;
+     margin-left: 0;
+     margin-top: 13px;
+	}
+	.time_box {
+	 width: 85px;
+	 align-items: center;
+	 text-align: center;
+	}
+	
+	.dd_btn{
+	  flex-direction: column;
+	}
+	
+	.modal_btn {
+	 height: 40px;
+     width: 85px;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     font-size: 13px;
+     margin-bottom: 10px;
+     line-height: 0;
+	}
+	.total_download_btn {
+	  height: 40px;
+      width: 84px;
+      margin: 0;
+      padding: 0;
+      font-size: 11px;
+      align-items: center;
+	}
+	
 }
