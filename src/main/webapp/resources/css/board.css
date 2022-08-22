@@ -17,10 +17,14 @@ button { cursor: pointer;}
   display: flex;
   align-items: center;
   position: relative;
-  border: 1px solid black;
   border-radius: 15px;
   height: 150px;
   margin: 40px 0 10px 0;
+  background-image: url(../img/filestation.png);
+  background-size: 672px;
+  background-repeat: no-repeat;
+  background-position: 500px -22px;
+  background-color: #ffd7c2;
 }
 .Questions_banner button:nth-of-type(1) {
    margin-left: 60px;
@@ -39,7 +43,7 @@ button { cursor: pointer;}
   width: 130px;
   height: 40px;
   left:30px;
-  background: var(--main-color);
+  background: #f7666d;
   border: none;
   border-radius: 5px;
   bottom: 30px;
@@ -51,9 +55,10 @@ button { cursor: pointer;}
   transition: .1s Ease-in all;
 }
 .Questions_btn:hover {
- background: #e0daf5;
- color:var(--main-color);
+	background: #fffbe9;
+    color: #f7666d;
 }
+
 
 .Questions_btn.middle {
   left: 20%;
@@ -267,7 +272,7 @@ a.delete:hover {
     width: 50px;
     height: 33px;
     left: 30px;
-    background: #c0b6e1;
+    background: #f7666d;
     border: none;
     border-radius: 5px;
     color: white;
@@ -279,11 +284,11 @@ a.delete:hover {
     width: 50px;
     height: 33px;
     left: 30px;
-    background: var(--main-color);
     border: none;
     border-radius: 5px;
-    color: white;
     border-style: none;
+    background: #fffbe9;
+    color: #f7666d;
 }
 .search-n-btn {
     border-style: none;

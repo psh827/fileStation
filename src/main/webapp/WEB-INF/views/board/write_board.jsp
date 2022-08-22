@@ -14,6 +14,8 @@
       src="https://kit.fontawesome.com/62a067f302.js"
       crossorigin="anonymous"
     ></script>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
 </head>
 <body>
 <div class="main_container">
@@ -29,12 +31,20 @@
           <form:form modelAttribute="postCommand" method="post">
           <div class="post_box">
             <div class="title_box">
-              작성자이름<form:input path="nickName" type="text" class="input-top"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-              <label>비밀글</label>
-              <form:input class="input-top" type="password" path="passwd"  maxlength="4" name="hide" placeholder="네자리를 입력하세요."/>
+            	<div class="title_name">
+ 	             작성자이름<form:input path="nickName" type="text" class="input-top"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            	</div>
+            	<div class="title_passwd">
+    	          <label>비밀글</label>
+        	      <span class="placeholder">네자리를 입력하세요.</span>
+            	  <form:input class="input-top" type="password" path="passwd"  maxlength="4" name="hide"/>
+             	</div>
             </div>
+            <div class="title_container">
             <label>제목</label><br>
-            <form:input class="write_title" type="text" placeholder="제목을 입력하세요." path="title"/><br>
+            <span class="title_label">제목을 입력하세요</span>
+            <form:input class="write_title" type="text" path="title"/><br>
+            </div>
             <label>내용</label><br>
             <form:textarea name="textarea" rows="20" cols="170" placeholder="글 내용을 입력하세요." path="content" style="padding: 10px 5px 5px 5px;"></form:textarea><br>
             <div class="botton-btn">
@@ -47,5 +57,16 @@
           </div>
         </div>
       </div>
+<script>
+$("span + textarea, span + input[type=text], span + input[type=password]").keyup(function(){
+	  if($(this).val()!=""){
+		   $(this).prev().hide();
+		  }else{
+			   $(this).prev().show();
+		  } 
+		}).prev().click(function(){
+			  $(this).next().focus();
+			 });
+</script>
 </body>
 </html>

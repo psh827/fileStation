@@ -20,6 +20,7 @@ button { cursor: pointer;}
   border-radius: 15px;
   height: 150px;
   margin: 40px 0;
+  
 }
 .posting_list {
   position: relative;
@@ -144,4 +145,33 @@ label {
 }
 input:-webkit-autofill, input:-webkit-autofill:hover, input:-webkit-autofill:focus, input:-webkit-autofill:active {
   transition: background-color 5000s ease-in-out 0s;
+}
+.title_box {
+	position: relative;
+}
+.title_name {
+	float: left;
+}
+.placeholder {
+    position: absolute;
+    top: 5px;
+    left: 72px;
+    font-size: 12px;
+}
+.title_passwd {
+    display: inline-block;
+    position: relative;
+    bottom: 2px;
+}
+.subheading {
+	margin-top: 10px;
+}
+.title_container {
+	position: relative;
+}
+.title_label {
+	position: absolute;
+    font-size: 13px;
+    left: 9px;
+    top: 39px;
 }
