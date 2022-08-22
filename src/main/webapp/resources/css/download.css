@@ -64,9 +64,10 @@ a {
 }
 .time_span {
 	font-size: 40px;
-    padding-top: 43px;
+    padding-top: 46px;
     display: inline-block;
     color: #483D8B;
+    margin-left: 41px;
 }
 
  @media all and (max-width: 768px) {

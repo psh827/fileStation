@@ -143,7 +143,7 @@
             	};
             </script>
             <div class="admin_box bottom left" style="padding: 0; overflow: hidden;">
-            	<div id="chart_div" style="width: 110%; height: 100%; margin-left: -77px;">
+            	<div id="chart_div" style="width: 110%; height: 100%;">
       				<c:forEach var="i" begin="0" end="${fn:length(monthCount) - 1}">
       					<p>${monthList[i]} = ${monthCount[i]}</p>
       				</c:forEach>

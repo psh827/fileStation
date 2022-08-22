@@ -97,18 +97,13 @@
        })
        
        const remainTime = document.querySelector(".time_span");
-	   var regDate = new Date('${fileList[0].regDate}')
-	   var textDate = new Date('${downloadText.regDate}')
-	   /* regDate.setDate(regDate.getDate() + 1) */
-	   regDate.setMinutes(regDate.getMinutes() + 10)
-	   /* textDate.setDate(textDate.getDate() + 1) */
-	   textDate.setMinutes(textDate.getMinutes() + 10)
-	   console.log(regDate)
+	   var regDate = new Date('${fileList[0].deleteDate}')
+	   var textDate = new Date('${downloadText.deleteDate}')
 	   function diffDay() {
 		let masTime;
 		if(regDate == 'Invalid Date'){
 			masTime = new Date(textDate);			
-		}else if(regDate != 'Invalid Date' && textDate != 'Invalid Date'){
+		}else if(textDate == 'Invalid Date'){
 			masTime = new Date(regDate);
 		}
 		

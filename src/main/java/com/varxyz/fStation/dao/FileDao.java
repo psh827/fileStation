@@ -82,6 +82,7 @@ public class FileDao {
 					Text text = new Text();
 					text.setContent(rs.getString("content"));
 					text.setRegDate(rs.getTimestamp("regDate"));
+					text.setDeleteDate(rs.getTimestamp("deleteDate"));
 					return text;
 				}
 				
@@ -171,6 +172,7 @@ public class FileDao {
 					of.setUrl(rs.getString("url"));
 					of.setDeleteCheck(rs.getString("deleteCheck"));
 					of.setRegDate(rs.getTimestamp("regDate"));
+					of.setDeleteDate(rs.getTimestamp("deleteDate"));
 					return of;
 				}
 				
