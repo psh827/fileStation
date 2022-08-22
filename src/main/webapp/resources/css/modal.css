@@ -15,6 +15,17 @@
     height: 30px;
     color: white;
     padding-top: 9px;
+    transition: .1s all;
+}
+.submit_btn:hover {
+	margin-left: 12px;
+    background-color: #e0daf5;
+    border-style: none;
+    border-radius: 5px;
+    width: 50px;
+    height: 30px;
+    color: #4425a7;
+    padding-top: 9px;
 }
 .modal_delete {
 	text-align: center;

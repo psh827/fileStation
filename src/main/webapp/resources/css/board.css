@@ -48,6 +48,7 @@ button { cursor: pointer;}
   font-family: 'OTWelcomeRa';
   font-size: 16px;
   padding-top: 10px;
+  transition: .1s Ease-in all;
 }
 .Questions_btn:hover {
  background: #e0daf5;
@@ -87,7 +88,6 @@ button { cursor: pointer;}
   border-radius: 0 14px 0 0;
 }
 .Questions_table tr td a {
-  display: flex;
   align-items: center;
 }
 .Questions_table tr td:first-child{
@@ -204,6 +204,19 @@ a.delete {
  bottom: 30px;
  display: inline-block;
  color: white;
+ transition: .2s all;
+}
+
+a.delete:hover {
+ width: 130px;
+ height: 40px;
+ left: 30px;
+ background: #e0daf5;
+ border: none;
+ border-radius: 5px;
+ bottom: 30px;
+ display: inline-block;
+ color: var(--main-color);
 }
 
 #paging {
@@ -258,6 +271,8 @@ a.delete {
     border: none;
     border-radius: 5px;
     color: white;
+    padding-top: 7px;
+    transition: .2s all;
 }
 .btn-sm:hover {
    margin-top:5px;

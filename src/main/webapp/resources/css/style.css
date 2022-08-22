@@ -69,6 +69,12 @@ nav > ul > li.active {
 nav > ul > li > a {
   color: #09c0d0;
 }
+.admin-nav {
+ margin-bottom:-600px;
+}
+.fa-cog:before, .fa-gear:before {
+	font-size:25px;
+}
 
 .main-inner__container {
   position: absolute;

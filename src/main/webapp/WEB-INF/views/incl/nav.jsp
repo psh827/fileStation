@@ -39,6 +39,12 @@
               <span class="hidden" hidden>건의사항</span>
             </a>
           </li>
+          <li class="nav_item">
+            <a  href="<c:url value='/admin/admin'/>" class="nav_link admin-nav">
+              <i class="fa-solid fa-gear"></i>
+              <span class="hidden" hidden>관리자</span>
+            </a>
+          </li>
         </ul>
         
        <!--  <script>

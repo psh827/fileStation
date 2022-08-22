@@ -37,7 +37,6 @@
       <form>
       <div class="main-inner__container">
         <div class="Questions_container">
-          <div class="subheading">글 내용</div>
           <div class="post_box">
               <p class="writer">작성자 : ${post.nickname}</p>
             <div class="Questions_title">

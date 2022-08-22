@@ -39,10 +39,10 @@ CREATE TABLE BoardImage(
 	CONSTRAINT BoardImage_boardFk_FK FOREIGN KEY (boardFk) REFERENCES Board(bId)
 )AUTO_INCREMENT 3001;
 
-INSERT INTO Board (title, nickName, passwd, content) VALUES ('nam','nam', '1111', '아무리 테스트지만 내용을 들어갑시다');
+INSERT INTO Board (title, nickName, passwd, content) VALUES ('긴 제목을 적어봅시다.','nam', '1111', '아무리 테스트지만 내용을 들어갑시다');
 INSERT INTO Board (title, nickName, passwd, content) VALUES ('test','test', '2222', '아무리 테스트지만 내용을 들어갑시다');
 INSERT INTO Board (title, nickName, passwd, content) VALUES ('jee','jee', '2222', '아무리 테스트지만 내용을 들어갑시다');
-INSERT INTO Board (title, nickName, passwd, content) VALUES ('윤정','윤정', '2222', '아무리 테스트지만 내용을 들어갑시다');
+INSERT INTO Board (title, nickName, passwd, content) VALUES ('테스트중입니다. 조금 더 긴 제목을 적는 테스트','윤정', '2222', '아무리 테스트지만 내용을 들어갑시다');
 INSERT INTO Board (title, nickName, passwd, content) VALUES ('형주','형주', '2222', '아무리 테스트지만 내용을 들어갑시다');
 
 
