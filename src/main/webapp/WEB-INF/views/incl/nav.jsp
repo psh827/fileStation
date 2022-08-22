@@ -1,7 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
+	
+	<!-- 햄버거 버튼-->
+	<input type="checkbox" id="gnbcheck" name="gnbcheck">
+    <label for="gnbcheck" id="gnbbtn">
+      <span></span>
+      <span></span>
+      <span></span>
+    </label>
+	
 <!-- <a class="logo" href="#">File Station</a> -->
+	<nav class="gnb">
         <ul class="nav_ul">
           <li class="nav_item">
             <a href="<c:url value='/file/file_main'/>" class="nav_link logo">
@@ -46,6 +55,10 @@
             </a>
           </li>
         </ul>
+     </nav>   
+        <!-- 반응형 nav -->
+        
+        
         
        <!--  <script>
         $("li.nav_item").click(function(){

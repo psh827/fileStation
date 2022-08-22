@@ -13,6 +13,7 @@ body {
   background-color: #f1eef9;
   height: calc(100vh);
   display: flex;
+  overflow-x: hidden;
   align-items: center;
   background: linear-gradient(90deg, rgba(241,238,248,1) 0%, rgba(224,212,244,1) 46%, rgba(195,206,235,1) 100% );
 }
@@ -86,4 +87,117 @@ nav > ul > li > a {
   height: 100%;
   border-radius: 50px;
   padding: 60px 25px 25px 72px;
+}
+
+/*햄버거 버튼*/
+input[type="checkbox"]#gnbcheck {
+  display: none;
+}
+#gnbbtn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 32px;
+  height: 32px;
+  z-index: 800;
+  display: none;
+  cursor: pointer;
+  transition: .5s all;
+
+}
+
+#gnbbtn > span {
+  position: absolute;
+  top: 16px;
+  height: 1.6px;
+  width: 100%;
+  transform: translateY( -50% );
+  background: #f7666d;
+}
+
+#gnbbtn > span:nth-child(1) {
+  top: 8px;
+}
+
+#gnbbtn > span:nth-child(3) {
+  top: 24px;
+}
+
+input[type="checkbox"]#gnbcheck:checked ~ #gnbbtn {
+	transform: rotate(90deg);
+}
+
+
+
+@media all and ( max-width: 790px ) {
+  #mobile-close-btn {
+    display: block;
+  }
+  #gnbbtn {
+    display: block;
+  }
+   input[type=checkbox]#gnbcheck:checked ~ .gnb {
+    left: 0;
+  }
+  .main-inner__container {
+  	width: 100%;
+  }
+  .main_container {
+    position: inherit;
+    width: 0%;
+  	height: 100%;
+  }
+  .gnb {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    width: 15%;
+    left: -100%;
+    background: rgba(0, 0, 0);
+    transition: .5s ease-in-out;
+    z-index: 900;
+  }
+  nav {
+    width: 100%;
+    display: block;
+    position: absolute;
+    height: 100%;
+  }
+  .Questions_container .Questions_banner{
+  	display: block;
+  	padding-top: 30px;
+
+  }
+  .Questions_banner button {
+    top: 20px;
+    margin: 0 auto !important;
+    display: block;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+  }
+  .Questions_banner form{
+    margin: 0 auto;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+  }
+  
+  form .search_box{
+  	display: block;
+  	text-align: center;
+  }
+  
+  th:first-child {
+  width: 20% !important;
+  }
+  
+  table {
+  font-size: 14px;
+  }
+  
+  tr td:nth-of-type(3), tr td:nth-of-type(4) {
+   font-size: 10px;
+  }
+  
 }

@@ -23,9 +23,9 @@
   <body>
     <div class="main_container">
       <!--왼쪽 navigation-->
-      <nav>
+
         <jsp:include page="../incl/nav.jsp"/>
-      </nav>
+
       <!-- 하얀색 영역 -->
       <div class="main-inner__container">
         <div id="Accordion_wrap">

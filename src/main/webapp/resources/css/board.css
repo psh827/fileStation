@@ -43,7 +43,7 @@ button { cursor: pointer;}
   width: 130px;
   height: 40px;
   left:30px;
-  background: #f7666d;
+  background: var(--main-color);
   border: none;
   border-radius: 5px;
   bottom: 30px;
@@ -55,8 +55,8 @@ button { cursor: pointer;}
   transition: .1s Ease-in all;
 }
 .Questions_btn:hover {
-	background: #fffbe9;
-    color: #f7666d;
+	background: #e0daf5;
+    color: var(--main-color);
 }
 
 
@@ -302,4 +302,13 @@ select {
     border-style: none;
     background: none;
     color: mediumpurple;
+}
+
+.pink-btn {
+	background: #f7666d;
+}
+
+.pink-btn:hover {
+	background: #fffbe9;
+    color: #f7666d;
 }

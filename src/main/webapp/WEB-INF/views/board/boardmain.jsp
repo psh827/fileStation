@@ -30,15 +30,14 @@
   <body>
     <div class="main_container">
       <!--왼쪽 navigation-->
-      <nav>
         <jsp:include page="../incl/nav.jsp"/>
-      </nav>
+
       <!-- 하얀색 영역 -->
       <div class="main-inner__container">
         <div class="Questions_container">
           <div class="subheading">건의사항</div>
           <div class="Questions_banner">
-            <button class="Questions_btn" style="margin-right: 30px;" type="button" name="writing" onclick='location.href="<c:url value='/board/write_board'/>"'>글작성</button>
+            <button class="Questions_btn pink-btn" style="margin-right: 30px;" type="button" name="writing" onclick='location.href="<c:url value='/board/write_board'/>"'>글작성</button>
             
           <!-- 검색 영역 시작-->
          <form action="boardmain" class="form-inline d-flex justify-content-end"
