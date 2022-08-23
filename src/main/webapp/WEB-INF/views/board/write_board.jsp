@@ -47,7 +47,7 @@
             <form:input class="write_title" type="text" path="title" /><br>
             </div>
             <label>내용</label><br>
-            <form:textarea name="textarea" rows="20" cols="170" placeholder="글 내용을 입력하세요." path="content" style="padding: 10px 5px 5px 5px;"></form:textarea><br>
+            <form:textarea name="textarea" rows="20" cols="170" placeholder="글 내용을 입력하세요." maxlength="5000" path="content" style="padding: 10px 5px 5px 5px;"></form:textarea><br>
             <div class="botton-btn">
                <button class="write_btn" type="submit">작성하기</button>
                <button class="write_btn" type="button"onclick='location.href="<c:url value='/board/boardmain'/>"'>목록으로</button>
