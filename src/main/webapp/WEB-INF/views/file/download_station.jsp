@@ -32,8 +32,6 @@
 
       <!-- 하얀색 영역 -->
       <div class="main-inner__container">
-      <c:choose>
-      	<c:when test="${fn:length(fileList) <= 20 }">
       	<div class="table_flex" style="display:flex;">
       		<table>
       		<thead>
@@ -54,8 +52,6 @@
 	        </c:forEach>
         	</table>
         	</div>
-      	</c:when>
-      </c:choose>
       <div class="bottom_container">
      	<div class="text_box" id="text">${downloadText.content}</div>
      	<button type="button" id="copyBtn">복사하기</button>

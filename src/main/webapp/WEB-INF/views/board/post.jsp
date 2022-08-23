@@ -77,9 +77,9 @@
       <p class="delete_title">삭제 하시겠습니까?</p>
       <div class="yes_or_no">
       <label for="Yes" >확인</label> 
-      <input type="checkbox" name="delete" value="1" id="Yes" checked />&nbsp;&nbsp;&nbsp;&nbsp;
+      <input type="checkbox" name="delete" value="1" id="Yes" onclick='checkOnlyOne(this)' checked />&nbsp;&nbsp;&nbsp;&nbsp;
       <label for="No">취소</label>
-      <input type="checkbox" name="delete" value="0" id="No"/>
+      <input type="checkbox" name="delete" value="0" onclick='checkOnlyOne(this)' id="No"/>
       </div>
       <input class="submit_btn" type="submit" value="확인"/>
 
@@ -99,6 +99,18 @@
            $(toTextarea).replaceWith('<textarea class="admin_inner textarea"></textarea>')
            $('.admin_modify').replaceWith('<button class="Questions_btn admin_comfirm middle" type="button" name="revoke">등록하기</button>')
        })
+       
+  function checkOnlyOne(element) {
+  
+  const checkboxes 
+      = document.getElementsByName("delete");
+  
+  checkboxes.forEach((cb) => {
+    cb.checked = false;
+  })
+  
+  element.checked = true;
+  }
    </script>
    <script src="<c:url value='/resources/js/common.js'/>"></script>
   </body>
