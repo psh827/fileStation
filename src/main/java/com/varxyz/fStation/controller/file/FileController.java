@@ -28,6 +28,7 @@ import java.util.zip.ZipOutputStream;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -94,10 +95,10 @@ public class FileController {
 	 */
 	@RequestMapping(value = "/file/addFile", method = { RequestMethod.POST })	
 	@ResponseBody
-	public String addMenuItem(Model model, @RequestParam(value="files", required = false) 
+	public int addMenuItem(Model model, @RequestParam(value="files", required = false) 
 				MultipartFile[] files, @RequestParam("passwd") String passwd,
 				@RequestParam(value="textarea", required = false) String textarea) throws IOException {
-		
+		int result = 0;
 		passwd = passwd.split(",")[0];
 		List<OurFile> ourFileList = new ArrayList<OurFile>();
 		System.out.println("textarea = " + textarea);
@@ -107,11 +108,6 @@ public class FileController {
 		//text처리
 		if(!text.getContent().equals("")) {
 			int textResult = fileService.addText(text);
-			if(textResult == 0) {
-				model.addAttribute("msg", "업로드오류");
-				model.addAttribute("url", "file_main");
-				return "alert";
-			}		
 		}
 		
 		String filePath = "C:\\fileStation\\";
@@ -155,15 +151,10 @@ public class FileController {
 				mt.transferTo(file);
 
 			}
-			int result = fileService.addFile(ourFileList);
+			result = fileService.addFile(ourFileList);
 			System.out.println("result = " + result);
-	        if(result == 0) {
-	        	model.addAttribute("msg", "업로드 오류");
-	        	model.addAttribute("url", "file_main");
-	        	return "alert";
-	        }
 		}
-		return "file/file_main";
+		return result;
 	}
 	
 	/**

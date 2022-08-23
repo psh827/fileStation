@@ -53,7 +53,6 @@ public class BoardController {
 			@RequestParam(required = false, defaultValue = "") String field,
 			@RequestParam(required = false, defaultValue = "") String nickname) {
 		
-		session.invalidate();
 		/**
 		 * 페이징
 		 */
@@ -72,7 +71,6 @@ public class BoardController {
 		
 		int pageNumber = ulist.getPageable().getPageNumber(); //현재페이지
 		int totalPages = ulist.getTotalPages(); //총 페이지 수. 검색에따라 10개면 10개..
-		System.out.println("totalPages=" + totalPages);
 		int pageBlock = 5; //블럭의 수 1, 2, 3, 4, 5	
 		int startBlockPage = ((pageNumber)/pageBlock)*pageBlock+1; //현재 페이지가 7이라면 1*5+1=6
 		int endBlockPage = startBlockPage+pageBlock-1; //6+5-1=10. 6,7,8,9,10해서 10.

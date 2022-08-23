@@ -18,6 +18,9 @@
       src="https://kit.fontawesome.com/62a067f302.js"
       crossorigin="anonymous"
     ></script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
   </head>
   <body>
     <div class="main_container">
@@ -57,7 +60,7 @@
             <div class="file_input_grp">
                 <div class="passwd_input">
                   <label class="input_label">비밀번호 입력</label>
-                  <input class="input_passwd" name="passwd" type="password" minlength="8" required>
+                  <input class="input_passwd" name="passwd" type="password" minlength="8" maxlength="20" required>
                   <label class="notice">8글자 이상 !, @, #, ~ 특수기호를 넣어서 작성해주세요.</label>
                 </div>
                 <input type="button" class="submit_file" onclick="uploadFile(); return false;" class="btn bg_01" value="파일 업로드">
@@ -73,6 +76,7 @@
       </div>
     </div>
     <script src="http://code.jquery.com/jquery-latest.js"></script>
+    <script src="<c:url value='/resources/js/common.js'/>"></script>
     <script src="<c:url value='/resources/js/home.js'/>"></script>
   </body>
 </html>

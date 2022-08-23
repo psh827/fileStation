@@ -64,22 +64,45 @@
                <th style="width:20%;text-align: center;"><span class="textLine">Date</span></th>
                <th style="width:10%;text-align: center;"><span class="textLine">답변여부</span></th>
             </tr>
-            <c:forEach items="${ulist.content}" var="user">
-            <tr>
-               <td><span class="textLine">${user.boardId}</span></td>
-               <td><a data-value="${user.boardId}" class="modal_btn"  rel="modal:open" href="#modal1"><span class="textLine">${user.getTitle()}</span></a></td>
-               <td style="text-align: center;"><span class="textLine">${user.regDate}</span></td>
-               <c:choose>
-               	<c:when test="${empty user.adminContent}">
-               		<td style="text-align: center;"><span class="textLine">미답변</span></td>	
-               	</c:when>
-               	<c:otherwise>
-               		<td style="text-align: center;"><span class="textLine">답변완료</span></td>
-               	</c:otherwise>
-               </c:choose>
-               
-            </tr>
-         </c:forEach>
+            
+            <c:choose>
+            	<c:when test="${!empty admin}">
+            		<c:forEach items="${ulist.content}" var="user">
+			            <tr>
+			               <td><span class="textLine">${user.boardId}</span></td>
+			               <td><a href="<c:url value='/board/post?boardId=${user.boardId}'/>"><span class="textLine">${user.getTitle()}</span></a></td>
+			               <td style="text-align: center;"><span class="textLine">${user.regDate}</span></td>
+			               <c:choose>
+			               	<c:when test="${empty user.adminContent}">
+			               		<td style="text-align: center;"><span class="textLine">미답변</span></td>	
+			               	</c:when>
+			               	<c:otherwise>
+			               		<td style="text-align: center;"><span class="textLine">답변완료</span></td>
+			               	</c:otherwise>
+			               </c:choose>
+			               
+			            </tr>
+			         </c:forEach>
+            	</c:when>
+            	<c:otherwise>
+	            	<c:forEach items="${ulist.content}" var="user">
+			            <tr>
+			               <td><span class="textLine">${user.boardId}</span></td>
+			               <td><a data-value="${user.boardId}" class="modal_btn"  rel="modal:open" href="#modal1"><span class="textLine">${user.getTitle()}</span></a></td>
+			               <td style="text-align: center;"><span class="textLine">${user.regDate}</span></td>
+			               <c:choose>
+			               	<c:when test="${empty user.adminContent}">
+			               		<td style="text-align: center;"><span class="textLine">미답변</span></td>	
+			               	</c:when>
+			               	<c:otherwise>
+			               		<td style="text-align: center;"><span class="textLine">답변완료</span></td>
+			               	</c:otherwise>
+			               </c:choose>
+			               
+			            </tr>
+			         </c:forEach>
+            	</c:otherwise>
+            </c:choose>
             </table>
           </div>
 
@@ -144,5 +167,6 @@
    </form>
 </div>
 
+<script src="<c:url value='/resources/js/common.js'/>"></script>
   </body>
 </html>

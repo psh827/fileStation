@@ -34,6 +34,15 @@ public class JeeController {
 	
 	@GetMapping("/admin/admin")
 	public String jeeForm(HttpServletRequest request, HttpSession session) {
+		
+		String admin = (String)session.getAttribute("admin");
+		String referer = (String)request.getHeader("REFERER");
+		if(admin.equals("") || admin.equals(null)) {
+			request.setAttribute("msg", "잘못된 접근입니다");
+			request.setAttribute("url", referer);
+			return "alert";
+		}
+		
 		//jee
 		List<Integer> checkList = fileService.jee();
 		List<String> checkStrList = new ArrayList<String>();
@@ -83,7 +92,6 @@ public class JeeController {
 		
 		//hoon
 		List<Post> adminPost =  boardService.getAllPostToAdmin();
-		session.setAttribute("admin", "admin");
 		request.setAttribute("adminPost", adminPost);
 		
 		

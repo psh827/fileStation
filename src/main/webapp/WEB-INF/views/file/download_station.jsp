@@ -123,5 +123,6 @@
 	   }
        
    </script>
+   <script src="<c:url value='/resources/js/common.js'/>"></script>
   </body>
 </html>

@@ -100,5 +100,6 @@
            $('.admin_modify').replaceWith('<button class="Questions_btn admin_comfirm middle" type="button" name="revoke">등록하기</button>')
        })
    </script>
+   <script src="<c:url value='/resources/js/common.js'/>"></script>
   </body>
 </html>

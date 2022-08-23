@@ -425,16 +425,13 @@ function uploadFile() {
             dataType : 'json',
             cache : false,
             success : function(result) {
-                if (result.data.length > 0) {
-                    alert("성공");
-                } else {
-                    alert("실패");
-                    location.reload();
-                }
-            }
+				alert("업로드 완료")
+                location.reload();
+            },
+            error : function(){
+				alert("업로드 실패")
+			}
         });
-		alert("업로드 성공되었습니다!")
-		location.reload();
     }
 }
 

@@ -32,6 +32,7 @@ nav {
   width: 90px;
   height: 100%;
   position: relative;
+  padding-top: 40px;
 }
 
 nav > ul {
@@ -41,21 +42,18 @@ nav > ul {
   flex-direction: column;
   justify-content: space-between;
   height: 55%;
-  margin-top: 40px;
+}
+
+.admin_ul{
+	justify-content: center;
+    height: 45%;
 }
 
 nav a.logo {
   display: inline-block;
   font-weight: 900;
   text-align: center;
-}
-
-nav > ul > li {
-  width: 40px;
-  height: 40px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  font-size: 18px;
 }
 
 nav > ul > li i:hover {

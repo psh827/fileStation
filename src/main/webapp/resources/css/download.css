@@ -150,6 +150,10 @@ a {
 	width: 50%;
 }
 
+.admin-nav{
+	color: #09c0d0;
+}
+
 #copyBtn{
 	position: absolute;
     bottom: -4%;
