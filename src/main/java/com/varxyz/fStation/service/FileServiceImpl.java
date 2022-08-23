@@ -100,5 +100,7 @@ public class FileServiceImpl implements FileService{
 		return fileDao.jee();
 		
 	}
+//	1.array
+//	동적으로 칼람이나 데이터를 처리하는 경우
 
 }

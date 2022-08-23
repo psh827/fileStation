@@ -21,7 +21,7 @@
           <li class="nav_item">
             <a href="<c:url value='/file/file_main'/>" class="nav_link file_main">
               <i class="fa-solid fa-house fa-lg"></i>
-              <span class="hidden" hidden>홈(업로드)</span>
+              <span class="hidden" hidden>홈</span>
             </a>
           </li>
           <li class="nav_item">

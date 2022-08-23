@@ -67,9 +67,14 @@ a {
     color: #483D8B;
     display: block;
     height: 100%;
-    line-height: 3.4;
+    line-height: 3.4;   
 }
 
+#modal1 {
+    width: 260px;
+    height: 121px;
+    padding: 24px 30px;
+}
     
 .bottom_container {
 	display: flex;
@@ -85,6 +90,7 @@ a {
 	box-shadow: 0 2px 5px rgba(0,0,0,.25);
 	margin-top: 15px;
 	overflow : auto;
+	padding: 20px;
 }
 
  .time_box {
@@ -167,11 +173,32 @@ a {
 #copyBtn:hover {
 	color: black;
 }
+
+.delete_title {
+	text-align: center;
+	margin-bottom: 5px;
+	}
+	
+.yes_or_no {
+	text-align: center;
+	margin-bottom: 5px;
+	}
+	
+.submit_btn {
+	padding: 5px;
+    height: 28px;
+    width: 43px;
+}
+
+.modal_delete {
+	text-align: center;
+}
 @media (max-width : 390px) {
 	.time_span {
 	 font-size: 25px;
      margin-left: 0;
-     margin-top: 13px;
+     margin-top: 44px;
+     line-height: 1.3;
 	}
 	.time_box {
 	 width: 85px;
@@ -201,5 +228,4 @@ a {
       font-size: 11px;
       align-items: center;
 	}
-	
 }

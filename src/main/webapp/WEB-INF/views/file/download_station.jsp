@@ -105,6 +105,8 @@
 			masTime = new Date(textDate);			
 		}else if(textDate == 'Invalid Date'){
 			masTime = new Date(regDate);
+		}else {
+			masTime = new Date(regDate);
 		}
 		
 		console.log(masTime)

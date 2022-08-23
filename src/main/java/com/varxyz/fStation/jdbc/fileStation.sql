@@ -39,58 +39,13 @@ CREATE TABLE BoardImage(
 	CONSTRAINT BoardImage_boardFk_FK FOREIGN KEY (boardFk) REFERENCES Board(bId)
 )AUTO_INCREMENT 3001;
 
-INSERT INTO Board (title, nickName, passwd, content) VALUES ('긴 제목을 적어봅시다.','nam', '1111', '아무리 테스트지만 내용을 들어갑시다');
-INSERT INTO Board (title, nickName, passwd, content) VALUES ('test','test', '2222', '아무리 테스트지만 내용을 들어갑시다');
-INSERT INTO Board (title, nickName, passwd, content) VALUES ('jee','jee', '2222', '아무리 테스트지만 내용을 들어갑시다');
-INSERT INTO Board (title, nickName, passwd, content) VALUES ('테스트중입니다. 조금 더 긴 제목을 적는 테스트','윤정', '2222', '아무리 테스트지만 내용을 들어갑시다');
-INSERT INTO Board (title, nickName, passwd, content) VALUES ('형주','형주', '2222', '아무리 테스트지만 내용을 들어갑시다');
-
-
-SELECT SUM(fileSize) FROM File WHERE regDate >'2022-08-01' AND regDate < '2022-08-31';
-SELECT SUM(fileSize) FROM File WHERE regDate >'2022-08-01';
-
-SELECT SUM(fileSize) FROM File WHERE Month(regDate) = MONTH(CURRENT_DATE()) AND YEAR(regDate) = YEAR(CURRENT_DATE());
-
-SELECT month('2022-06-03')
-
-SELECT MONTH(NOW());
-
-SELECT COUNT(*) FROM Board;
-
-UPDATE File SET regDate = '2022-06-11 11:20:23.0' WHERE fId=1001;
 
 SELECT * FROM File;
 SELECT * FROM Text;
 SELECT * FROM Board;
 SELECT * FROM BoardImage;
 
-SELECT * FROM Board WHERE adminContent IS null
-
-SELECT bId, title, nickName, passwd,content, regDate FROM Board WHERE nickName = 'nam'
- ORDER BY regDate ASC LIMIT 8 OFFSET 0
-
-SELECT count(*) FROM Board WHERE nickName = 'nam';
-DELETE FROM Text WHERE tId = 2001;
-
-UPDATE filestation.file
-SET passwd='987654321', url='C:\\fileStation\\', fileOriName='지윤정.zip', fileName='8675ee35c94b4741b2d68b828d4b1616.zip', fileSize=136631, fileType='DOCUMENT', deleteCheck='NO', regDate='2022-08-19 15:55:00', deleteDate='2022-08-19 16:55:00'
-WHERE fId=1019;
-UPDATE Board SET content = 'test test test' WHERE bId = '1';
-
 ALTER TABLE File convert to charset utf8;
 ALTER TABLE Text convert to charset utf8;
 ALTER TABLE Board convert to charset utf8;
 ALTER TABLE File convert to charset utf8;
-
-SELECT regDate FROM File WHERE regDate BETWEEN '2022-08-01 00:00:00' AND '2022-08-31 23:59:59'  GROUP BY passwd;
-
-SELECT Month(regDate) FROM File GROUP BY passwd;
-SELECT MONTH('2022-08-01');
-
-SELECT count(distinct passwd) FROM File WHERE Month(regDate) = MONTH('2022-08-01') AND YEAR(regDate) = YEAR(CURRENT_DATE());
-DROP TABLE File;
-DROP TABLE Text;
-DROP TABLE BoardImage;
-DROP TABLE Board;
-
-SELECT count(*) FROM Board WHERE nickName = 'nam';
