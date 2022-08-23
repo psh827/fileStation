@@ -45,8 +45,8 @@ nav > ul {
 }
 
 .admin_ul{
-	justify-content: center;
-    height: 45%;
+	justify-content: flex-end;
+    height: 42%;
 }
 
 nav a.logo {

@@ -50,7 +50,7 @@
           </li>
         </ul>
         <ul class="admin_ul">
-          <li class="nav_item" style="margin-bottom: 20px;">
+          <li class="nav_item" style="margin-bottom: 10px;">
           <c:choose>
           	<c:when test="${!empty admin}">
           	  <a class="modal_btn nav_link admin-nav"  href="<c:url value='/admin/admin' />">		

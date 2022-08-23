@@ -29,7 +29,7 @@ $(".delete_all").on("click", function(){
 })
 
 $(".upload-box").click(function(e){
-    e.preventDefault();
+
     $("#input_file").click()
 })
 
@@ -140,7 +140,7 @@ function selectFile(fileObject) {
             graphPercent = (graphCount / maxUploadSize) * 100
             var leftSize = graphCount
             $('.items .percent').text(graphPercent.toFixed(2) + "%")
-            $('.items').css("width", graphPercent)
+            $('.items').css("width", graphPercent + "%")
             $('.left_size').text(leftSize.toFixed(2) + "Mb")
             
             var fileSizeStr = "";
@@ -336,7 +336,7 @@ function deleteFile(fIndex) {
 	}
     var leftSize = graphCount
     $('.items .percent').text(graphPercent.toFixed(2) + "%")
-    $('.items').css("width", graphPercent)
+    $('.items').css("width", graphPercent + "%")
     $('.left_size').text(leftSize.toFixed(2) + "Mb")
     
     if (totalFileSize > 0) {

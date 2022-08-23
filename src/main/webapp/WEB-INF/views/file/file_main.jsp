@@ -19,8 +19,8 @@
       crossorigin="anonymous"
     ></script>
      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
   </head>
   <body>
     <div class="main_container">
@@ -32,7 +32,7 @@
       <div class="main-inner__container">
         <div class="input-container">
           <input class="file" id="input_file" type="file" multiple>
-          <form name="uploadForm" id="uploadForm" enctype="multipart/form-data" method="post" onsubmit="return false;">
+          <form name="uploadForm" id="uploadForm" enctype="multipart/form-data" method="post">
           <div class="top-container">
             <div id="root">
                 <div class="contents">
@@ -63,7 +63,7 @@
                   <input class="input_passwd" name="passwd" type="password" minlength="8" maxlength="20" required>
                   <label class="notice">8글자 이상 !, @, #, ~ 특수기호를 넣어서 작성해주세요.</label>
                 </div>
-                <input type="button" class="submit_file" onclick="uploadFile(); return false;" class="btn bg_01" value="파일 업로드">
+                <input type="submit" class="submit_file" onclick="uploadFile(); return false;" class="btn bg_01" value="파일 업로드">
             </div>
           </form>
         </div>
