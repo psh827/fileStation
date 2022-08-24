@@ -62,6 +62,7 @@ public class FileDao {
 			
 			return 1;
 		} catch (Exception e) {
+			e.printStackTrace();
 			return 0;
 		}
 	}
@@ -72,10 +73,10 @@ public class FileDao {
 	 * @param passwd
 	 * @return
 	 */
-	public Text getTextByPasswd(String passwd) {
+	public List<Text> getTextByPasswd(String passwd) {
 		try {
-			String sql = "SELECT * FROM Text WHERE passwd = ? AND deleteCheck = ?";
-			return jdbcTemplate.queryForObject(sql, new RowMapper<Text>() {
+			String sql = "SELECT * FROM Text WHERE passwd = ? AND deleteCheck = ? ORDER BY regDate DESC";
+			return jdbcTemplate.query(sql, new RowMapper<Text>() {
 
 				@Override
 				public Text mapRow(ResultSet rs, int rowNum) throws SQLException {
@@ -89,9 +90,6 @@ public class FileDao {
 			}, passwd, "NO");
 			
 		}catch(EmptyResultDataAccessException e) {
-			e.printStackTrace();
-			return null;
-		} catch (IncorrectResultSizeDataAccessException e) {
 			e.printStackTrace();
 			return null;
 		} catch(Exception e) {

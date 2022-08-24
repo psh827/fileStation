@@ -33,7 +33,7 @@ public class FileServiceImpl implements FileService{
 	}
 	
 	@Override
-	public Text getTextByPasswd(String passwd) {
+	public List<Text> getTextByPasswd(String passwd) {
 		return fileDao.getTextByPasswd(passwd);
 	}
 

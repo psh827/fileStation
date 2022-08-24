@@ -52,3 +52,6 @@ ALTER TABLE File convert to charset utf8;
 ALTER TABLE Text convert to charset utf8;
 ALTER TABLE Board convert to charset utf8;
 ALTER TABLE File convert to charset utf8;
+
+
+SELECT * FROM Text WHERE passwd = 'tkdgnsrkt1!' AND deleteCheck = 'NO' ORDER BY regDate DESC;

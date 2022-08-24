@@ -10,7 +10,7 @@ public interface FileService {
 	int	addFile(List<OurFile> ourFile);
 	int addText(Text text);
 	List<Text> getAllText();
-	Text getTextByPasswd(String passwd);
+	List<Text> getTextByPasswd(String passwd);
 	int deleteAllText(Text text);
 	int deleteText(String string, String passwd);
 	List<OurFile> getAllFile();

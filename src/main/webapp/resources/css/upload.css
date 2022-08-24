@@ -104,6 +104,13 @@
     font-weight: bold;
 }
 
+.text_cnt_box{
+	align-self: flex-end;
+    margin-right: 50px;
+    margin-top: 15px;
+}
+
+
 .delete_all{
     height: 25px;
     border: none;
@@ -470,6 +477,7 @@
     align-items: center;
     height: 100%;
   }
+  
   .contents {
     margin-top: 0px;
   }
@@ -484,6 +492,7 @@
     margin: 0 auto;
     width: 100%;
   }
+  
   .contents .files {
     height: 40%;
     min-height: 160px;
@@ -500,6 +509,7 @@
     width: 100%;
     margin-top: 2px;
   }
+  
   .textInput {
     width: 100%;
     height: 150px;
@@ -507,6 +517,12 @@
     display: flex;
     margin-bottom: 20px;
   }
+  
+  .text_cnt_box{
+  	margin-right: 10px;
+  	margin-top: 0;
+  }
+  
   .file_input_grp {
     width: 100%;
     margin: 0 auto;

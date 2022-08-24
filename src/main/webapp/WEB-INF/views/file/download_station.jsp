@@ -45,7 +45,7 @@
 	        <c:forEach var="i" begin="1" end="${fn:length(fileList) }">
 	        	<tr>
 	        		<td class="no${i}">${i}</td>
-	        		<td class="file_name_${i}">${fileList[i - 1].fileOriName}<span hidden> ${fileList[i - 1].fileId}</span></td>
+	        		<td class="file_name_${i} file_name"><span class="file_ori_name">${fileList[i - 1].fileOriName}</span><span hidden> ${fileList[i - 1].fileId}</span></td>
 	        		<td class="file_size_${i} file_size">${fileList[i - 1].fileSize}</td>
 	        		<td><a href="<c:url value='/file/download_detail?fileId=${fileList[i - 1].fileId}'/>">다운로드</a></td>
 	        	</tr>

@@ -14,38 +14,38 @@
         <ul class="nav_ul">
           <li class="nav_item">
             <a href="<c:url value='/file/file_main'/>" class="nav_link logo">
-              <span class="logo_span">File Station</spanc>
-              <span class="hidden" hidden>로고</span>
+              <span class="logo_span">File Station</span>
+              <span hidden>로고</span>
             </a>
           </li>
           <li class="nav_item">
             <a href="<c:url value='/file/file_main'/>" class="nav_link file_main">
               <i class="fa-solid fa-house fa-lg"></i>
-              <span class="hidden" hidden>홈</span>
+              <span class="hidden upload">업로드</span>
             </a>
           </li>
           <li class="nav_item">
             <a href="<c:url value='/file/download'/>" class="nav_link download">
               <i class="fa-solid fa-download fa-lg"></i>
-              <span class="hidden" hidden>다운로드</span>
+              <span class="hidden">다운로드</span>
             </a>
           </li>
           <li class="nav_item">
             <a href="<c:url value='/service/service_introduction'/>" class="nav_link service_introduction">
               <i class="fa-solid fa-person-chalkboard fa-lg"></i>
-              <span class="hidden" hidden>서비스 소개</span>
+              <span class="hidden">서비스 소개</span>
             </a>
           </li>
           <li class="nav_item">
             <a href="<c:url value='/service/qna'/>" class="nav_link qna">
               <i class="fa-solid fa-question fa-lg"></i>
-              <span class="hidden" hidden>자주 하는 질문</span>
+              <span class="hidden ques">자주 하는 질문</span>
             </a>
           </li>
           <li class="nav_item">
             <a href="<c:url value='/board/boardmain'/>" class="nav_link boardmain">
               <i class="fa-solid fa-chalkboard-user fa-lg"></i>
-              <span class="hidden" hidden>건의사항</span>
+              <span class="hidden boardNotice">건의사항</span>
             </a>
           </li>
         </ul>

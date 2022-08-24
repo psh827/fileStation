@@ -108,6 +108,7 @@ public class FileController {
 		//text처리
 		if(!text.getContent().equals("")) {
 			int textResult = fileService.addText(text);
+			System.out.println(textResult);
 		}
 		
 		String filePath = "C:\\fileStation\\";
@@ -176,13 +177,16 @@ public class FileController {
 	public String download(HttpServletRequest request) throws ParseException {
 		String passwd = request.getParameter("passwd");
 		List<OurFile> fileList = fileService.getFile(passwd);
-		Text downloadText = fileService.getTextByPasswd(passwd);
+		List<Text> downloadTextList = fileService.getTextByPasswd(passwd);
 		
-		if (fileList.size() == 0 && downloadText == null) {
+		if (fileList.size() == 0 && (downloadTextList == null || downloadTextList.size() == 0)) {
 			request.setAttribute("msg", "비밀번호가 틀렸습니다.");
 			request.setAttribute("url", "download");
 			return "alert";
 		}
+
+		Text downloadText = downloadTextList.get(0);
+		downloadText.setContent(downloadText.getContent().replace("<", "&lt;").replace(">", "&gt;"));
 		
 		request.setAttribute("passwd", passwd);
 		request.setAttribute("fileList", fileList);

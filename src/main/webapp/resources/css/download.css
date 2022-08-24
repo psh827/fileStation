@@ -160,6 +160,19 @@ a {
 	color: #09c0d0;
 }
 
+.more-content > span{
+	display: none;
+}
+
+.more-content a {
+    display: block;
+    margin-top: 10px;
+}
+
+.more-content a span{
+	display: inline-block;
+}
+
 #copyBtn{
 	position: absolute;
     bottom: -4%;
