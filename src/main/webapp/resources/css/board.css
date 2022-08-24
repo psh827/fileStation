@@ -94,14 +94,25 @@ button { cursor: pointer;}
 }
 .Questions_table tr td a {
   align-items: center;
+
 }
 .Questions_table tr td:first-child{
    padding-left: 15px;
 }
+
 .Questions_table span.textLine {
   display: block;
   padding-top: 7px;
   line-height: 16px;
+}
+
+.Questions_table td:nth-of-type(2) span.textLine {
+	word-break: break-all;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	width: 600px;
+	white-space: nowrap;
+	display: block;
 }
 .Questions_table tr td {
   text-align: left;

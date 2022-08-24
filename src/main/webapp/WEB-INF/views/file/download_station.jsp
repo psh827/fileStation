@@ -74,9 +74,9 @@
       <p class="delete_title">삭제 하시겠습니까?</p>
       <div class="yes_or_no">
       <label for="Yes" >확인</label> 
-      <input type="checkbox" name="delete" value="1" id="Yes" checked />&nbsp;&nbsp;&nbsp;&nbsp;
+      <input type="checkbox" name="delete" value="1" id="Yes" onclick='checkOnlyOne(this)' checked />&nbsp;&nbsp;&nbsp;&nbsp;
       <label for="No">취소</label>
-      <input type="checkbox" name="delete" value="0" id="No"/>
+      <input type="checkbox" name="delete" value="0" id="No" onclick='checkOnlyOne(this)'/>
       </div>
       <input hidden name="passwd" value="${passwd}"/>
       <input class="submit_btn" type="submit" value="확인"/>
@@ -119,6 +119,18 @@
 		   location.href = "file/download";
 	   }
        
+	   function checkOnlyOne(element) {
+		   
+		   const checkboxes 
+		       = document.getElementsByName("delete");
+		   
+		   checkboxes.forEach((cb) => {
+		     cb.checked = false;
+		   })
+		   
+		   element.checked = true;
+		   }
+	   
    </script>
    <script src="<c:url value='/resources/js/common.js'/>"></script>
   </body>

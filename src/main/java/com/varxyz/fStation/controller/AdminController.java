@@ -26,7 +26,7 @@ public class AdminController {
 		if(!adminId.equals("admin") && !adminPasswd.equals("qwer123!")) {
 			request.setAttribute("msg", "잘못된 접근입니다.");
 			request.setAttribute("url", referer);
-			return "alert";
+						return "alert";	
 		}
 		
 		session.setAttribute("admin", "admin");

@@ -38,6 +38,7 @@ CREATE TABLE BoardImage(
 	CONSTRAINT BoardImage_boardFk_FK FOREIGN KEY (boardFk) REFERENCES Board(bId)
 )AUTO_INCREMENT 3001;
 
+INSERT INTO Board (title, nickName, passwd, content) VALUES ('테스트 중입니다.건의사항 처리부탁드립니다','윤정','1111','안녕하세요.테스트 중입니다')
 
 SELECT * FROM File;
 SELECT * FROM Text;
