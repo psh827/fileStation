@@ -73,15 +73,12 @@
     </div>
 <!-- modal body -->
 <div id="modal1" class="modal" >
-   <form action="delete" method="post" class="modal_delete">
+   <form class="modal_delete">
       <p class="delete_title">삭제 하시겠습니까?</p>
       <div class="yes_or_no">
-      <label for="Yes" >확인</label> 
-      <input type="checkbox" name="delete" value="1" id="Yes" onclick='checkOnlyOne(this)' checked />&nbsp;&nbsp;&nbsp;&nbsp;
-      <label for="No">취소</label>
-      <input type="checkbox" name="delete" value="0" onclick='checkOnlyOne(this)' id="No"/>
+      <button class="delete-modal" formaction="delete" formmethod="post" type="submit">삭제</button>
+      <a href="#close-modal" rel="modal:close" class="delete-modal close-modal close_custom">취소</a>
       </div>
-      <input class="submit_btn" type="submit" value="확인"/>
 
    </form>
 </div>

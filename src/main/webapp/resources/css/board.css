@@ -106,14 +106,6 @@ button { cursor: pointer;}
   line-height: 16px;
 }
 
-.Questions_table td:nth-of-type(2) span.textLine {
-	word-break: break-all;
-	text-overflow: ellipsis;
-	overflow: hidden;
-	width: 600px;
-	white-space: nowrap;
-	display: block;
-}
 .Questions_table tr td {
   text-align: left;
   justify-content: center;
@@ -323,3 +315,8 @@ select {
 	background: #fffbe9;
     color: #f7666d;
 }
+
+
+.Questions_table td:nth-of-type(2) span.textLine {
+   word-break: break-all;
+} 

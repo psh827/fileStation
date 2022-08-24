@@ -63,11 +63,11 @@ a {
     overflow-y: scroll;
 }
 .time_span {
-	font-size: 40px;
-    color: #483D8B;
-    display: block;
+	color: #483D8B;
+    display: flex;
     height: 100%;
-    line-height: 3.4;   
+    justify-content: center;
+    align-items: center;   
 }
 
 #modal1 {
@@ -114,12 +114,12 @@ a {
     border-radius: 5px;
     width: 100%;
     height: 100%;
+    line-height: 96px;
     color: white;
     text-align: center;
     display: flex;
     justify-content: center;
     font-size: 15px;
-    padding: 33px 28px;
     cursor: pointer;
 }
 
@@ -146,6 +146,8 @@ a {
     background: #4425a7;
     color: white;
     border-radius: 5px;
+    position: relative;
+    z-index: 55;
 }
 
 .delete:hover, .total_download_btn:hover {
@@ -153,7 +155,9 @@ a {
 }
 
 .download_form {
-	width: 50%;
+	width: 100%;
+	position: relative;
+    z-index: 30;
 }
 
 .admin-nav{
@@ -210,8 +214,6 @@ a {
 	.time_span {
 	 font-size: 25px;
      margin-left: 0;
-     margin-top: 44px;
-     line-height: 1.3;
 	}
 	.time_box {
 	 width: 85px;
@@ -233,9 +235,36 @@ a {
      margin-bottom: 10px;
      line-height: 0;
 	}
+	
 	.total_download_btn {
 	  height: 40px;
       width: 84px;
+      margin: 0;
+      padding: 0;
+      font-size: 11px;
+      align-items: center;
+	}
+}
+
+@media (max-width : 840px) {
+	.dd_btn{
+	  flex-direction: column;
+	}
+	
+	.modal_btn {
+	 height: 40px;
+     width: 100%;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     font-size: 13px;
+     margin-bottom: 10px;
+     line-height: 0;
+	}
+	
+	.total_download_btn {
+	  height: 40px;
+      width: 100%;
       margin: 0;
       padding: 0;
       font-size: 11px;
