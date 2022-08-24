@@ -281,6 +281,9 @@ public class FileController {
 				File file = new File(path + fileName);
 				file.delete();
 			}						
+		} else {
+			String referer = (String)request.getHeader("REFERER");
+			return referer;
 		}
 		int result = fileService.deleteFile("YES", passwd);
 		int result2 = fileService.deleteText("YES", passwd);

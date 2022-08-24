@@ -70,17 +70,13 @@
     </div>
     <!-- modal body -->
 <div id="modal1" class="modal" >
-   <form action="deleteAll" method="post" class="modal_delete">
+   <form>
       <p class="delete_title">삭제 하시겠습니까?</p>
       <div class="yes_or_no">
-      <label for="Yes" >확인</label> 
-      <input type="checkbox" name="delete" value="1" id="Yes" onclick='checkOnlyOne(this)' checked />&nbsp;&nbsp;&nbsp;&nbsp;
-      <label for="No">취소</label>
-      <input type="checkbox" name="delete" value="0" id="No" onclick='checkOnlyOne(this)'/>
-      </div>
       <input hidden name="passwd" value="${passwd}"/>
-      <input class="submit_btn" type="submit" value="확인"/>
-
+      <button type="submit" formaction="deleteAll" formmethod="post">삭제</button>
+      <a href="#close-modal" rel="modal:close" class="close-modal close_custom">취소</a>
+      </div>
    </form>
 </div>
     <script src="http://code.jquery.com/jquery-latest.js"></script>

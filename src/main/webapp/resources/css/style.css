@@ -125,7 +125,17 @@ input[type="checkbox"]#gnbcheck:checked ~ #gnbbtn {
 	transform: rotate(90deg);
 }
 
-
+.modal a.close-modal.close_custom{
+	position: inherit;
+    display: inline-block;
+    width: 30px;
+    height: 24px;
+    background-image: none;
+    color: black;
+    text-indent: 0;
+    margin-left: 10px;
+    line-height: 32px;
+}
 
 
 @media all and ( max-width: 790px ) {
@@ -206,4 +216,3 @@ input[type="checkbox"]#gnbcheck:checked ~ #gnbbtn {
   	padding: 60px 10px;
 	}
 }
-
