@@ -46,7 +46,7 @@
 	        	<tr>
 	        		<td class="no${i}">${i}</td>
 	        		<td class="file_name_${i}">${fileList[i - 1].fileOriName}<span hidden> ${fileList[i - 1].fileId}</span></td>
-	        		<td class="file_size_${i}">${fileList[i - 1].fileSize}</td>
+	        		<td class="file_size_${i} file_size">${fileList[i - 1].fileSize}</td>
 	        		<td><a href="<c:url value='/file/download_detail?fileId=${fileList[i - 1].fileId}'/>">다운로드</a></td>
 	        	</tr>
 	        </c:forEach>
@@ -105,7 +105,6 @@
 			masTime = new Date(regDate);
 		}
 		
-		console.log(masTime)
 	   	const todayTime = new Date();
 	   	const diff = masTime - todayTime;
 	       
