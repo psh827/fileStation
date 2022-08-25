@@ -1,6 +1,18 @@
+$(document).ready(function(){
+	var text = $('.text_repl')
+	$(text).each(function(){
+		let change = $(this).html().split("<span>")[1].split("</span>")[0]
+		change = change.replaceAll('[br]', "<br>");
+		console.log(change)
+		$(this).html(change)
+	})
+})
+
 function copyClipboard() {
-  const text = document.getElementById('text').textContent;
+  let text = document.getElementById('text').innerHTML;
+  console.log(text)
   const textarea = document.createElement('textarea');
+  text = text.replaceAll("<br>", "\n");
   textarea.textContent = text;
   document.body.append(textarea);
   textarea.select();
@@ -11,14 +23,47 @@ function copyClipboard() {
 const button = document.getElementById('copyBtn');
 button.addEventListener('click', copyClipboard);
 
+$('.text2_btn.copyBtn').click(function(){
+	
+	let text = $(this).parent().prev().html()
+	if(text.includes("Show More")){
+		text = text.replace("Show More", "")
+	}
+	text = text.replaceAll("<br>", "\n");
+	text = text.split("type=\"button\">")[1].split("</a>")[0]
+	console.log(text)
+	const textarea = document.createElement('textarea');
+	  textarea.textContent = text;
+	  document.body.append(textarea);
+	  textarea.select();
+	  document.execCommand('copy');
+	  textarea.remove();
+})
+
+$(".modal_inner_btn.modalCopyBtn").click(function(){
+	let text = $(this).next().html()
+	text = text.replaceAll("<br>", "\n");
+	const textarea = document.createElement('textarea');
+	textarea.textContent = text;
+	document.body.append(textarea);
+	textarea.select();
+	document.execCommand('copy');
+	textarea.remove();
+})
+
 let fileSize = $('.file_size')
 $(fileSize).each(function(index, item){
-	let sizekb = $(this).text() / 1024;
+	let size = Number($(this).text());
+	let sizekb = size / 1024;
 	let sizeMb = sizekb / 1024;
-	if (sizekb < 1000){
-		$(this).text(Math.floor(sizekb) + "KB")
-	}else{
-		$(this).text(Math.floor(sizeMb) + "MB")
+	let fileSizeStr = "";
+	
+	if (size >= (1024 * 1024)){
+		$(this).text(sizeMb.toFixed(2) + " Mb");
+	}else if (size >= (1024)){
+		$(this).text(sizekb.toFixed(2) + " kb");
+	}else {
+		$(this).text(size + " byte");
 	}
 	
 })
@@ -69,3 +114,31 @@ $(window).resize(function(){
 	}
 })
 
+
+$(function(){
+    let elem = $('.table_txt');
+    const showText = 80;
+    let moreBtnText = "Show More";
+
+    elem.each(function(i){
+        let content = $(this).html();
+		console.log(content)
+        let contentLeng = content.length;
+        let lessText = content.substr(0, showText);
+        let moreText = content.substr(showText, contentLeng);
+        let changeHtml = '';
+        if (showText < contentLeng) {
+            changeHtml = `${lessText} <span>...</span><span class="more-content"><span>${moreText}</span><a href="#table_modal${i}"type="button" class="more-btn active"><span>${moreBtnText}</span></a></span>`;
+            $(this).html(changeHtml);
+            if( i == 0 ){
+                $(this).html(changeHtml)
+            }else if( i == 1 ){
+                $(this).html(changeHtml)
+            }else{
+                $(this).html(changeHtml)
+            }
+        }
+    });
+    
+});
+  

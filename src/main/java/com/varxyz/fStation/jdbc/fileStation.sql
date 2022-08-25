@@ -29,14 +29,7 @@ CREATE TABLE Board(
 	adminContent	VARCHAR(500),
 	regDate			TIMESTAMP		NOT NULL DEFAULT CURRENT_TIMESTAMP
 )AUTO_INCREMENT 5062;
-CREATE TABLE BoardImage(
-	biId		BIGINT			PRIMARY KEY AUTO_INCREMENT,
-	boardFk		BIGINT			NOT NULL,
-	imgName		VARCHAR(200)	NOT NULL,
-	imgOriName	VARCHAR(300)	NOT NULL,
-	imgUrl		VARCHAR(500)	NOT NULL,
-	CONSTRAINT BoardImage_boardFk_FK FOREIGN KEY (boardFk) REFERENCES Board(bId)
-)AUTO_INCREMENT 3001;
+
 
 INSERT INTO Board (title, nickName, passwd, content) VALUES ('테스트 중입니다.건의사항 처리부탁드립니다','윤정','1111','안녕하세요.테스트 중입니다')
 
@@ -47,6 +40,7 @@ SELECT * FROM BoardImage;
 
 DROP TABLE File;
 DROP TABLE Text
+DROP TABLE Board;
 
 ALTER TABLE File convert to charset utf8;
 ALTER TABLE Text convert to charset utf8;

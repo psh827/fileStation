@@ -57,8 +57,8 @@
                   </p>
                   <button type="button" class="delete_all">전체삭제</button>
               </div>
-              <textarea placeholder="TEXT" id="file_textarea" class="textInput" maxlength="15500" name="textInput" >
-              </textarea>
+              <textarea id="file_textarea" class="textInput" maxlength="15500" name="textInput" ></textarea>
+              <span class="textarea_span">TEXT</span>
               	<div class="text_cnt_box">
               		<span class="text_now"></span>
               		/

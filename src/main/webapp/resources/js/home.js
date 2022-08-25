@@ -9,11 +9,11 @@ $(document).ready(function() {
     $(".textInput").on("change keyup paste", function(){
         $(this).css("line-height", "1")
         if($(".textInput").val() == ""){
-            $(this).attr("placeholder", "TEXT")
-            $(this).css("font-size", "30px").css("font-weight", "bold").css("line-height", "365px").css("overflow-y", "hidden")
+			$('.textarea_span').css("display", "block")
+            $(this).css("overflow-y", "hidden")
         }else {
-			$(this).attr("placeholder", "")
-   			$(this).css("font-size", "16px").css("font-weight", "normal").css("overflow-y", "auto")
+			$('.textarea_span').css("display", "none")
+   			$(this).css("font-weight", "normal").css("overflow-y", "auto")
 		}
 		let textcnt = $(this).val().length;
 		$('.text_now').text(textcnt)
@@ -146,11 +146,11 @@ function selectFile(fileObject) {
                 console.log("0kb file return");
                 return;
             }
-            
-            var fileSizeKb = fileSize / 1024; // 파일 사이즈(단위 :kb)
             var fileSizeMb = fileSizeKb / 1024;    // 파일 사이즈(단위 :Mb)
             
+            var fileSizeKb = fileSize / 1024; // 파일 사이즈(단위 :kb)
             var fileSizeStr = "";
+            
             if ((1024*1024) <= fileSize) {    // 파일 용량이 1메가 이상인 경우 
                 fileSizeStr = fileSizeMb.toFixed(2) + " Mb";
             } else if ((1024) <= fileSize) {

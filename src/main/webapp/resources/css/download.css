@@ -93,6 +93,29 @@ a {
 	padding: 20px;
 }
 
+.text_box2{
+	width: 70%;
+	height: 100%;
+	background: #f8f5ff;
+	border-radius: 5px;
+	box-shadow: 0 2px 5px rgba(0,0,0,.25);
+	margin-top: 15px;
+	overflow : auto;
+}
+
+.text_box2_table{
+  border: 1px #a39485 solid;
+  font-size: .9em;
+  box-shadow: 0 2px 5px rgba(0,0,0,.25);
+  width: 100%;
+  max-height: none;
+  height: 100%;
+  border-collapse: collapse;
+  border-radius: 5px;
+  margin-top : 5px;
+  overflow: hidden;
+}
+
  .time_box {
  	width: 100%;
     height: 50%;
@@ -135,6 +158,12 @@ a {
 	display: flex;
     margin-top: 25px;
     margin-left: 15px;
+    position: relative;
+    z-index: 1;
+}
+
+.modal.text_inner_box{
+	max-width: none;
 }
 
 .modal_btn {
@@ -185,6 +214,26 @@ a {
     background: none;
     color: gray;
     cursor: pointer;
+}
+
+#copyBtn.text2_btn{
+	position: initial;
+    border: 0;
+    background: none;
+    color: gray;
+    cursor: pointer;
+}
+
+#copyBtn.modal_inner_btn{
+	position: initial; 
+    display: block;
+    border: 0;
+    background: #4425a7;
+    color: white;
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 10px;
+    margin-bottom: 20px;
 }
 
 #copyBtn:hover {

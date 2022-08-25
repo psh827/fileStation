@@ -38,8 +38,6 @@ public class FileDao {
 				jdbcTemplate.update(sql, of.getPasswd(), of.getFileOriName(), of.getFileName(), of.getFileSize(), of.getFileType(), of.getUrl());
 			}
 			
-			System.out.println("입력성공");
-			
 			return 1;
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -57,8 +55,6 @@ public class FileDao {
 			String sql = "INSERT INTO Text (passwd, content) VALUES(?, ?)";
 			
 			jdbcTemplate.update(sql, text.getPasswd(), text.getContent());
-			
-			System.out.println("입력성공");
 			
 			return 1;
 		} catch (Exception e) {

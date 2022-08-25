@@ -54,8 +54,48 @@
         	</table>
         	</div>
       <div class="bottom_container">
-     	<div class="text_box" id="text">${downloadText.content}</div>
-     	<button type="button" id="copyBtn">복사하기</button>
+     		<c:choose>
+     		<c:when test="${fn:length(textList) == 1}"> 		
+		     	<div class="text_box text_repl" id="text">
+		     		<span>${textList[0].content}</span>
+		     	</div>
+		     	<button type="button" id="copyBtn">복사하기</button>
+     		</c:when>
+     		<c:otherwise>
+     		<div class="text_box2" id="text">
+     			<table class="text_box2_table">
+     			<thead>
+     				<tr>
+     					<th style="width: 10%;">번호</th>
+     					<th>내용</th>
+     					<th style="width: 10%;"></th>
+     				</tr>
+     			</thead>
+     			<c:choose>
+     				<c:when test="${fn:length(textList) < 5}">
+	     				<c:forEach var="i" begin="0" end="${fn:length(textList) - 1}">
+	     					<tr>
+	     						<td>${i + 1}</td>
+	     						<td><a class="table_txt text_repl" rel="modal:open" href="#table_modal${i}" type="button"><span>${textList[i].content}</span></a></td>
+	     						<td><button type="button" class="text2_btn copyBtn" id="copyBtn">복사하기</button></td>
+	     					</tr>
+	     				</c:forEach>
+     				</c:when>
+     				<c:otherwise>
+     					<c:forEach var="i" begin="0" end="4">
+	     					<tr>
+	     						<td>${i + 1}</td>
+	     						<td><a class="table_txt text_repl" rel="modal:open" href="#table_modal${i}" type="button"><span>${textList[i].content}</span></a></td>
+	     						<td><button type="button" class="text2_btn copyBtn" id="copyBtn">복사하기</button></td>
+	     					</tr>
+	     				</c:forEach>
+     				</c:otherwise>
+     			</c:choose>
+     			</table>
+     		</div>
+     		</c:otherwise>
+     	</c:choose>
+     	
      	<div class="time_container">
 	   	    <p class="time_box"><span class="time_span"></span></p>
 		   	   <div class="dd_btn">
@@ -80,6 +120,28 @@
       </div>
    </form>
 </div>
+<c:choose>
+	<c:when test="${fn:length(textList) < 5}">
+		<c:forEach var="i" begin="0" end="${fn:length(textList) - 1}">
+			<div id="table_modal${i}" class="modal text_inner_box">
+				<button type="button" class="modal_inner_btn modalCopyBtn" id="copyBtn">복사하기</button>
+		    	<div class="text_repl">
+		    		<span>${textList[i].content}</span>
+		    	</div>
+		    </div>
+		</c:forEach>
+	</c:when>
+	<c:otherwise>
+		<c:forEach var="i" begin="0" end="4">
+			<div id="table_modal${i}" class="modal text_inner_box">
+				<button type="button" class="modal_inner_btn modalCopyBtn" id="copyBtn">복사하기</button>
+				<div class="text_repl">
+		    		<span>${textList[i].content}</span>
+		    	</div>
+		    </div>
+		</c:forEach>
+	</c:otherwise>
+</c:choose>
     <script src="http://code.jquery.com/jquery-latest.js"></script>
     <script src="<c:url value='/resources/js/download.js'/>"></script>
     <script>
@@ -91,7 +153,7 @@
        
        const remainTime = document.querySelector(".time_span");
 	   var regDate = new Date('${fileList[0].deleteDate}')
-	   var textDate = new Date('${downloadText.deleteDate}')
+	   var textDate = new Date('${textList[0].deleteDate}')
 	   function diffDay() {
 		let masTime;
 		if(regDate == 'Invalid Date'){
@@ -152,11 +214,10 @@
 				masTime.setSeconds(0)
 			}
 		}
-		
 	   	const todayTime = new Date();
 	   	const diff = masTime - todayTime;
 	   	let diffHour = ""
-	    if(diff > 90000000){
+	    if(diff > 86400000){
 	    	diffHour = String(24 + Math.floor((diff / (1000*60*60)) % 24)).padStart(2, "0");
 	    }else{
 		   	diffHour = String( Math.floor((diff / (1000*60*60)) % 24)).padStart(2,"0");

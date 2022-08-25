@@ -33,6 +33,7 @@ nav {
   height: 100%;
   position: relative;
   padding-top: 40px;
+  z-index: 1;
 }
 
 nav > ul {

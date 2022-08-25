@@ -101,14 +101,12 @@ public class FileController {
 		int result = 0;
 		passwd = passwd.split(",")[0];
 		List<OurFile> ourFileList = new ArrayList<OurFile>();
-		System.out.println("textarea = " + textarea);
 		Text text = new Text();
 		text.setPasswd(passwd);
-		text.setContent(textarea);
+		text.setContent(textarea.replace("\r\n", "<br>"));
 		//text처리
-		if(!text.getContent().equals("")) {
+		if(!text.getContent().equals("") && text.getContent() != "") {
 			int textResult = fileService.addText(text);
-			System.out.println(textResult);
 		}
 		
 		String filePath = "C:\\fileStation\\";
@@ -156,7 +154,6 @@ public class FileController {
 
 			}
 			result = fileService.addFile(ourFileList);
-			System.out.println("result = " + result);
 		}
 		return result;
 	}
@@ -188,16 +185,15 @@ public class FileController {
 			return "alert";
 		}
 		
-		Text downloadText = null;
 		
-		if(downloadTextList.size() != 0) {
-			downloadText = downloadTextList.get(0);
-			downloadText.setContent(downloadText.getContent().replace("<", "&lt;").replace(">", "&gt;"));			
+		if(downloadTextList.size() >= 1) {
+			for(Text t : downloadTextList) {
+				t.setContent(t.getContent().replace("<br>", "[br]").replace("<", "&lt;").replace(">", "&gt;"));
+			}
+			request.setAttribute("textList", downloadTextList);
 		}
-		
 		request.setAttribute("passwd", passwd);
 		request.setAttribute("fileList", fileList);
-		request.setAttribute("downloadText", downloadText);
 		
 		return "file/download_station";
 	}
