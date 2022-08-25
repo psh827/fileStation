@@ -55,44 +55,40 @@
         	</div>
       <div class="bottom_container">
      		<c:choose>
-     		<c:when test="${fn:length(textList) == 1}"> 		
-		     	<div class="text_box text_repl" id="text">
-		     		<span>${textList[0].content}</span>
+     		<c:when test="${empty textList}">
+     			<div class="text_box text_repl" id="text">
 		     	</div>
 		     	<button type="button" id="copyBtn">복사하기</button>
      		</c:when>
      		<c:otherwise>
-     		<div class="text_box2" id="text">
-     			<table class="text_box2_table">
-     			<thead>
-     				<tr>
-     					<th style="width: 10%;">번호</th>
-     					<th>내용</th>
-     					<th style="width: 10%;"></th>
-     				</tr>
-     			</thead>
      			<c:choose>
-     				<c:when test="${fn:length(textList) < 5}">
-	     				<c:forEach var="i" begin="0" end="${fn:length(textList) - 1}">
-	     					<tr>
-	     						<td>${i + 1}</td>
-	     						<td><a class="table_txt text_repl" rel="modal:open" href="#table_modal${i}" type="button"><span>${textList[i].content}</span></a></td>
-	     						<td><button type="button" class="text2_btn copyBtn" id="copyBtn">복사하기</button></td>
-	     					</tr>
-	     				</c:forEach>
-     				</c:when>
-     				<c:otherwise>
-     					<c:forEach var="i" begin="0" end="4">
-	     					<tr>
-	     						<td>${i + 1}</td>
-	     						<td><a class="table_txt text_repl" rel="modal:open" href="#table_modal${i}" type="button"><span>${textList[i].content}</span></a></td>
-	     						<td><button type="button" class="text2_btn copyBtn" id="copyBtn">복사하기</button></td>
-	     					</tr>
-	     				</c:forEach>
-     				</c:otherwise>
+	     		<c:when test="${fn:length(textList) == 1}"> 		
+			     	<div class="text_box text_repl" id="text">
+			     		<span>${textList[0].content}</span>
+			     	</div>
+			     	<button type="button" id="copyBtn">복사하기</button>
+	     		</c:when>
+	     		<c:when test="${fn:length(textList) > 1 }">
+	     		<div class="text_box2" id="text">
+	     			<table class="text_box2_table">
+	     			<thead>
+	     				<tr>
+	     					<th style="width: 10%;">번호</th>
+	     					<th>내용</th>
+	     					<th style="width: 10%;"></th>
+	     				</tr>
+	     			</thead>
+		     		<c:forEach var="i" begin="0" end="${fn:length(textList) - 1}">
+		     			<tr>
+		     				<td>${i + 1}</td>
+		     				<td><a class="table_txt text_repl" rel="modal:open" href="#table_modal${i}" type="button"><span>${textList[i].content}</span></a></td>
+		     				<td><button type="button" class="text2_btn copyBtn" id="copyBtn">복사하기</button></td>
+		     			</tr>
+		     		</c:forEach>
+	     			</table>
+	     		</div>
+	     		</c:when>
      			</c:choose>
-     			</table>
-     		</div>
      		</c:otherwise>
      	</c:choose>
      	
@@ -121,7 +117,7 @@
    </form>
 </div>
 <c:choose>
-	<c:when test="${fn:length(textList) < 5}">
+	<c:when test="${fn:length(textList) > 1 }">
 		<c:forEach var="i" begin="0" end="${fn:length(textList) - 1}">
 			<div id="table_modal${i}" class="modal text_inner_box">
 				<button type="button" class="modal_inner_btn modalCopyBtn" id="copyBtn">복사하기</button>
@@ -129,18 +125,8 @@
 		    		<span>${textList[i].content}</span>
 		    	</div>
 		    </div>
-		</c:forEach>
+		</c:forEach>	
 	</c:when>
-	<c:otherwise>
-		<c:forEach var="i" begin="0" end="4">
-			<div id="table_modal${i}" class="modal text_inner_box">
-				<button type="button" class="modal_inner_btn modalCopyBtn" id="copyBtn">복사하기</button>
-				<div class="text_repl">
-		    		<span>${textList[i].content}</span>
-		    	</div>
-		    </div>
-		</c:forEach>
-	</c:otherwise>
 </c:choose>
     <script src="http://code.jquery.com/jquery-latest.js"></script>
     <script src="<c:url value='/resources/js/download.js'/>"></script>
@@ -171,6 +157,7 @@
 				masTime.setMinutes(0)
 				masTime.setSeconds(0)
 			}else if((masTime.getHours() >= 18 && masTime.getMinutes() >= 1) && (masTime.getHours() <= 23 && masTime.getMinutes() <= 59)){
+				masTime.setDate(masTime.getDate() + 1)
 				masTime.setHours(0)
 				masTime.setMinutes(0)
 				masTime.setSeconds(0)
@@ -190,6 +177,7 @@
 				masTime.setMinutes(0)
 				masTime.setSeconds(0)
 			}else if((masTime.getHours() >= 18 && masTime.getMinutes() >= 1) && (masTime.getHours() <= 23 && masTime.getMinutes() <= 59)){
+				masTime.setDate(masTime.getDate() + 1)
 				masTime.setHours(0)
 				masTime.setMinutes(0)
 				masTime.setSeconds(0)
@@ -209,6 +197,7 @@
 				masTime.setMinutes(0)
 				masTime.setSeconds(0)
 			}else if((masTime.getHours() >= 18 && masTime.getMinutes() >= 1) && (masTime.getHours() <= 23 && masTime.getMinutes() <= 59)){
+				masTime.setDate(masTime.getDate() + 1)
 				masTime.setHours(0)
 				masTime.setMinutes(0)
 				masTime.setSeconds(0)

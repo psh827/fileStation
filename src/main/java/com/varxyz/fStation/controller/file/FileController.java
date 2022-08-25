@@ -103,7 +103,7 @@ public class FileController {
 		List<OurFile> ourFileList = new ArrayList<OurFile>();
 		Text text = new Text();
 		text.setPasswd(passwd);
-		text.setContent(textarea.replace("\r\n", "<br>"));
+		text.setContent(textarea.replace("\r\n", "<br>").replace("	", "[tab]"));
 		//text처리
 		if(!text.getContent().equals("") && text.getContent() != "") {
 			int textResult = fileService.addText(text);

@@ -60,7 +60,7 @@
           	</c:otherwise>
           </c:choose>
               <i class="fa-solid fa-gear"></i>
-              <span class="hidden" hidden>관리자</span>
+              <span class="hidden admin" hidden>관리자</span>
             </a>
           </li>
           <c:choose>

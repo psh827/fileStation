@@ -13,7 +13,7 @@ $(document).ready(function() {
             $(this).css("overflow-y", "hidden")
         }else {
 			$('.textarea_span').css("display", "none")
-   			$(this).css("font-weight", "normal").css("overflow-y", "auto")
+   			$(this).css("overflow-y", "auto")
 		}
 		let textcnt = $(this).val().length;
 		$('.text_now').text(textcnt)
@@ -36,9 +36,9 @@ function removeEmojis (str) {
 
 $(".delete_all").on("click", function(){
     let textarea = $(".textInput")
+    $('.textarea_span').css("display", "block")
     textarea.val("")
-    textarea.attr("placeholder", "TEXT")
-    textarea.css("font-size", "30px").css("font-weight", "bold").css("line-height", "365px").css("overflow-y", "hidden")
+    textarea.css("overflow-y", "hidden")
     $('.text_now').text("0")
 })
 
@@ -146,9 +146,9 @@ function selectFile(fileObject) {
                 console.log("0kb file return");
                 return;
             }
+            var fileSizeKb = fileSize / 1024; // 파일 사이즈(단위 :kb)
             var fileSizeMb = fileSizeKb / 1024;    // 파일 사이즈(단위 :Mb)
             
-            var fileSizeKb = fileSize / 1024; // 파일 사이즈(단위 :kb)
             var fileSizeStr = "";
             
             if ((1024*1024) <= fileSize) {    // 파일 용량이 1메가 이상인 경우 
@@ -163,13 +163,13 @@ function selectFile(fileObject) {
                 // 확장자 체크
                 alert("등록 불가 확장자");
                 break; */
-            if ($.inArray(ext, [ 'hwp', 'doc', 'docx', 'xls', 'xlsx', 'ppt', 'pptx', 'txt', 'png', 'pdf', 'jpg', 'jpeg', 'gif',
-             					'zip', 'css', 'mp3', 'mp4', 'java', 'jsp', 'bmp', 'html', 'js', 'xml', 'bat', 'sh']) <= 0) {
+            /*if ($.inArray(ext, [ 'hwp', 'doc', 'docx', 'xls', 'xlsx', 'ppt', 'pptx', 'txt', 'png', 'pdf', 'jpg', 'jpeg', 'gif',
+             					'zip', 'css', 'mp3', 'mp4', 'java', 'jsp', 'bmp', 'html', 'js', 'xml', 'bat', 'sh', 'py', 'json']) <= 0) {
                 // 확장자 체크
                 /* alert("등록이 불가능한 파일 입니다.");
                 break; */
-                alert("등록이 불가능한 파일 입니다.("+fileName+")");
-            } else if (fileSizeMb > uploadSize) {
+                /*alert("등록이 불가능한 파일 입니다.("+fileName+")");}*/
+            if (fileSizeMb > uploadSize) {
                 // 파일 사이즈 체크
                 alert("용량 초과\n업로드 가능 용량 : " + uploadSize + " MB");
                 break;
