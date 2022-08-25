@@ -76,10 +76,9 @@
    <form class="modal_delete">
       <p class="delete_title">삭제 하시겠습니까?</p>
       <div class="yes_or_no">
-      <button class="delete-modal" formaction="delete" formmethod="post" type="submit">삭제</button>
-      <a href="#close-modal" rel="modal:close" class="delete-modal close-modal close_custom">취소</a>
+	      <button class="delete-modal" formaction="delete" formmethod="post" type="submit">삭제</button>
+	      <a href="#close-modal" rel="modal:close" class="delete-modal close-modal close_custom">취소</a>
       </div>
-
    </form>
 </div>
     <script>

@@ -37,6 +37,7 @@ $(".delete_all").on("click", function(){
     textarea.val("")
     textarea.attr("placeholder", "TEXT")
     textarea.css("font-size", "30px").css("font-weight", "bold").css("line-height", "365px").css("overflow-y", "hidden")
+    $('.text_now').text("0")
 })
 
 $(".upload-box").click(function(e){
@@ -147,13 +148,6 @@ function selectFile(fileObject) {
             var fileSizeKb = fileSize / 1024; // 파일 사이즈(단위 :kb)
             var fileSizeMb = fileSizeKb / 1024;    // 파일 사이즈(단위 :Mb)
             
-            graphCount += fileSizeMb;
-            graphPercent = (graphCount / maxUploadSize) * 100
-            var leftSize = graphCount
-            $('.items .percent').text(graphPercent.toFixed(2) + "%")
-            $('.items').css("width", graphPercent + "%")
-            $('.left_size').text(leftSize.toFixed(2) + "Mb")
-            
             var fileSizeStr = "";
             if ((1024*1024) <= fileSize) {    // 파일 용량이 1메가 이상인 경우 
                 fileSizeStr = fileSizeMb.toFixed(2) + " Mb";
@@ -195,6 +189,18 @@ function selectFile(fileObject) {
                 } else {
                     fileaddFileList(fileIndex, fileName, fileSizeStr);
                 }
+                
+                graphCount += fileSizeMb;
+	            graphPercent = (graphCount / maxUploadSize) * 100
+	            var leftSize = graphCount
+	            
+	            $('.items .percent').text(graphPercent.toFixed(2) + "%")
+	            if(graphPercent < 7){
+					$('.items').css('width', '7%')
+				}else{
+		            $('.items').css("width", graphPercent + "%")
+				}
+	            $('.left_size').text(leftSize.toFixed(2) + "Mb")
                 
 				$(`div#fileTr_${fileIndex}`).find('.bar').animate({
 					'width': '100%'
@@ -347,7 +353,11 @@ function deleteFile(fIndex) {
 	}
     var leftSize = graphCount
     $('.items .percent').text(graphPercent.toFixed(2) + "%")
-    $('.items').css("width", graphPercent + "%")
+    if(graphPercent < 7){
+		$('.items').css("width", "7%")	
+	}else{
+	    $('.items').css("width", graphPercent + "%")		
+	}
     $('.left_size').text(leftSize.toFixed(2) + "Mb")
     
     if (totalFileSize > 0) {

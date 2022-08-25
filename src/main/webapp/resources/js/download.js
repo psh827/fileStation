@@ -39,21 +39,20 @@ $(window).resize(function(){
 		        let lessText = content.substr(0, showText);
 		        let moreText = content.substr(showText, contentLeng);
 		        if(!contentText.includes("...")){
-			
-		        let changeHtml = '';
-			        if (showText < contentLeng) {
-			            changeHtml = `${lessText}<span>...</span><span class="more-content"><span>${moreText}</span></span>`;
-			            $(this).html(changeHtml);
-			            if( i == 0 ){
-			                $(this).html(changeHtml)
-			            }else if( i == 1 ){
-			                $(this).html(changeHtml)
-			            }else{
-			                $(this).html(changeHtml)
-			            }
-				}
+			        let changeHtml = '';
+				    if (showText < contentLeng) {
+				        changeHtml = `${lessText}<span>...</span><span class="more-content"><span>${moreText}</span></span>`;
+				        $(this).html(changeHtml);
+				        if( i == 0 ){
+				            $(this).html(changeHtml)
+				        }else if( i == 1 ){
+				            $(this).html(changeHtml)
+				        }else{
+				            $(this).html(changeHtml)
+				        }
+					}
 			    }
-			    });
+			});
 		});
 	}else{
 		$(function(){

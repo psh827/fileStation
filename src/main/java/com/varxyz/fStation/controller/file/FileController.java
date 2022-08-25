@@ -184,9 +184,13 @@ public class FileController {
 			request.setAttribute("url", "download");
 			return "alert";
 		}
-
-		Text downloadText = downloadTextList.get(0);
-		downloadText.setContent(downloadText.getContent().replace("<", "&lt;").replace(">", "&gt;"));
+		
+		Text downloadText = null;
+		
+		if(downloadTextList.size() != 0) {
+			downloadText = downloadTextList.get(0);
+			downloadText.setContent(downloadText.getContent().replace("<", "&lt;").replace(">", "&gt;"));			
+		}
 		
 		request.setAttribute("passwd", passwd);
 		request.setAttribute("fileList", fileList);
@@ -275,20 +279,14 @@ public class FileController {
 	@PostMapping("/file/deleteAll")
 	public String deleteAll(HttpServletRequest request) {
 		String passwd = request.getParameter("passwd");
-		String radio = request.getParameter("delete");
 		List<OurFile> fileList = fileService.getFile(passwd);
 		
-		if(radio.equals("1")) {
-			for(OurFile of : fileList) {
-				String path = "C:\\fileStation\\";
-				String fileName = of.getFileOriName();
-				File file = new File(path + fileName);
-				file.delete();
-			}						
-		} else {
-			String referer = (String)request.getHeader("REFERER");
-			return referer;
-		}
+		for(OurFile of : fileList) {
+			String path = "C:\\fileStation\\";
+			String fileName = of.getFileOriName();
+			File file = new File(path + fileName);
+			file.delete();
+		}						
 		int result = fileService.deleteFile("YES", passwd);
 		int result2 = fileService.deleteText("YES", passwd);
 		if(result == 0 || result2 == 0) {

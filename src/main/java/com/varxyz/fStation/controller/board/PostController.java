@@ -38,7 +38,6 @@ public class PostController {
 	
 	@PostMapping("/board/post")
 	public String postForm(Model model, HttpServletRequest request, HttpSession session) {
-
 		long bId = Long.parseLong(request.getParameter("bId"));
 		String passwd = request.getParameter("passwd");
 		

@@ -13,7 +13,8 @@
     <title>file Station</title>
     <link rel="stylesheet" href="<c:url value='/resources/css/initial.css'/>" />
     <link rel="stylesheet" href="<c:url value='/resources/css/default.css'/>" />
-    <link rel="stylesheet" href="<c:url value='/resources/css/style.css'/>" />    
+    <link rel="stylesheet" href="<c:url value='/resources/css/style.css'/>" />   
+    <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/modal.css'/>" /> 
     <link rel="stylesheet" href="<c:url value='/resources/css/qna.css'/>" />
     <script
       src="https://kit.fontawesome.com/62a067f302.js"
@@ -41,7 +42,7 @@
               </div>     
             </div>
             <div class="anw">
-              <span>24시간이 초과되면 자동으로 삭제되며 24시간 전에 삭제를 원하시면 다운로드페이지에 있는 삭제버튼을 클릭하시면 삭제 됩니다.</span>
+              <span>24시간에서 30시간까지 보장됩니다. 24시간이 지난 파일은 매일 00시, 06시, 12시, 18시를 기준으로 삭제됩니다. 다운로드페이지에 남은시간이 표시됩니다.</span>
             </div>
               <div class="que">
               <span>로그인은 어디서 하나요?</span>
@@ -53,7 +54,7 @@
               <span>최대 업로드 용량은 얼마인가요?</span>
             </div>
             <div class="anw">
-              <span>단일 200mb이며, 최대 20개 까지 가능합니다.</span>
+              <span>단일 200MB이며, 최대 4000MB 까지 가능합니다.</span>
             </div>
                <div class="que">
               <span>비밀번호 설정은 무엇인가요?</span>

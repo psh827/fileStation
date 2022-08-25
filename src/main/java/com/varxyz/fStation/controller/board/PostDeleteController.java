@@ -32,15 +32,12 @@ public class PostDeleteController {
 	@PostMapping("/board/delete")
 	public String deleteForm(Model model,HttpServletRequest request, HttpSession session) throws Exception {
 		long bId = (long) session.getAttribute("bId");
-		System.out.println(bId);
 		String radio = request.getParameter("delete");
-		System.out.println(radio);
+		
 		Post post = new Post();
 		int result = 0;
 		post.setBoardId(bId);
-		if(radio.equals("1")) {
-			result = boardService.deletePost(post);			
-		}
+		result = boardService.deletePost(post);			
 		
 		if(result == 0 ) {
 			model.addAttribute("msg", "삭제오류");

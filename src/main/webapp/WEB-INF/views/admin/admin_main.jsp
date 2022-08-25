@@ -16,6 +16,7 @@
     <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/default.css'/>" />
     <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/style.css'/>" />
     <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/Questions.css'/>" />
+    <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/modal.css'/>" />
     <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/admin.css'/>" />
     <link rel="stylesheet" href="<c:url value='/resources/css/nam.css'/>">
     <script src="<c:url value='/resources/js/subpage.js'/>"></script>
@@ -55,7 +56,6 @@
           </li>
           <li class="nav_item">
             <a href="<c:url value='/admin/logout'/>" class="nav_link">
-              로그아웃
               <span class="hidden" hidden>로그아웃</span>
             </a>
           </li>

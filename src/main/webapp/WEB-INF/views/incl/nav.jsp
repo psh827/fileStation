@@ -75,10 +75,14 @@
         </ul>
      </nav>
      
-<div id="modal2" class="modal" >
-   <form action="/fileStation/admin/adminLogin" method="post" class="modal_body">
-      <p><span>아이디</span> : <input type="text" name="adminId" /></p>
-      <p><span>비밀번호</span> : <input type="password" name="adminPasswd" /></p>
+<div id="modal2" class="modal admin-modal" >
+   <form action="/fileStation/admin/adminLogin" method="post" class="modal_body modal-admin">
+      <div class="id-box">
+      <p><span>아이디</span> : &nbsp <input type="text" class="id-input" name="adminId" /></p>
+      </div>
+      <div class="passwd-box">
+      <p><span>비밀번호</span> : &nbsp <input type="password" class="passwd-input" name="adminPasswd" /></p>
+      </div>
       <input class="submit_btn" type="submit" value="확인" />
    </form>
-</div>   
+</div>     

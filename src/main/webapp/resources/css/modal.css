@@ -39,3 +39,23 @@
 .delete_title {
 	font-size : 16px;
 }
+.modal-admin {
+   margin-top : 35px;
+}
+
+.delete_title {
+   font-size : 16px;
+}
+
+.passwd-box {
+   margin : 20px auto;
+}
+
+.id-input, .passwd-input {
+   border: none;
+    border-bottom: 1px solid gray;
+}
+
+.passwd-input {
+   width: 36%;
+}

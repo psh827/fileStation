@@ -9,6 +9,7 @@
 <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/initial.css'/>" />
 <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/default.css'/>" />
 <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/style.css'/>" />
+<link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/modal.css'/>" />
 <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/Questions.css'/>" />
 <script
       src="https://kit.fontawesome.com/62a067f302.js"

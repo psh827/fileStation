@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="<c:url value='/resources/css/default.css'/>">
     <link rel="stylesheet" href="<c:url value='/resources/css/style.css'/>">
     <%-- <link rel="stylesheet" href="<c:url value='/resources/css/upload.css'/>"> --%>
+    <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/modal.css'/>" />
     <link rel="stylesheet" href="<c:url value='/resources/css/download.css'/>">
     <script
       src="https://kit.fontawesome.com/62a067f302.js"
@@ -74,7 +75,7 @@
       <p class="delete_title">삭제 하시겠습니까?</p>
       <div class="yes_or_no">
       <input hidden name="passwd" value="${passwd}"/>
-      <button class="delete-modal" formaction="delete" formmethod="post" type="submit">삭제</button>
+      <button class="delete-modal" formaction="deleteAll" formmethod="post" type="submit">삭제</button>
       <a href="#close-modal" rel="modal:close" class="delete-modal close-modal close_custom">취소</a>
       </div>
    </form>
@@ -94,39 +95,78 @@
 	   function diffDay() {
 		let masTime;
 		if(regDate == 'Invalid Date'){
-			masTime = new Date(textDate);			
+			masTime = new Date(textDate);
+			if ((masTime.getHours() >= 0 && masTime.getMinutes() >= 1) && (masTime.getHours() <= 5 && masTime.getMinutes() <= 59)){
+				masTime.setHours(6)
+				masTime.setMinutes(0)
+				masTime.setSeconds(0)
+			}else if((masTime.getHours() >= 6 && masTime.getMinutes() >= 1) && (masTime.getHours() <= 11 && masTime.getMinutes() <= 59)){
+				masTime.setHours(12)
+				masTime.setMinutes(0)
+				masTime.setSeconds(0)
+			}else if((masTime.getHours() >= 12 && masTime.getMinutes() >= 1) && (masTime.getHours() <= 17 && masTime.getMinutes() <= 59)){
+				masTime.setHours(18)
+				masTime.setMinutes(0)
+				masTime.setSeconds(0)
+			}else if((masTime.getHours() >= 18 && masTime.getMinutes() >= 1) && (masTime.getHours() <= 23 && masTime.getMinutes() <= 59)){
+				masTime.setHours(0)
+				masTime.setMinutes(0)
+				masTime.setSeconds(0)
+			}
 		}else if(textDate == 'Invalid Date'){
 			masTime = new Date(regDate);
+			if ((masTime.getHours() >= 0 && masTime.getMinutes() >= 1) && (masTime.getHours() <= 5 && masTime.getMinutes() <= 59)){
+				masTime.setHours(6)
+				masTime.setMinutes(0)
+				masTime.setSeconds(0)
+			}else if((masTime.getHours() >= 6 && masTime.getMinutes() >= 1) && (masTime.getHours() <= 11 && masTime.getMinutes() <= 59)){
+				masTime.setHours(12)
+				masTime.setMinutes(0)
+				masTime.setSeconds(0)
+			}else if((masTime.getHours() >= 12 && masTime.getMinutes() >= 1) && (masTime.getHours() <= 17 && masTime.getMinutes() <= 59)){
+				masTime.setHours(18)
+				masTime.setMinutes(0)
+				masTime.setSeconds(0)
+			}else if((masTime.getHours() >= 18 && masTime.getMinutes() >= 1) && (masTime.getHours() <= 23 && masTime.getMinutes() <= 59)){
+				masTime.setHours(0)
+				masTime.setMinutes(0)
+				masTime.setSeconds(0)
+			}
 		}else {
 			masTime = new Date(regDate);
+			if ((masTime.getHours() >= 0 && masTime.getMinutes() >= 1) && (masTime.getHours() <= 5 && masTime.getMinutes() <= 59)){
+				masTime.setHours(6)
+				masTime.setMinutes(0)
+				masTime.setSeconds(0)
+			}else if((masTime.getHours() >= 6 && masTime.getMinutes() >= 1) && (masTime.getHours() <= 11 && masTime.getMinutes() <= 59)){
+				masTime.setHours(12)
+				masTime.setMinutes(0)
+				masTime.setSeconds(0)
+			}else if((masTime.getHours() >= 12 && masTime.getMinutes() >= 1) && (masTime.getHours() <= 17 && masTime.getMinutes() <= 59)){
+				masTime.setHours(18)
+				masTime.setMinutes(0)
+				masTime.setSeconds(0)
+			}else if((masTime.getHours() >= 18 && masTime.getMinutes() >= 1) && (masTime.getHours() <= 23 && masTime.getMinutes() <= 59)){
+				masTime.setHours(0)
+				masTime.setMinutes(0)
+				masTime.setSeconds(0)
+			}
 		}
 		
 	   	const todayTime = new Date();
 	   	const diff = masTime - todayTime;
-	       
-	   	const diffHour =String( Math.floor((diff / (1000*60*60)) % 24)).padStart(2,"0");
+	   	let diffHour = ""
+	    if(diff > 90000000){
+	    	diffHour = String(24 + Math.floor((diff / (1000*60*60)) % 24)).padStart(2, "0");
+	    }else{
+		   	diffHour = String( Math.floor((diff / (1000*60*60)) % 24)).padStart(2,"0");
+	    }
 		const diffMin = String(Math.floor((diff / (1000*60)) % 60)).padStart(2,"0");
 		const diffSec = String(Math.floor(diff / 1000 % 60)).padStart(2,"0");
 		remainTime.innerText = diffHour + '시간 ' + diffMin + '분 ' + diffSec + '초';
 	   }
 	   diffDay();
 	   setInterval(diffDay, 1000);
-	   if (remainTime.innerText == "0시간 0분 0초"){
-		   location.href = "file/download";
-	   }
-       
-	   function checkOnlyOne(element) {
-		   
-		   const checkboxes 
-		       = document.getElementsByName("delete");
-		   
-		   checkboxes.forEach((cb) => {
-		     cb.checked = false;
-		   })
-		   
-		   element.checked = true;
-		   }
-	   
    </script>
    <script src="<c:url value='/resources/js/common.js'/>"></script>
   </body>

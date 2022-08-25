@@ -26,6 +26,7 @@
 }
 
 .textarea{
+	min-width: 220px;
     width: calc(40% - 10px);
     flex-grow: 0;
 }
@@ -445,7 +446,7 @@
 }
 
 .items-wrap .items {
-  width: 0%;
+  width: 7%;
   -webkit-transition: 1s .25s;
   transition: 1s .25s;
   min-width: 5%;
