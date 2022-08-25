@@ -137,7 +137,10 @@ public class FileController {
 					fileT = "IMG";
 				} else if (originalFileExtension.equals(".mp3") || originalFileExtension.equals(".mp4")) {
 					fileT = "VIDEO";
-				} else {
+				} else if(originalFileExtension.equals(".zip") || originalFileExtension.equals(".7z") || originalFileExtension.equals(".zar")) {
+					fileT = "ETC";
+				}
+				else {
 					fileT = "DOCUMENT";
 				}
 				ourFile.setFileType(fileT);

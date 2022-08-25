@@ -68,5 +68,6 @@
     
 .month_selection {
 	height: 25px;
-    font-size: 15px; 
+    font-size: 15px;
+    font-family: emoji; 
  }

@@ -70,7 +70,6 @@
             	<div class="input-container">
 			        <form method="get">
 			        	<select class="month_selection" name="month">
-			        		<option value="unknown">--선택--</option>
 			        		<option label="1월" value="01-01">
 			        		<option label="2월" value="02-01">
 			        		<option label="3월" value="03-01">
@@ -217,9 +216,9 @@
     	      $(".zt-skill-bar > div ").each(function(i) {
     	        var $this = $(this),
     	          skills = $this.data('width');
-				if(skills / 10 < 4){
+				if(skills / 200 < 4000){
 	    	        $this.css({
-	    	          'width': '10%'
+	    	          'width': '15%'
 	    	        });
 				}else{
 					$this.css({
@@ -241,7 +240,7 @@
     	}(jQuery));
 	    var default_month = '${defaultMonth}'
 	    default_month = default_month.split('-')[1].replace("0", "")
-	    default_month = Number(default_month)
+	    default_month = Number(default_month) - 1
 	    $('.month_selection option:eq(' + default_month + ')').prop("selected", true);
     
     </script>

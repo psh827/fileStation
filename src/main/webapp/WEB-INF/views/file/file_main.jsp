@@ -9,7 +9,6 @@
       content="width=device-width, initial-scale=1.0, minimum-scale=1"
     />
     <title>file Station</title>
-    <!-- <link rel="stylesheet" href="./css/initial.css"> -->
     <link rel="stylesheet" href="<c:url value='/resources/css/initial.css'/>">
     <link rel="stylesheet" href="<c:url value='/resources/css/default.css'/>">
     <link rel="stylesheet" href="<c:url value='/resources/css/style.css'/>">
@@ -24,6 +23,9 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
   </head>
   <body>
+	<div id = "Progress_Loading"><!-- 로딩바 -->
+		<img src="<c:url value='/resources/img/loading.gif'/>"/>
+	</div>
     <div class="main_container">
       <!--왼쪽 navigation-->
 
@@ -82,6 +84,7 @@
         </div>
       </div>
     </div>
+     <div class="all_wrap"></div>
     <script src="http://code.jquery.com/jquery-latest.js"></script>
     <script src="<c:url value='/resources/js/common.js'/>"></script>
     <script src="<c:url value='/resources/js/home.js'/>"></script>

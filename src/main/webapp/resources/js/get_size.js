@@ -10,8 +10,8 @@ $(".month_selection").on("change", function(){
 			'month': month
 		},
 		success: function(data){
-			if(data / 10 < 4){
-				$('.zt-skill-bar > div').attr('data-width', data).css('width', '10%')
+			if(data / 200 < 4000){
+				$('.zt-skill-bar > div').attr('data-width', data).css('width', '15%')
 				$('.month').text(monthstr + "월")
 			}else{
 				$('.zt-skill-bar > div').attr('data-width', data).css('width', data / 10 + "%")

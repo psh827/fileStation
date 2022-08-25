@@ -194,6 +194,30 @@ input[type="checkbox"]#gnbcheck:checked ~ #gnbbtn {
     transition: .1s Ease-in all;
 }
 
+#Progress_Loading
+{
+ position: absolute;
+ left: 50%;
+ top: 50%;
+ background: #ffffff;
+ z-index: 999;
+}
+
+.all_wrap{
+	position: absolute;
+	left: 0;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	background: rgba(0, 0, 0, 0.4);
+	display: none;
+}
+
+.all_wrap.active {
+	display: block;
+	z-index: 998;
+}
+
 @media all and ( max-width: 790px ) {
   #mobile-close-btn {
     display: block;
