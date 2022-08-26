@@ -18,7 +18,7 @@
     <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/Questions.css'/>" />
     <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/modal.css'/>" />
     <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/admin.css'/>" />
-    <link rel="stylesheet" href="<c:url value='/resources/css/nam.css'/>">
+	<link rel="stylesheet" href="<c:url value='/resources/css/nam.css'/>">
     <script src="<c:url value='/resources/js/subpage.js'/>"></script>
     <script src="<c:url value='/resources/js/admin.js'/>"></script>
     <script
@@ -137,17 +137,20 @@
             </div>
             <div class="admin_box bottom right">
             	<p class="admin_title">새로 올라온 건의사항</p>
-            	<ul>
+            	<table class="admin_board_box">
+            		<tr style="border-bottom: 1px solid; border-top: 1px solid; " >
+            			<th>순서</th>
+            			<th>내용</th>
+            			<th>날짜</th>
+            		</tr>
             		<c:choose>
             			<c:when test="${fn:length(adminPost) < 6 }">
             				<c:forEach var="post" items="${adminPost}">
-            					<li class="admin_item">
-	            					<a class="admin_link" href="<c:url value="/board/post?boardId=${post.boardId}"/>">
-		            					<span class="admin_bId admin_span">${post.boardId}</span>
-		            					<span class="admin_span_title admin_span">${post.title}</span>
-		            					<span class="admin_regDate admin_span">${post.regDate }</span>
-	            					</a>
-            					</li>	            					
+            					<tr class="admin_item">
+		            					<td class="admin_bId admin_span"><a class="admin_link" href="<c:url value="/board/post?boardId=${post.boardId}"/>">${post.boardId}</a></td>
+		            					<td class="admin_span_title admin_span"><a class="admin_link" href="<c:url value="/board/post?boardId=${post.boardId}"/>">${post.title}</a></td>
+		            					<td class="admin_regDate admin_span"><a class="admin_link" href="<c:url value="/board/post?boardId=${post.boardId}"/>">${post.regDate }</a></td>
+            					</tr>	            					
             				</c:forEach>
             			</c:when>
             			<c:otherwise>
@@ -162,7 +165,7 @@
 		            		</c:forEach>
             			</c:otherwise>
             		</c:choose>
-            	</ul>
+            	</table>
             </div>
           </div>
         </div>
