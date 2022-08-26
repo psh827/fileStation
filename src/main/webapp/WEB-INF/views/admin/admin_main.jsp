@@ -240,15 +240,17 @@
     	          if (skills >= (1024 * 1024 * 1024)) {
     	        	  iswhat = "GB";
     	        	  skills = skills / (1024 * 1024 * 1024) ;
+    	        	  console.log(skills)
     	        	  $this.css({
-    	    	          'width': (20 / skills) * 10 + "%"
+    	    	          'width': ((skills / 20) * 100) + "%"
     	    	        });
     	        	  $(amountText).text(skills.toFixed(0) + "GB");
     			  }else if (skills >= (1024 * 1024)) {
     				  isWhat = "MB"
     				  skills = skills / (1024 * 1024);
+    				  
     				  $this.css({
-    	    	          'width': (skills / 20000) * 100 + "%"
+    	    	          'width': "10%"
     	    	        });
     				  $(amountText).text(skills.toFixed(0) + "MB");
     			  }else if (skills >= 1024) {

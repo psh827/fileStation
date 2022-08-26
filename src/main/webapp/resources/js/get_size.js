@@ -18,7 +18,7 @@ $(".month_selection").on("change", function(){
     	    	  iswhat = "GB";
     	       	  data = data / (1024 * 1024 * 1024) ;
     	       	  target.css({
-    	              'width': (20 / data) * 10 + "%"
+    	              'width': (data / 20) * 100 + "%"
     	            });
     	      	  $(amountText).text(data.toFixed(0) + "GB");
     		  }else if (data >= (1024 * 1024)) {
