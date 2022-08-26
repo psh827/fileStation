@@ -36,12 +36,22 @@ import com.varxyz.fStation.service.BoardServiceImpl;
 @Controller
 public class IntroductionController {
 	
+	/**
+	 * 서비스소개 매핑
+	 * @param request
+	 * @param model
+	 * @param session
+	 * @return
+	 */
 	@GetMapping("/service/service_introduction")
 	public String boardForm(HttpServletRequest request, Model model, HttpSession session) {
-		
 		return "service/service_introduction";
 	}
 	
+	/**
+	 * qna 매핑
+	 * @return
+	 */
 	@GetMapping("/service/qna")
 	public String qnaForm() {
 		return "service/qna";

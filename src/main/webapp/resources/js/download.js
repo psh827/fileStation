@@ -122,11 +122,10 @@ $(function(){
     elem.each(function(i){
         let content = $(this).html();
         let contentmad = $(this).html().split("<br>")
+        console.log(contentmad[0].length)
+        console.log(contentmad.length)
         let changeHtml = '';
-		if(contentmad[0].length < 10 && contentmad.length > 5){
-			changeHtml = `${contentmad[0]}<br>${contentmad[1]} <span>...</span><span class="more-content"><span></span><a href="#table_modal${i}"type="button" class="more-btn active"><span>${moreBtnText}</span></a></span>`;
-            $(this).html(changeHtml);
-		}
+		
         let contentLeng = content.length;
         let lessText = content.substr(0, showText);
         let moreText = content.substr(showText, contentLeng);
@@ -141,6 +140,10 @@ $(function(){
                 $(this).html(changeHtml)
             }
         }
+        if(contentmad[0].length < 10 && contentmad.length > 5){
+			changeHtml = `${contentmad[0]}<br>${contentmad[1]} <span>...</span><span class="more-content"><span></span><a href="#table_modal${i}"type="button" class="more-btn active"><span>${moreBtnText}</span></a></span>`;
+            $(this).html(changeHtml);
+		}
     });
     
 });

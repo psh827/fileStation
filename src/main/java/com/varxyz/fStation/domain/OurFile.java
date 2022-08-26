@@ -19,5 +19,6 @@ public class OurFile {
 	private String deleteCheck;
 	private Date regDate;
 	private Date deleteDate;
+	private String deleteDateStr;
 	
 }

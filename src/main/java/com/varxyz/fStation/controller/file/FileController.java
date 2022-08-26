@@ -10,6 +10,7 @@ import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -183,6 +184,53 @@ public class FileController {
 			request.setAttribute("msg", "비밀번호가 틀렸습니다.");
 			request.setAttribute("url", "download");
 			return "alert";
+		}
+		
+		if(fileList.size() >= 1) {
+			for(OurFile f : fileList) {
+				Calendar cl = Calendar.getInstance();
+				cl.setTime(f.getDeleteDate());
+				int year = cl.get(Calendar.YEAR);
+				int month = cl.get(Calendar.MONTH);
+				int day = cl.get(Calendar.DATE);
+				int hour = cl.get(Calendar.HOUR_OF_DAY);
+				int minute = cl.get(Calendar.MINUTE);
+				if((hour >= 0 && minute >= 1) && (hour <= 5 && minute <= 59)) {
+					cl.set(Calendar.YEAR, year);
+					cl.set(Calendar.MONTH, month);
+					cl.set(Calendar.DATE, day);
+					cl.set(Calendar.HOUR_OF_DAY, 6);
+					cl.set(Calendar.MINUTE, 0);
+					cl.set(Calendar.SECOND, 0);
+					f.setDeleteDate(cl.getTime());
+				}else if((hour >= 6 && minute >= 1) && (hour <= 11 && minute <= 59)) {
+					cl.set(Calendar.YEAR, year);
+					cl.set(Calendar.MONTH, month);
+					cl.set(Calendar.DATE, day);
+					cl.set(Calendar.HOUR_OF_DAY, 12);
+					cl.set(Calendar.MINUTE, 0);
+					cl.set(Calendar.SECOND, 0);
+					f.setDeleteDate(cl.getTime());
+				}else if((hour >= 12 && minute >= 1) && (hour <= 17 && minute <= 59)) {
+					cl.set(Calendar.YEAR, year);
+					cl.set(Calendar.MONTH, month);
+					cl.set(Calendar.DATE, day);
+					cl.set(Calendar.HOUR_OF_DAY, 18);
+					cl.set(Calendar.MINUTE, 0);
+					cl.set(Calendar.SECOND, 0);
+					f.setDeleteDate(cl.getTime());
+				}else if((hour >= 18 && minute >= 1) && (hour <= 23 && minute <= 59)) {
+					cl.set(Calendar.YEAR, year);
+					cl.set(Calendar.MONTH, month);
+					cl.add(Calendar.DATE, 1);
+					cl.set(Calendar.HOUR_OF_DAY, 0);
+					cl.set(Calendar.MINUTE, 0);
+					cl.set(Calendar.SECOND, 0);
+					f.setDeleteDate(cl.getTime());
+				}
+				SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+				f.setDeleteDateStr(format.format(f.getDeleteDate()));
+			}
 		}
 		
 		
