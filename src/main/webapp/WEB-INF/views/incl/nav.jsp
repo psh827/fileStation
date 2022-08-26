@@ -66,7 +66,7 @@
           <c:choose>
           	<c:when test="${!empty admin}">
 	          	<li class="nav_item">
-	          		<a class="admin-nav nav_link" href="<c:url value="/admin/logout"/>">
+	          		<a class="admin-nav nav_link" style="font-size: 12px; margin-top: 15px;" href="<c:url value="/admin/logout"/>">
 	          			로그아웃
 	          		</a>
 	          	</li>

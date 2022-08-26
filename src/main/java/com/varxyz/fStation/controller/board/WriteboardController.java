@@ -31,28 +31,41 @@ public class WriteboardController {
 	
 	@Autowired
 	BoardServiceImpl boardService;
-	
+
+	/**
+	 * 글작성 폼 화면
+	 * @param postCommand
+	 * @return
+	 */
 	@GetMapping("/board/write_board")
 	public String writeBoardForm(@ModelAttribute("postCommand") PostCommand postCommand) {
-		
 		return "board/write_board";
 	}
 	
-	
+	/**
+	 * 글작성 종료 후
+	 * @param postCommand
+	 * @param model
+	 * @return
+	 */
 	@PostMapping("/board/write_board")
 	public String writeBoard(PostCommand postCommand, Model model) {
+		// 변수 선언
 		String title = postCommand.getTitle();
 		String nickName = postCommand.getNickName();
 		String passwd = postCommand.getPasswd();
 		String content = postCommand.getContent();
 		
+		// service에 넣을 객체 생성
 		Post post = new Post();		
 		post.setTitle(title);
 		post.setNickname(nickName);
 		post.setPasswd(passwd);
 		post.setContent(content);
 		
+		// 서비스 호출
 		int reuslt = boardService.writePost(post);
+		// result값이 0이라면 등록 오류. 글작성 페이지로 보내기
 		if(reuslt == 0) {
 			model.addAttribute("msg", "등록 오류");
 			model.addAttribute("url", "write_board");

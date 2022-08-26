@@ -41,7 +41,8 @@ public class ModifyBoardController {
 		//service 호출
 		int result = boardService.modifyPost(post);
 		
-	   return post;
+		//ajax에값넘기기
+	    return post;
 	}
 	
 	/**
@@ -65,7 +66,7 @@ public class ModifyBoardController {
 		//service 호출
 		int result = boardService.adminComment(post);
 		
-		//html에
+		//ajax에값넘기기
 	    return post;
 	}
 }

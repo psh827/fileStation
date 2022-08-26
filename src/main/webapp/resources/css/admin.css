@@ -135,6 +135,12 @@ table {
 	text-align: center;
     margin-left: 30px;
 }
+
+.pie_txt_box td {
+	border-right: 1px solid;
+	padding-right: 5px;
+}
+
 td {
 	padding:5px;
 }

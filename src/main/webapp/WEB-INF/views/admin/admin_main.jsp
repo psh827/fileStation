@@ -89,7 +89,7 @@
 			<p>&nbsp;</p>
 			<p>&nbsp;</p>
 			<h3><strong>월별 업로드된 파일 크기</strong></h3>
-			<div class="zt-skill-bar"><div data-width="${amount }" style=""><span class="month">8월</span><span class="amount">${amount }MB</span></div></div>
+			<div class="zt-skill-bar"><div data-width="${amount}" style=""><span class="month">8월</span><span class="amount">${amount }MB</span></div></div>
         </div>
       </div>
             
@@ -159,7 +159,7 @@
             </div>
             <div class="admin_box bottom right">
             	<p class="admin_title">새로 올라온 건의사항</p>
-            	<table class="admin_board_box">
+            	<table class="admin_board_box" style="width: 100%; margin: 0;">
             		<tr style="border-bottom: 1px solid; border-top: 1px solid; " >
             			<th>순서</th>
             			<th>내용</th>
@@ -177,13 +177,11 @@
             			</c:when>
             			<c:otherwise>
 		            		<c:forEach var="i" begin="0" end="5">
-		            			<li class="admin_item">
-									<a class="admin_link" href="<c:url value="/board/post?boardId=${adminPost[i].boardId}"/>">
-		            					<span class="admin_bId admin_span">${adminPost[i].boardId}</span>
-		            					<span class="admin_span_title admin_span">${adminPost[i].title}</span>
-		            					<span class="admin_regDate admin_span">${adminPost[i].regDate }</span>
-	            					</a>
-								</li>
+		            			<tr class="admin_item">
+									<td class="admin_bId admin_span"><a class="admin_link" href="<c:url value="/board/post?boardId=${post.boardId}"/>">${post.boardId}</a></td>
+		            					<td class="admin_span_title admin_span"><a class="admin_link" href="<c:url value="/board/post?boardId=${post.boardId}"/>">${post.title}</a></td>
+		            					<td class="admin_regDate admin_span"><a class="admin_link" href="<c:url value="/board/post?boardId=${post.boardId}"/>">${post.regDate }</a></td>
+								</tr>
 		            		</c:forEach>
             			</c:otherwise>
             		</c:choose>
@@ -195,7 +193,9 @@
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
     <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
   <script src="<c:url value='/resources/js/get_size.js'/>"></script>
+  <script src="<c:url value='/resources/js/admin.js'/>"></script>
     <script type="text/javascript">      
 	  google.load("visualization", "1", {packages:["corechart"]});     
 	  var month = ${monthList}
@@ -206,11 +206,11 @@
 	  function drawChart() {        
 		 var data = google.visualization.arrayToDataTable([      
 			 ['Month', 'Count'],          
-			 [month[0],  Number(count[0])],          
-			 [month[1],  Number(count[1])],          
-			 [month[2],  Number(count[2])],          
-			 [month[3],  Number(count[3])],
-			 [month[4],  Number(count[4])]  ]);        
+			 [month[0] + "월",  52],          
+			 [month[1] + "월",  17],          
+			 [month[2] + "월",  25],          
+			 [month[3] + "월",  52],
+			 [month[4] + "월",  Number(count[4])]]);        
 			 data.addColumn('number', '명');
 		 var options = {
 			title: '월 별 사용자 수',
@@ -218,12 +218,6 @@
 		    colors: [ '#42cef5'],
 		 	tooltip: { isHtml: true },
 		 	legend: 'none',
-		 	hAxis: {
-		          title: '월',
-		          textStyle: {
-		        	  italic : false
-		          }
-		        },
 		 	 vAxis: {
 		          title: '명',
 		          textStyle: {
@@ -235,21 +229,43 @@
 		 chart.draw(data, options);      }
  
     (function($) {
-    	  "use strict";
     	  $(function() {
     	    function animated_contents() {
     	      $(".zt-skill-bar > div ").each(function(i) {
     	        var $this = $(this),
     	          skills = $this.data('width');
-				if(skills / 200 < 4000){
-	    	        $this.css({
-	    	          'width': '15%'
-	    	        });
-				}else{
-					$this.css({
-		    	          'width': skills / 10 + '%'
-		    	    });
-				}
+    	          iswhat = "";
+    	          amountText = $('.amount')
+    	          //10000MB - > 10GB
+    	          if (skills >= (1024 * 1024 * 1024)) {
+    	        	  iswhat = "GB";
+    	        	  skills = skills / (1024 * 1024 * 1024) ;
+    	        	  $this.css({
+    	    	          'width': (20 / skills) * 10 + "%"
+    	    	        });
+    	        	  $(amountText).text(skills.toFixed(0) + "GB");
+    			  }else if (skills >= (1024 * 1024)) {
+    				  isWhat = "MB"
+    				  skills = skills / (1024 * 1024);
+    				  $this.css({
+    	    	          'width': (skills / 20000) * 100 + "%"
+    	    	        });
+    				  $(amountText).text(skills.toFixed(0) + "MB");
+    			  }else if (skills >= 1024) {
+    				  //20gb 10% = 2bg 1% = 200mb 0.1 = 2mb 0.01% = 200kb
+    				  iswhat = "KB";
+    				  skills = skills / 1024;
+    				  $this.css({
+    	    	          'width': '10%' 
+    	    	        });
+    				  $(amountText).text(skills.toFixed(2) + "KB");
+    			  }else{
+    				  iswhat = "byte";
+    				  $this.css({
+    	    	          'width': '10%'
+    	    	        });
+    				  $(amountText).text(skills.toFixed(0) + "byte");
+    			  }
 
     	      });
     	    }
@@ -268,6 +284,34 @@
 	    default_month = Number(default_month) - 1
 	    $('.month_selection option:eq(' + default_month + ')').prop("selected", true);
     
+	    
+	    $(function(){
+	        let elem = $('.admin_span_title .admin_link');
+	        const showText = 15;
+	        let moreBtnText = "Show More";
+
+	        elem.each(function(i){
+	            let content = $(this).html();
+	            console.log(content)
+	            let changeHtml = '';
+	    		
+	            let contentLeng = content.length;
+	            let lessText = content.substr(0, showText);
+	            let moreText = content.substr(showText, contentLeng);
+	            if (showText < contentLeng) {
+	                changeHtml = lessText + '<span>...</span>';
+	                $(this).html(changeHtml);
+	                if( i == 0 ){
+	                    $(this).html(changeHtml)
+	                }else if( i == 1 ){
+	                    $(this).html(changeHtml)
+	                }else{
+	                    $(this).html(changeHtml)
+	                }
+	            }
+	        });
+	        
+	    });
     </script>
   </body>
 </html>

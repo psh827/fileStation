@@ -14,6 +14,12 @@ import com.varxyz.fStation.domain.OurFile;
 import com.varxyz.fStation.domain.Text;
 import com.varxyz.fStation.service.FileServiceImpl;
 
+/**
+ * 파일 자동 삭제 스케쥴러.
+ * 00시, 06시, 12시, 18시를 기준으로 삭제 날짜가 지난 파일들을 삭제한다.
+ * @author Administrator
+ *
+ */
 @Controller
 @EnableScheduling
 public class FileSchedulerController {
@@ -22,17 +28,18 @@ public class FileSchedulerController {
 	
 	@Scheduled(cron = "0 0 0 * * *")
     public void doScheduled() {
+		//변수 설정 파일, 텍스트를 전부 들고온다.
         List<OurFile> fileList =  fileService.getAllFile();
         List<Text> textList = fileService.getAllText();
         Date date = new Date();
-        
+        //파일 처리
         if(fileList.size() != 0) {
         	for(int i = 0; i < fileList.size(); i++) {
         		OurFile thisFile = fileList.get(i); 
         		Calendar cl = Calendar.getInstance();
         		cl.setTime(thisFile.getDeleteDate());
         		Date checkDate = new Date(cl.getTimeInMillis());
-        		if(date.after(checkDate)) {
+        		if(date.after(checkDate)) { //지금 시간이 설정된 시간보다 지나있다면 파일을 삭제함.
         			fileService.deleteAll(thisFile);
         			String path = "C:\\fileStation\\";
     				String fileName = thisFile.getFileOriName();
@@ -41,7 +48,7 @@ public class FileSchedulerController {
         		}
         	}
         }
-        
+        //텍스트 처리
         if(textList.size() != 0) {
         	for(Text text : textList) {
         		Calendar cl = Calendar.getInstance();

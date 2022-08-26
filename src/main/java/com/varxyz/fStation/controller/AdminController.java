@@ -36,9 +36,9 @@ public class AdminController {
 		
 		String admin = (String)session.getAttribute("admin");
 		String referer = (String)request.getHeader("REFERER");
-		if(admin.equals("") || admin.equals(null)) {
+		if(admin == null) {
 			request.setAttribute("msg", "잘못된 접근입니다");
-			request.setAttribute("url", referer);
+			request.setAttribute("url", "/fileStation/file/file_main");
 			return "alert";
 		}
 		
@@ -80,12 +80,6 @@ public class AdminController {
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 		long amount = fileService.getFileAmountByMonth(format.format(date));
 		
-		if (amount >= 1000) {
-			amount = amount / 1000 ;
-			if (amount >= 1000) {
-				amount = amount / 1000;
-			}
-		}
 		request.setAttribute("defaultMonth", format.format(date));
 		request.setAttribute("amount", amount);
 		
@@ -108,12 +102,7 @@ public class AdminController {
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-");
 		
 		long amount = fileService.getFileAmountByMonth(format.format(date) + month);
-		if (amount >= 1000) {
-			amount = amount / 1000 ;
-			if (amount >= 1000) {
-				amount = amount / 1000;
-			}
-		}
+		
 	   return amount;
 	}
 	

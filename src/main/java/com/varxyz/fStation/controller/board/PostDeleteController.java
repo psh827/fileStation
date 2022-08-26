@@ -31,21 +31,24 @@ public class PostDeleteController {
 	 */
 	@PostMapping("/board/delete")
 	public String deleteForm(Model model,HttpServletRequest request, HttpSession session) throws Exception {
+		// 변수 선언
 		long bId = (long) session.getAttribute("bId");
-		String radio = request.getParameter("delete");
-		
+
+		// 삭제할 객체 생성
 		Post post = new Post();
 		int result = 0;
 		post.setBoardId(bId);
+		
+		// 서비스 호출
 		result = boardService.deletePost(post);			
 		
+		// 만약 서비스 호출 값이 0이라면 오류! 메인으로 보내기
 		if(result == 0 ) {
 			model.addAttribute("msg", "삭제오류");
 			model.addAttribute("url", "boardmain");
 			return "alert";
 		}
 		
-
 	    return "redirect:boardmain";
 	}
 
