@@ -32,6 +32,7 @@ CREATE TABLE Board(
 
 
 INSERT INTO Board (title, nickName, passwd, content) VALUES ('테스트 중입니다.건의사항 처리부탁드립니다','윤정','1111','안녕하세요.테스트 중입니다')
+DELETE FROM File WHERE FId=1045;
 
 SELECT * FROM File;
 SELECT * FROM Text;

@@ -123,10 +123,14 @@ nav > ul > li > a {
 	font-size:24px;
 }
 .pie_box {
-	display: flex;
-	width: 200px;
-	margin-left: 30px;
+    width: 100%;
+    height: 86%;
+    display: flex;
 }
+.chart-div{
+	margin-left: 24px;
+}
+
 table {
 	text-align: center;
     margin-left: 30px;

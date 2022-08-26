@@ -28,7 +28,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.12.4.min.js"></script>
 	<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.bundle.min.js"></script>
+	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.css">
   </head>
   <body>
@@ -98,7 +98,7 @@
             	<h1>확장자 별 총 업로드 수</h1>
 	            <div class="pie_box">
 		            <div class="chart-div">
-		              <canvas id="pieChartCanvas" width="150px" height="150px"></canvas>
+						<div id="piechart" style="width: 250px; height: 250px;margin: -54px;padding:0px 15px;"></div>
 		            </div>
 		            <table>
 		            <tr class="pie_txt_box">
@@ -114,20 +114,42 @@
 		            </table>
 	            </div>
             </div>
-            <script type="text/javascript">
-            window.onload = function () {
-            	  pieChartDraw();
-            	  document.getElementById('legend-div').innerHTML = window.pieChart.generateLegend();
-            		 setLegendOnClick();
-            		}
-            	let pieChartData = {
-            	    labels: ['IMG', 'VIDEO', 'DOCUMENT', 'ETC', 'TEXT'],
-            	    datasets: [{
-            	        data: [${checkList[0]}, ${checkList[1]}, ${checkList[2]}, ${checkList[3]}, ${checkList[4]}],
-            	        backgroundColor: ['rgb(255, 99, 132)', 'rgb(255, 159, 64)', 'rgb(255, 205, 86)', 'rgb(75, 192, 192)', 'rgb(54, 162, 235)', 'rgb(153, 102, 255)']
-            	    }]
-            	};
-            </script>
+	<script type="text/javascript">
+	      google.charts.load("current", {packages:["corechart"]});
+	      google.charts.setOnLoadCallback(drawChart);
+	      
+	      function drawChart() {
+	        var data = google.visualization.arrayToDataTable([
+	          ['file', 'number'],
+	          ['IMG',  ${checkList[0]}],
+	          ['VIDEO',  ${checkList[1]}],
+	          ['DOCUMENT', ${checkList[2]}],
+	          ['ETC', ${checkList[3]}],
+	          ['TEXT', ${checkList[4]}]
+	        ]);
+	
+	      var options = {
+	        legend: {
+	            display: true,
+	            position: 'top'
+	        },
+	        pieSliceText: 'label',
+	        pieStartAngle: 100,
+	        pieSliceTextStyle: {
+	            color: 'black',
+	          },
+	        backgroundColor: {
+                fill: 'none',
+            },
+            colors: ['#F94892', '#FF7F3F', '#FBDF07', '#89CFFD',
+                '#7FB77E'],
+            tooltip: { trigger: 'none' }
+	      };
+	
+	        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+	        chart.draw(data, options);
+	      }
+    </script>
             <div class="admin_box bottom left" style="padding: 0; overflow: hidden;">
             	<div id="chart_div" style="width: 110%; height: 100%;">
       				<c:forEach var="i" begin="0" end="${fn:length(monthCount) - 1}">
