@@ -24,11 +24,13 @@ button.addEventListener('click', copyClipboard);
 $('.text2_btn.copyBtn').click(function(){
 	
 	let text = $(this).parent().prev().html()
+	let textIndex = $(this).parent().prev().find(".more-btn.active").attr("href").split("modal")[1]
 	if(text.includes("Show More")){
 		text = text.replace("Show More", "")
 	}
-	text = text.replaceAll("<br>", "\n").replaceAll("&nbsp;&nbsp;&nbsp;&nbsp;", "\t");
-	text = text.split("type=\"button\">")[1].split("</a>")[0]
+	text = text.replaceAll("<br>", "\n").replaceAll("&nbsp;&nbsp;&nbsp;&nbsp;", "\t").replaceAll("&lt;", "<").replaceAll("&gt;", ">");
+	text = text.split(`</span><a href="#table_modal${textIndex}" type="button" class="more-btn active">`)[0]
+	console.log(text)
 	const textarea = document.createElement('textarea');
 	  textarea.textContent = text;
 	  document.body.append(textarea);
@@ -39,7 +41,7 @@ $('.text2_btn.copyBtn').click(function(){
 
 $(".modal_inner_btn.modalCopyBtn").click(function(){
 	let text = $(this).next().html()
-	text = text.replaceAll("<br>", "\n").replaceAll("&nbsp;&nbsp;&nbsp;&nbsp;", "\t");
+	text = text.replaceAll("<br>", "\n").replaceAll("&nbsp;&nbsp;&nbsp;&nbsp;", "\t").replaceAll("&lt;", "<").replaceAll("&gt;", ">");
 	const textarea = document.createElement('textarea');
 	textarea.textContent = text;
 	document.body.append(textarea);
