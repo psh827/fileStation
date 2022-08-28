@@ -36,6 +36,7 @@ public class ModifyBoardController {
 		//service에 넘길 객체 생성 및 값 입력
 		Post post = new Post();
 		post.setBoardId(bId);
+		//html이 알 수 있게 태그 변환.
 		post.setContent(content.replace("\n", "<br>"));
 		
 		//service 호출

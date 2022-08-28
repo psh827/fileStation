@@ -34,6 +34,7 @@ public class FileDao {
 			String sql = "INSERT INTO File (passwd, fileOriName, fileName, fileSize, fileType, url)"
 					+ " VALUES (?, ?, ?, ?, ?, ?)";
 			
+			//for문을 돌면서 파일 배열들을 DB에 입력
 			for(OurFile of : ourFile) {
 				jdbcTemplate.update(sql, of.getPasswd(), of.getFileOriName(), of.getFileName(), of.getFileSize(), of.getFileType(), of.getUrl());
 			}
@@ -271,6 +272,7 @@ public class FileDao {
 		try {
 			String sql = "SELECT count(*) FROM File WHERE fileType=? ";
 			String sql2 = "SELECT count(*) FROM Text";
+			//for문을 돌면서 데이터들을 가져온다.
 			for(int i = 0; i < checkList.size(); i++) {
 				countList.add(jdbcTemplate.queryForObject(sql, Integer.class, checkList.get(i)));
 			}
@@ -284,7 +286,6 @@ public class FileDao {
 	
 	/**
 	 * 월별 업로드된 총 파일크기 가져오기
-	 * WHERE TO_CHAR(REGDATE, 'YYYYMMDD') > '20190701'
 	 */
 	public long getFileAmountByMonth(String month) {
 		try {

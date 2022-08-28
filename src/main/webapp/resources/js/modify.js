@@ -1,3 +1,4 @@
+//사용자 수정
 $(document).on('click', '.comfirm', function(){
 	content = $(".Questions_inner.textarea").val()
 	bId = $(".bId_hidden").text()
@@ -29,6 +30,7 @@ $(document).on('click', '.comfirm', function(){
 	
 })
 
+//관리자 댓글
 $(document).on('click', '.admin_comfirm', function(){
 	content = $(".admin_inner.textarea").val();
 	bId = $(".bId_hidden").text()

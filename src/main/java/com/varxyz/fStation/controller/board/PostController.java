@@ -53,7 +53,7 @@ public class PostController {
 		// 원하는 값들을 service에 호출해서 가져오기
 		Post post = boardService.viewPostByPasswd(bId, passwd);
 		
-		// 원하는 객체가 없다면 메인으로 ㄴ가ㅏ게 하기
+		// 원하는 객체가 없다면 메인으로 나가게 하기
 		if (post == null) {
 			model.addAttribute("msg", "비밀번호가 틀렸습니다.");
 			model.addAttribute("url", "boardmain");

@@ -65,6 +65,7 @@ public class WriteboardController {
 		
 		// 서비스 호출
 		int reuslt = boardService.writePost(post);
+		//컨트롤러에서 서비스를 호출 했을 때 0이 반환되면 오류로써 전페이지로 이동하게 했다.
 		// result값이 0이라면 등록 오류. 글작성 페이지로 보내기
 		if(reuslt == 0) {
 			model.addAttribute("msg", "등록 오류");
