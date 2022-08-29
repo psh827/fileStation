@@ -1,11 +1,8 @@
 $(document).ready(function() {
     $("#input_file").bind('change', function() {
         selectFile(this.files);
-        //this.files[0].size gets the size of your file.
-        //alert(this.files[0].size);
     });
     
-   
     $(".textInput").on("change keyup paste", function(){
         $(this).css("line-height", "1")
         if($(".textInput").val() == ""){

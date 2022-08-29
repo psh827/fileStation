@@ -20,6 +20,7 @@ $(".month_selection").on("change", function(){
     	       	  target.css({
     	              'width': (data / 20) * 100 + "%"
     	            });
+    	          $('.amount').text(data + "GB")
     	      	  $(amountText).text(data.toFixed(0) + "GB");
     		  }else if (data >= (1024 * 1024)) {
     			  isWhat = "MB"
@@ -27,6 +28,7 @@ $(".month_selection").on("change", function(){
     			  target.css({
     	              'width': (data / 20000) * 100 + "%"
     	            });
+    	          $(amountText).text(data + "MB")
     			  $(amountText).text(data.toFixed(0) + "MB");
     		  }else if (data >= 1024) {
     			  //20gb 10% = 2bg 1% = 200mb 0.1 = 2mb 0.01% = 200kb
@@ -35,12 +37,14 @@ $(".month_selection").on("change", function(){
     			  target.css({
     	              'width': '10%' 
     	            });
+    	          $('.amount').text(data + "KB")
     			  $(amountText).text(data.toFixed(2) + "KB");
     		  }else{
     			  iswhat = "byte";
     			  target.css({
     	              'width': '10%'
     	            });
+    	          $('.amount').text(data + "byte")
     			  $(amountText).text(data.toFixed(0) + "byte");
     		  }
     		  $('.month').text(monthstr + "월")

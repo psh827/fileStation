@@ -178,9 +178,9 @@
             			<c:otherwise>
 		            		<c:forEach var="i" begin="0" end="5">
 		            			<tr class="admin_item">
-									<td class="admin_bId admin_span"><a class="admin_link" href="<c:url value="/board/post?boardId=${post.boardId}"/>">${post.boardId}</a></td>
-		            					<td class="admin_span_title admin_span"><a class="admin_link" href="<c:url value="/board/post?boardId=${post.boardId}"/>">${post.title}</a></td>
-		            					<td class="admin_regDate admin_span"><a class="admin_link" href="<c:url value="/board/post?boardId=${post.boardId}"/>">${post.regDate }</a></td>
+									<td class="admin_bId admin_span"><a class="admin_link" href="<c:url value="/board/post?boardId=${adminPost[i].boardId}"/>">${adminPost[i].boardId}</a></td>
+		            					<td class="admin_span_title admin_span"><a class="admin_link" href="<c:url value="/board/post?boardId=${adminPost[i].boardId}"/>">${adminPost[i].title}</a></td>
+		            					<td class="admin_regDate admin_span"><a class="admin_link" href="<c:url value="/board/post?boardId=${adminPost[i].boardId}"/>">${adminPost[i].regDate }</a></td>
 								</tr>
 		            		</c:forEach>
             			</c:otherwise>
