@@ -1,8 +1,11 @@
+//텍스트박스 영역
 $(document).ready(function() {
-    $("#input_file").bind('change', function() {
+	//file input 변화시 파일 추가 함수 실행
+    $("#input_file").on('change', function() {
         selectFile(this.files);
     });
     
+    //textbox input 변화시 textbox의 css, 글자수 설정
     $(".textInput").on("change keyup paste", function(){
         $(this).css("line-height", "1")
         if($(".textInput").val() == ""){
@@ -12,12 +15,10 @@ $(document).ready(function() {
 			$('.textarea_span').css("display", "none")
    			$(this).css("overflow-y", "auto")
 		}
+		//변화될때마다의 inputbox의 글자수를 체크한다.
 		let textcnt = $(this).val().length;
+		//변화된 글자수를 적용한다.
 		$('.text_now').text(textcnt)
-		if(textcnt > 15500){
-			alert("글자 수 초과입니다.")
-		}
-		
     })
     $('.total_size').text(maxUploadSize+"Mb");
     
@@ -25,12 +26,15 @@ $(document).ready(function() {
 
 })
 
-
+//이모티콘 처리
 function removeEmojis (str) {
   const regex = /(?:[\u2700-\u27bf]|(?:\ud83c[\udde6-\uddff]){2}|[\ud800-\udbff][\udc00-\udfff]|[\u0023-\u0039]\ufe0f?\u20e3|\u3299|\u3297|\u303d|\u3030|\u24c2|\ud83c[\udd70-\udd71]|\ud83c[\udd7e-\udd7f]|\ud83c\udd8e|\ud83c[\udd91-\udd9a]|\ud83c[\udde6-\uddff]|\ud83c[\ude01-\ude02]|\ud83c\ude1a|\ud83c\ude2f|\ud83c[\ude32-\ude3a]|\ud83c[\ude50-\ude51]|\u203c|\u2049|[\u25aa-\u25ab]|\u25b6|\u25c0|[\u25fb-\u25fe]|\u00a9|\u00ae|\u2122|\u2139|\ud83c\udc04|[\u2600-\u26FF]|\u2b05|\u2b06|\u2b07|\u2b1b|\u2b1c|\u2b50|\u2b55|\u231a|\u231b|\u2328|\u23cf|[\u23e9-\u23f3]|[\u23f8-\u23fa]|\ud83c\udccf|\u2934|\u2935|[\u2190-\u21ff])/g;
+  //모든 이모티콘을 빈문자열로 변환
   return str.replace(regex, '');
 }
 
+//전체삭제버튼
+//원래 상태로의 css로 돌리고 글자수를 0으로 적용
 $(".delete_all").on("click", function(){
     let textarea = $(".textInput")
     $('.textarea_span').css("display", "block")
@@ -40,7 +44,6 @@ $(".delete_all").on("click", function(){
 })
 
 $(".upload-box").click(function(e){
-
     $("#input_file").click()
 })
 
@@ -58,8 +61,9 @@ var uploadSize = 200;
 var maxUploadSize = 4000;
 
 var uploadFiles = [];
-
+//화면 킽 upload크기를 나타낼 변수
 var graphCount = 0;
+
 $(function() {
     // 파일 드롭 다운
     fileDropDown();
@@ -189,23 +193,27 @@ function selectFile(fileObject) {
                     fileaddFileList(fileIndex, fileName, fileSizeStr);
                 }
                 
+                //화면 밑 크기 그래프 설정
                 graphCount += fileSizeMb;
+                //백분율로 나타내기
 	            graphPercent = (graphCount / maxUploadSize) * 100
 	            var leftSize = graphCount
 	            
+	            //소수점2번째자리까지해서 텍스트 적용
 	            $('.items .percent').text(graphPercent.toFixed(2) + "%")
+	            //화면의 크기, 글자크기 때문에 7%보다 작으면 안보이니 기본값으로 7% 설정
 	            if(graphPercent < 7){
 					$('.items').css('width', '7%')
 				}else{
+					//그게 아니면 4000MB에서 현재 그래프퍼센트만크의 크기로 설정
 		            $('.items').css("width", graphPercent + "%")
 				}
 	            $('.left_size').text(leftSize.toFixed(2) + "Mb")
                 
+                //업로드 시 업로드 되는것 처럼 보이게 하는 바 애니메이션 
 				$(`div#fileTr_${fileIndex}`).find('.bar').animate({
 					'width': '100%'
 				}, 500, 'swing')
-				
-				console.log("upload fileTotalSize = " + totalFileSize)
 				
                 // 파일 번호 증가
                 fileIndex++;
@@ -216,6 +224,7 @@ function selectFile(fileObject) {
     }
 }
 
+//업로드되는 영역에 이미지를 올리면 thumbnail보여주기
 function preview(file, fileIndex) {
     var reader = new FileReader();
     reader.onload = (function(f, idx) {
@@ -258,6 +267,7 @@ function addFileList(fIndex, fileName, fileSizeStr) {
   `
 
     $('#files').append(html);
+    //파일이 추가될때마다 그 파일의 바올라가는 것을 숫자로 표현하는 애니메이션
     let boxNum = $(`.status${fIndex} .percent`);
 
     $(boxNum).prop('Counter', 0).animate({Counter: '100'}, {
@@ -318,14 +328,11 @@ function fileaddFileList(fIndex, fileName, fileSizeStr) {
 
 //업로드 파일 삭제
 function deleteFile(fIndex) {
-    console.log("deleteFile.fIndex=" + fIndex);
     // 전체 파일 사이즈 수정
-    console.log("deleteFileSize = " + fileSizeList[fIndex]);
     totalFileSize -= fileSizeList[fIndex];
 
 	var fileSize = fileSizeList[fIndex];
 	
-    console.log("fileSizeList[fIndex] = " + fileSizeList[fIndex])
     // 파일 배열에서 삭제
     delete fileList[fIndex];
 
@@ -335,23 +342,19 @@ function deleteFile(fIndex) {
     // 업로드 파일 테이블 목록에서 삭제
     $("#fileTr_" + fIndex).remove();
     
-    console.log("totalFileSize="+totalFileSize);
-    
-    
-
+    //삭제하려는 파일의 크기를 총 크기에서 삭제
     graphCount -= fileSize;
-    console.log("graphCount = "+ graphCount);
     let graphPercent = 0.0
-    console.log("totalFileSize.toFixed(2) / graphCount.toFixed(2) = "+ totalFileSize.toFixed(2) / graphCount.toFixed(2));
-    console.log("left = " + totalFileSize.toFixed(2) % graphCount.toFixed(2))
     
     if(totalFileSize <= 0){
 		graphPercent = 0
 	}else{
 	    graphPercent = (graphCount.toFixed(2) / maxUploadSize) * 100
 	}
+	//삭제된 크기 텍스트를 지정
     var leftSize = graphCount
     $('.items .percent').text(graphPercent.toFixed(2) + "%")
+    //업로드와 마찬가지로 크기 설정
     if(graphPercent < 7){
 		$('.items').css("width", "7%")	
 	}else{
@@ -380,8 +383,10 @@ function uploadFile() {
 	//텍스트 체크
 	var textarea = $('.textInput').val();
 	
+	//텍스트 이모지 처리
 	textarea = removeEmojis(textarea)
 
+	//패스워드처리(정규식) 숫자, 문자, 특수문자가 없으면 오류 
     let number = password.search(/[0-9]/g);
     let english = password.search(/[a-z]/ig);
     let spece = password.search(/[`~!@@#$%^&*|₩₩₩'₩";:₩/?]/gi);
@@ -397,10 +402,7 @@ function uploadFile() {
     } else if (number < 0 || english < 0 || spece < 0) {
         alert("영문,숫자,특수문자를 혼합하여 입력해주세요.");
         return false;
-
-    } else {
     }
-
     
     // 파일이 있는지 체크
     if (uploadFileList.length == 0 && textarea == "") {

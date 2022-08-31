@@ -60,15 +60,15 @@
         </div>
       </div>
 <script>
-$("span + textarea, span + input[type=text], span + input[type=password]").keyup(function(){
+	$("span + textarea, span + input[type=text], span + input[type=password]").keyup(function(){
 	  if($(this).val()!=""){
 		   $(this).prev().hide();
 		  }else{
 			   $(this).prev().show();
 		  } 
-		}).prev().click(function(){
-			  $(this).next().focus();
-			 });
+	}).prev().click(function(){
+		  $(this).next().focus();
+	 });
 </script>
 </body>
 </html>

@@ -1,7 +1,11 @@
+//월별 사용량 통계 ajax통신
 $(".month_selection").on("change", function(){
+	//선택 월
     var month = $(this).val();
+    //value = 08-01이니 - 로 split
     var monthstr = month.split("-")[0]
     $.ajax({
+		//메소드 명 설정
 		url: "getMonth",
 		type: "POST",
 		enctype: "application/json; charset=utf-8",
@@ -22,7 +26,7 @@ $(".month_selection").on("change", function(){
     	            });
     	          $('.amount').text(data + "GB")
     	      	  $(amountText).text(data.toFixed(0) + "GB");
-    		  }else if (data >= (1024 * 1024)) {
+    		  }else if (data >= (1024 * 1024)) { //mb처리
     			  isWhat = "MB"
     			  data = data / (1024 * 1024);
     			  target.css({

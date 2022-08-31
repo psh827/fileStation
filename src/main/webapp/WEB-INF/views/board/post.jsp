@@ -96,17 +96,6 @@
            $('.admin_modify').replaceWith('<button class="Questions_btn admin_comfirm middle" type="button" name="revoke">등록하기</button>')
        })
        
-  function checkOnlyOne(element) {
-  
-  const checkboxes 
-      = document.getElementsByName("delete");
-  
-  checkboxes.forEach((cb) => {
-    cb.checked = false;
-  })
-  
-  element.checked = true;
-  }
    </script>
    <script src="<c:url value='/resources/js/common.js'/>"></script>
   </body>

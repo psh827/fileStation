@@ -133,85 +133,38 @@
     <script src="http://code.jquery.com/jquery-latest.js"></script>
     <script src="<c:url value='/resources/js/download.js'/>"></script>
     <script>
+    	//사용자 수정 클릭시 css 및 태그 변화
        $(document).on('click', '.modify', function(){
           var toTextarea = $(".Questions_inner")
           $(toTextarea).replaceWith('<textarea class="Questions_inner textarea">${post.content}</textarea>')
           $('.modify').replaceWith('<button class="Questions_btn comfirm middle" type="button" name="revoke">등록하기</button>')
        })
        
+       //삭제 시간의 띄우기 위한 코드
        const remainTime = document.querySelector(".time_span");
+       //각 삭제 시간 가져오기
 	   var regDate = new Date('${fileList[0].deleteDate}')
 	   var textDate = new Date('${textList[0].deleteDate}')
+	   
 	   function diffDay() {
 		let masTime;
+		//만약 파일이 없다면 text시간으로 설정
 		if(regDate == 'Invalid Date'){
 			masTime = new Date(textDate);
-			if ((masTime.getHours() >= 0 && masTime.getMinutes() >= 1) && (masTime.getHours() <= 5 && masTime.getMinutes() <= 59)){
-				masTime.setHours(6)
-				masTime.setMinutes(0)
-				masTime.setSeconds(0)
-			}else if((masTime.getHours() >= 6 && masTime.getMinutes() >= 1) && (masTime.getHours() <= 11 && masTime.getMinutes() <= 59)){
-				masTime.setHours(12)
-				masTime.setMinutes(0)
-				masTime.setSeconds(0)
-			}else if((masTime.getHours() >= 12 && masTime.getMinutes() >= 1) && (masTime.getHours() <= 17 && masTime.getMinutes() <= 59)){
-				masTime.setHours(18)
-				masTime.setMinutes(0)
-				masTime.setSeconds(0)
-			}else if((masTime.getHours() >= 18 && masTime.getMinutes() >= 1) && (masTime.getHours() <= 23 && masTime.getMinutes() <= 59)){
-				masTime.setDate(masTime.getDate() + 1)
-				masTime.setHours(0)
-				masTime.setMinutes(0)
-				masTime.setSeconds(0)
-			}
-		}else if(textDate == 'Invalid Date'){
+		}else if(textDate == 'Invalid Date'){ //만약 텍스트가 없다면 file시가능로 설정
 			masTime = new Date(regDate);
-			if ((masTime.getHours() >= 0 && masTime.getMinutes() >= 1) && (masTime.getHours() <= 5 && masTime.getMinutes() <= 59)){
-				masTime.setHours(6)
-				masTime.setMinutes(0)
-				masTime.setSeconds(0)
-			}else if((masTime.getHours() >= 6 && masTime.getMinutes() >= 1) && (masTime.getHours() <= 11 && masTime.getMinutes() <= 59)){
-				masTime.setHours(12)
-				masTime.setMinutes(0)
-				masTime.setSeconds(0)
-			}else if((masTime.getHours() >= 12 && masTime.getMinutes() >= 1) && (masTime.getHours() <= 17 && masTime.getMinutes() <= 59)){
-				masTime.setHours(18)
-				masTime.setMinutes(0)
-				masTime.setSeconds(0)
-			}else if((masTime.getHours() >= 18 && masTime.getMinutes() >= 1) && (masTime.getHours() <= 23 && masTime.getMinutes() <= 59)){
-				masTime.setDate(masTime.getDate() + 1)
-				masTime.setHours(0)
-				masTime.setMinutes(0)
-				masTime.setSeconds(0)
-			}
-		}else {
+		}else { //둘다 있다면 파일 시간으로 설정
 			masTime = new Date(regDate);
-			if ((masTime.getHours() >= 0 && masTime.getMinutes() >= 1) && (masTime.getHours() <= 5 && masTime.getMinutes() <= 59)){
-				masTime.setHours(6)
-				masTime.setMinutes(0)
-				masTime.setSeconds(0)
-			}else if((masTime.getHours() >= 6 && masTime.getMinutes() >= 1) && (masTime.getHours() <= 11 && masTime.getMinutes() <= 59)){
-				masTime.setHours(12)
-				masTime.setMinutes(0)
-				masTime.setSeconds(0)
-			}else if((masTime.getHours() >= 12 && masTime.getMinutes() >= 1) && (masTime.getHours() <= 17 && masTime.getMinutes() <= 59)){
-				masTime.setHours(18)
-				masTime.setMinutes(0)
-				masTime.setSeconds(0)
-			}else if((masTime.getHours() >= 18 && masTime.getMinutes() >= 1) && (masTime.getHours() <= 23 && masTime.getMinutes() <= 59)){
-				masTime.setDate(masTime.getDate() + 1)
-				masTime.setHours(0)
-				masTime.setMinutes(0)
-				masTime.setSeconds(0)
-			}
 		}
+		//오늘 날짜 설정
 	   	const todayTime = new Date();
+		//기준 날짜에서 오늘 날짜를 빼서 millisecond으로 가져오기 
 	   	const diff = masTime - todayTime;
 	   	let diffHour = ""
-	    if(diff > 86400000){
-	    	diffHour = String(24 + Math.floor((diff / (1000*60*60)) % 24)).padStart(2, "0");
+	    if(diff > 86400000){ //24시간 이상이라면
+	    	diffHour = String(24 + Math.floor((diff / (1000*60*60)) % 24)).padStart(2, "0"); //24시간 더해주기
 	    }else{
-		   	diffHour = String( Math.floor((diff / (1000*60*60)) % 24)).padStart(2,"0");
+		   	diffHour = String( Math.floor((diff / (1000*60*60)) % 24)).padStart(2,"0"); //그게아니면 원래 시간으로 표기
 	    }
 		const diffMin = String(Math.floor((diff / (1000*60)) % 60)).padStart(2,"0");
 		const diffSec = String(Math.floor(diff / 1000 % 60)).padStart(2,"0");

@@ -89,6 +89,7 @@ public class FileController {
 	 * 파일 업로드. ajax통신
 	 * 파일만 올릴 수도 있고, 텍스트만 올릴수도 있고, 둘다 올릴 수도 있음.
 	 * @param model
+	 * 
 	 * @param files
 	 * @param passwd
 	 * @param textarea

@@ -61,7 +61,6 @@
               <span class="textarea_span">TEXT</span>
               	<div class="text_cnt_box">
               		<span class="text_now"></span>
-              		/
               		<span class="text_total">15500</span>
               	</div>
             </div>
